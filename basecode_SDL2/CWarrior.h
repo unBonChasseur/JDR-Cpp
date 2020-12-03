@@ -1,5 +1,7 @@
 #pragma once
-class CWarrior
+#include "CCharacter.h"
+
+class CWarrior : public CCharacter
 {
 private :
 	void IsWeaponSword();
