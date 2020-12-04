@@ -3,18 +3,14 @@
 
 class CMelee : public CWeapon
 {
-private : 
-	
-
 protected :
 	int m_durabiliteInitiale;
 	int m_durabilite;
+
 	CMelee();
 
 public :
-	CMelee(std::string nom, std::string degats, std::string critique, std::string bonus, int durabilite);
+	CMelee(std::string type, std::string nom, int degats, float critique, float bonus, int durabilite);
 	virtual ~CMelee();
-
-	int IsCassee();
 };
 

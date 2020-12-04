@@ -11,6 +11,10 @@ protected :
 	int m_CDFurtif;
 	int m_nbFleche;
 
+	CRogue();
+
 public :
+	CRogue();
+
 };
 
