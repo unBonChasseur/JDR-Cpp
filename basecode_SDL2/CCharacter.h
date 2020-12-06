@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <vector>
 
 #include "CWeapon.h"
@@ -22,7 +22,6 @@ protected :
 	int m_bonusDegats;
 
 	CCharacter();
-	void SetVie(int vie);
 
 public :
 	CCharacter(std::string nom, int vie, CWeapon weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
@@ -46,5 +45,6 @@ public :
 	int IsEmpoisonne();
 	int HasBonusDegats();
 
+	void SetVie(int vie);
 };
 

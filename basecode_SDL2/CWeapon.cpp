@@ -38,6 +38,12 @@ CWeapon::~CWeapon()
 {
 }
 
+float CWeapon::Utiliser()
+{
+
+	return 0.0f;
+}
+
 std::string CWeapon::GetType()
 {
 	return m_type;

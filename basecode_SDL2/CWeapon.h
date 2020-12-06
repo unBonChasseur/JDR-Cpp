@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <cstring>
 #include <iostream>
 
 class CWeapon
@@ -27,6 +27,8 @@ public :
 	CWeapon(std::string type, std::string nom, int degats, float critique, float bonus
 	,int vie,float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CWeapon();
+
+	virtual float Utiliser();
 
 	std::string GetType();
 	std::string GetNom();

@@ -8,9 +8,11 @@ protected:
 	CRanged();
 
 public:
-	CRanged(std::string nom, std::string degats, std::string critique, std::string bonus, int durabilite);
+	CRanged(std::string type, std::string nom, int degats, float critique, float bonus
+		, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CRanged();
 
+	virtual float Utiliser();
 };
 
 

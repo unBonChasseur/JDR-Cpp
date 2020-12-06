@@ -1,6 +1,6 @@
 #include "utils.h"
 
-//float randEsquive = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+//float randomNumber = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
 
 enum class ePosition
 {

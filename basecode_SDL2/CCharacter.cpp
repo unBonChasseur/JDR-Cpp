@@ -4,7 +4,7 @@ CCharacter::CCharacter()
 {
 	m_nom = "";
 	m_vie = 0;
-	//m_weapon = new std::vector<CWeapon();
+	//m_weapon = new CWeapon();
 	m_esquive = 0;
 	m_vitesseBase = 0;
 	m_vitesse = 0;
@@ -14,14 +14,6 @@ CCharacter::CCharacter()
 	m_intelligence = 0;
 	m_empoisonne = 0;
 	m_bonusDegats = 0;
-}
-
-void CCharacter::SetVie(int vie)
-{
-	m_vie += vie; 
-	if (m_vie < 0) {
-		m_vie = 0;
-	}
 }
 
 CCharacter::CCharacter(std::string nom, int vie, CWeapon weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
@@ -117,4 +109,12 @@ int CCharacter::IsEmpoisonne()
 int CCharacter::HasBonusDegats()
 {
 	return m_bonusDegats;
+}
+
+void CCharacter::SetVie(int vie)
+{
+	m_vie += vie;
+	if (m_vie < 0) {
+		m_vie = 0;
+	}
 }
