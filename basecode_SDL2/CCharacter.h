@@ -10,7 +10,7 @@ class CCharacter
 protected :
 	std::string m_nom;
 	int m_vie;
-	std::vector<CWeapon*> m_weapon;
+	CWeapon m_weapon;
 	float m_esquive;
 	int m_vitesseBase;
 	int m_vitesse;
@@ -25,7 +25,7 @@ protected :
 	void SetVie(int vie);
 
 public :
-	CCharacter(std::string nom, int vie, std::vector<CWeapon*> weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CCharacter(std::string nom, int vie, CWeapon weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CCharacter();
 
 	void AttaquerSansArme(CCharacter CCharacter);
@@ -35,7 +35,7 @@ public :
 
 	std::string GetNom();
 	int GetVie();
-	CWeapon* GetWeapon();
+	CWeapon GetWeapon();
 	int GetEsquive();
 	int GetVitesseBase();
 	int GetVitesse();

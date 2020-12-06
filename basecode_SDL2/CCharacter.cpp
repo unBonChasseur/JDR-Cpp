@@ -24,7 +24,7 @@ void CCharacter::SetVie(int vie)
 	}
 }
 
-CCharacter::CCharacter(std::string nom, int vie, std::vector<CWeapon*> weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
+CCharacter::CCharacter(std::string nom, int vie, CWeapon weapon, int esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
 {
 	m_nom = nom;
 	m_vie = vie;
@@ -69,9 +69,9 @@ int CCharacter::GetVie()
 	return m_vie;
 }
 
-CWeapon* CCharacter::GetWeapon()
+CWeapon CCharacter::GetWeapon()
 {
-	return nullptr;
+	return m_weapon;
 }
 
 int CCharacter::GetEsquive()
