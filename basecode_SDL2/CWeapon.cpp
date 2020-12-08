@@ -34,16 +34,6 @@ CWeapon::CWeapon(std::string type, std::string nom, int degats, float critique, 
 	m_intelligence = intelligence;
 }
 
-CWeapon::~CWeapon()
-{
-}
-
-float CWeapon::Utiliser()
-{
-
-	return 0.0f;
-}
-
 std::string CWeapon::GetType()
 {
 	return m_type;
@@ -74,7 +64,7 @@ int CWeapon::GetVie()
 	return m_vie;
 }
 
-int CWeapon::GetEsquive()
+float CWeapon::GetEsquive()
 {
 	return m_esquive;
 }
@@ -102,4 +92,21 @@ int CWeapon::GetAgilite()
 int CWeapon::GetIntelligence()
 {
 	return m_intelligence;
+}
+
+void CWeapon::print()
+{
+	std::cout << "\n\nclasse CWeapon";
+	std::cout << "\ntype : " << m_type;
+	std::cout << "\nnom : " << m_nom;
+	std::cout << "\nDegats : " << m_degats;
+	std::cout << "\nCritique : " << m_critique;
+	std::cout << "\nBonus : " << m_bonusDegatsArme;
+	std::cout << "\nVie : " << m_vie;
+	std::cout << "\nEsquive : " << m_esquive;
+	std::cout << "\nVitesse : " << m_vitesseBase;
+	std::cout << "\nattaque : " << m_attaque;
+	std::cout << "\ndefense : " << m_defense;
+	std::cout << "\nagilite : " << m_agilite;
+	std::cout << "\nintelligence : " << m_intelligence;
 }

@@ -9,34 +9,20 @@ CSword::CSword(std::string type, std::string nom, int degats, float critique, fl
 {
 }
 
-float CSword::Utiliser()
+void CSword::print()
 {
-	float DegatsFinaux;
-	if (m_durabilite == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
-		DegatsFinaux = (float)m_degats / 10;			//Si oui, on divise les dégats par 10
-	}
-	else {												//sinon, les dégats sont normaux
-		DegatsFinaux = m_degats;
-		
-		int randDurabilite = rand() % (5 - 2 + 1) + 2;	//on choisi un chiffre au hasard entre 2 et 5
-		m_durabilite -= randDurabilite;					//on soustrait ce chiffre à la durabilité de l'arme 
-		if (m_durabilite <= 0) {
-			m_durabilite = 0;
-			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
-				"' viens de se casser lors de ce coup!\nPensez à la faire réparer au plus vite !";
-		}
-		else {
-			std::cout << "\nVotre arme viens de perdre " //informe l'utilisateur de la durabilité restante de l'arme
-				<< randDurabilite << " de durabilité lors de ce coup.\nIl reste " << m_durabilite << " de durabilité à votre arme.(/"<<m_durabiliteInitiale<<")";
-		}
-	}
-
-	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
-	if (randomNumber <= m_critique) {
-		std::cout << "Le coup est fluide et sans bavure, si l'adversaire est touché ce sera un vrai carnage !";
-		DegatsFinaux += DegatsFinaux;
-	}
-
-	return DegatsFinaux;
+	std::cout << "\n\nclasse CSword";
+	std::cout << "\ntype : " << m_type;
+	std::cout << "\nnom : " << m_nom;
+	std::cout << "\nDegats : " << m_degats;
+	std::cout << "\nCritique : " << m_critique;
+	std::cout << "\nBonus : " << m_bonusDegatsArme;
+	std::cout << "\nVie : " << m_vie;
+	std::cout << "\nEsquive : " << m_esquive;
+	std::cout << "\nVitesse : " << m_vitesseBase;
+	std::cout << "\nattaque : " << m_attaque;
+	std::cout << "\ndefense : " << m_defense;
+	std::cout << "\nagilite : " << m_agilite;
+	std::cout << "\nintelligence : " << m_intelligence;
+	std::cout << "\nDurabiilite : " << m_durabilite;
 }
-

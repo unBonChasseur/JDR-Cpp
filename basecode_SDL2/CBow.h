@@ -13,8 +13,12 @@ protected:
 public:
 	CBow(std::string type, std::string nom, int degats, float critique, float bonus
 		, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, int nbFleches);
-	virtual ~CBow();
 
-	float Utiliser();
+	int GetNbFleches();
+	int GetNbFlechesBase();
+
+	void SetNbFleches(int nbFleches);
+
+	void print();
 };
 

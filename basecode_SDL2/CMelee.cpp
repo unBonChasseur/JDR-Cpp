@@ -13,15 +13,6 @@ CMelee::CMelee(std::string type, std::string nom, int degats, float critique, fl
 {
 }
 
-CMelee::~CMelee()
-{
-}
-
-float CMelee::Utiliser()
-{
-	return 0.0f;
-}
-
 int CMelee::GetDurabiliteInitiale()
 {
 	return m_durabiliteInitiale;
@@ -35,4 +26,8 @@ int CMelee::GetDurabilite()
 void CMelee::SetDurabilite(int durabilite)
 {
 	m_durabilite = durabilite;
+}
+
+void CMelee::print()
+{
 }

@@ -3,19 +3,21 @@
 
 class CMage : public CCharacter
 {
-private :
-	void IsWeaponStaff();
-
 protected :
-	int m_ManaMax;
-	int m_Mana;
-	int m_CDSoin;
-	int m_CD;
+	int m_manaMax;
+	int m_mana;
+	int m_CDsoin;
+	int m_CDenchantement;
+
+	CMage();
 
 public :
-	void RegenererMana();
-	void Soigner();
-	void Enchanter();
+	CMage(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	virtual ~CMage();
 
+	void RegenererMana();
+	void Soigner(CCharacter CCharacter);
+	void Enchanter(CCharacter CCharacter);
+	void print();
 };
 

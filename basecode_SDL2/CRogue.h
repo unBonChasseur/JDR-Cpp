@@ -3,18 +3,21 @@
 
 class CRogue : public CCharacter
 {
-private :
-	int IsWeaponDagger();
-
 protected :
 	int m_nbToursFurtif;
 	int m_CDFurtif;
-	int m_nbFleche;
+	float m_poison;
 
 	CRogue();
 
 public :
-	CRogue();
+	CRogue(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison);
+	virtual ~CRogue();
 
+	void AttaquerAvecArme();
+
+	void Furtivite();
+
+	void print();
 };
 

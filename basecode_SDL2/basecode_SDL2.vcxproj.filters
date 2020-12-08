@@ -78,11 +78,11 @@
     <ClCompile Include="CSword.cpp">
       <Filter>Fichiers sources\Armes\Melee</Filter>
     </ClCompile>
+    <ClCompile Include="Parsing.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CDagger.h">
       <Filter>Fichiers d%27en-tête\Armes\Melee</Filter>
     </ClInclude>
@@ -119,12 +119,15 @@
     <ClInclude Include="CMelee.h">
       <Filter>Fichiers d%27en-tête\Armes\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="Parsing.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\Broster\Downloads\config\weapons.jdc">
+    <None Include="data\characters.jdc">
       <Filter>Fichiers de ressources</Filter>
     </None>
-    <None Include="C:\Users\Broster\Downloads\config\characters.jdc">
+    <None Include="data\weapons.jdc">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>

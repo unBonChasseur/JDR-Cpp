@@ -1,126 +1,128 @@
-#include "utils.h"
+#include <vector>
+#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include <cstring>
+#include "Parsing.h"
 
-//float randomNumber = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
-
-enum class ePosition
-{
-	DOWN,
-	LEFT,
-	UP,
-	RIGHT,
-	NB_POSITION
-};
 
 int main(int argc, char** argv)
 {
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	Parsing parsing;
 
-	SDL_Texture* texture;
-	SDL_Surface* image;
-	SDL_Rect spriteRect;
-	SDL_Rect positionRect;
+	parsing.PrintWeapon();
+	parsing.PrintCharacter();
 
-	SDL_Event e;
-	int quit = 0;
+	int a;
+	std::cin >> a;
 
-	ePosition pos = ePosition::DOWN;
-
-	if (!SDL_WasInit(SDL_INIT_VIDEO))
-	{
-		if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		{
-			std::cerr << "[-] ERROR - Failed to initialise SDL (" << SDL_GetError() << ")\n";
-			return EXIT_FAILURE;
-		}
-	}
-
-	if (!IMG_Init(IMG_INIT_PNG))
-	{
-		std::cerr << "[-] ERROR - Failed to initialise SDL_Image (" << SDL_GetError() << ")\n";
-		return EXIT_FAILURE;
-	}
-
-	window = SDL_CreateWindow("Ma fenetre SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
-	if (!window)
-	{
-		std::cerr << "[-] ERROR - Failed to create SDL window (" << SDL_GetError() << ")\n";
-		return EXIT_FAILURE;
-	}
-
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	
-	image = IMG_Load("data/sprite.png");
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
-
-	SDL_SetRenderDrawColor(renderer, 40, 110, 0, 255);
-
-	spriteRect.w = 120;
-	spriteRect.h = 130;
-	spriteRect.x = 0;
-	spriteRect.y = 0;
-
-	positionRect.w = 64;
-	positionRect.h = 48;
-	positionRect.x = 288;
-	positionRect.y = 216;
-
-	while (!quit)
-	{
-		while (SDL_PollEvent(&e))
-		{
-			switch (e.type)
-			{
-			case SDL_QUIT:
-				quit = 1;
-				break;
-
-			case SDL_KEYDOWN:
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_ESCAPE:
-					quit = 1;
-					break;
-
-				case SDLK_UP:
-					pos = ePosition::UP;
-					positionRect.y -= positionRect.h/2;
-					break;
-
-				case SDLK_DOWN:
-					pos = ePosition::DOWN;
-					positionRect.y += positionRect.h/2;
-					break;
-
-				case SDLK_RIGHT:
-					pos = ePosition::RIGHT;
-					positionRect.x += positionRect.w / 2;
-					break;
-
-				case SDLK_LEFT:
-					pos = ePosition::LEFT;
-					positionRect.x -= positionRect.w / 2;
-					break;
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		spriteRect.y = (int)(pos) * spriteRect.h;
-
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, texture, &spriteRect, &positionRect);
-		SDL_RenderPresent(renderer);
-	}
-
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-
-	return EXIT_SUCCESS;
+	return 0;
 }
 
+//float randomNumber = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+/*
+float CSword::Utiliser()
+{
+	float DegatsFinaux;
+	if (m_durabilite == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
+		DegatsFinaux = (float)m_degats / 10;			//Si oui, on divise les dégats par 10
+	}
+	else {												//sinon, les dégats sont normaux
+		DegatsFinaux = m_degats;
+
+		int randDurabilite = rand() % (5 - 2 + 1) + 2;	//on choisi un chiffre au hasard entre 2 et 5
+		m_durabilite -= randDurabilite;					//on soustrait ce chiffre à la durabilité de l'arme
+		if (m_durabilite <= 0) {
+			m_durabilite = 0;
+			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
+				"' viens de se casser lors de ce coup!\nPensez à la faire réparer au plus vite !";
+		}
+		else {
+			std::cout << "\nVotre arme viens de perdre " //informe l'utilisateur de la durabilité restante de l'arme
+				<< randDurabilite << " de durabilité lors de ce coup.\nIl reste " << m_durabilite << " de durabilité à votre arme.(/"<<m_durabiliteInitiale<<")";
+		}
+	}
+
+	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
+	if (randomNumber <= m_critique) {
+		std::cout << "Le coup est fluide et sans bavure, si l'adversaire est touché ce sera un vrai carnage !";
+		DegatsFinaux += DegatsFinaux;
+	}
+
+	return DegatsFinaux;
+}
+
+float CDagger::Utiliser()
+{
+	float DegatsFinaux;
+	if (m_durabilite == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
+		DegatsFinaux = (float)m_degats / 10;			//Si oui, on divise les dégats par 10
+	}
+	else {												//sinon, les dégats sont normaux
+		DegatsFinaux = m_degats;
+		m_durabilite--;					//on soustrait ce chiffre à la durabilité de l'arme
+		if (m_durabilite == 0) {
+			m_durabilite = 0;
+			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
+				"' viens de se casser lors de ce coup!\nPensez à la faire réparer au plus vite !";
+		}
+		else {
+			std::cout << "\nVotre arme viens de perdre " //informe l'utilisateur de la durabilité restante de l'arme
+				"1 de durabilité lors de ce coup.\nIl reste " << m_durabilite << " de durabilité à votre arme.(/" << m_durabiliteInitiale << ")";
+		}
+	}
+
+	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
+	if (randomNumber <= m_critique) {
+		std::cout << "Ce coup est vicieux et bien placé, s'il fait mouche il devrait être redoutable !";
+		DegatsFinaux += DegatsFinaux;
+	}
+
+	return DegatsFinaux;
+}
+
+float CStaff::Utiliser()
+{
+	float DegatsFinaux;
+
+	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
+	if (randomNumber <= m_critique) {
+		std::cout << "La sort dégage une aura fantastique et sera 2 fois plus efficace !";
+		DegatsFinaux += DegatsFinaux;
+	}
+
+	return DegatsFinaux;
+}
+
+float CBow::Utiliser()
+{
+	float DegatsFinaux;
+	if (m_nbFleches == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
+
+		DegatsFinaux = 0.0f;						//Si oui, on divise les dégats par 10
+	}
+	else {												//sinon, les dégats sont normaux
+		DegatsFinaux = m_degats;
+
+		m_nbFleches--;					//on soustrait ce chiffre à la durabilité de l'arme
+		if (m_nbFleches == 0) {
+			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
+				"' ne possède plus de flèches!\nPensez à récupérer des flèches au plus vite !";
+		}
+		else {
+			std::cout << "\nVous décochez votre flèche. " //informe l'utilisateur de la durabilité restante de l'arme
+				<<"\nIl reste " << m_nbFleches << " flèches dans votre carquois.(/" << m_nbFlechesBase << ")";
+		}
+	}
+
+	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
+	if (randomNumber <= m_critique) {
+		std::cout << "La flèche est particulièrement précise et devrait infliger un coup critique !";
+		DegatsFinaux += DegatsFinaux;
+	}
+
+	return DegatsFinaux;
+}
+
+
+*/

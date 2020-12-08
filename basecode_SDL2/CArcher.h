@@ -3,15 +3,17 @@
 
 class CArcher : public CCharacter
 {
-private :
-	void IsWeaponBow();
-
 protected :
-	int m_nbFleche;
+
+	CArcher();
 
 public :
-	void GuerirPoison();
-	void VIser();
+	CArcher(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	virtual ~CArcher();
 
+	void GuerirPoison();
+	void Viser();
+
+	void print();
 };
 

@@ -13,36 +13,35 @@ CBow::CBow(std::string type, std::string nom, int degats, float critique, float 
 {
 }
 
-CBow::~CBow()
+int CBow::GetNbFleches()
 {
+	return m_nbFleches;
 }
 
-float CBow::Utiliser()
+int CBow::GetNbFlechesBase()
 {
-	float DegatsFinaux;
-	if (m_nbFleches == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
+	return m_nbFlechesBase;
+}
 
-		DegatsFinaux = 0.0f;						//Si oui, on divise les dégats par 10
-	}
-	else {												//sinon, les dégats sont normaux
-		DegatsFinaux = m_degats;
+void CBow::SetNbFleches(int nbFleches)
+{
+	m_nbFleches += nbFleches;
+}
 
-		m_nbFleches--;					//on soustrait ce chiffre à la durabilité de l'arme 
-		if (m_nbFleches == 0) {
-			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
-				"' ne possède plus de flèches!\nPensez à récupérer des flèches au plus vite !";
-		}
-		else {
-			std::cout << "\nVous décochez votre flèche. " //informe l'utilisateur de la durabilité restante de l'arme
-				<<"\nIl reste " << m_nbFleches << " flèches dans votre carquois.(/" << m_nbFlechesBase << ")";
-		}
-	}
-
-	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
-	if (randomNumber <= m_critique) {
-		std::cout << "La flèche est particulièrement précise et devrait infliger un coup critique !";
-		DegatsFinaux += DegatsFinaux;
-	}
-
-	return DegatsFinaux;
+void CBow::print()
+{
+	std::cout << "\n\nclasse CBow";
+	std::cout << "\ntype : " << m_type;
+	std::cout << "\nnom : " << m_nom;
+	std::cout << "\nDegats : " << m_degats;
+	std::cout << "\nCritique : " << m_critique;
+	std::cout << "\nBonus : " << m_bonusDegatsArme;
+	std::cout << "\nVie : " << m_vie;
+	std::cout << "\nEsquive : " << m_esquive;
+	std::cout << "\nVitesse : " << m_vitesseBase;
+	std::cout << "\nattaque : " << m_attaque;
+	std::cout << "\ndefense : " << m_defense;
+	std::cout << "\nagilite : " << m_agilite;
+	std::cout << "\nintelligence : " << m_intelligence;
+	std::cout << "\nnbFleches :" << m_nbFleches;
 }

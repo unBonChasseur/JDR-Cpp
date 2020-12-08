@@ -5,14 +5,17 @@ class CStaff : public CRanged
 {
 protected:
 
+	int m_cout;
+
 	CStaff();
 
 public:
 	CStaff(std::string type, std::string nom, int degats, float critique, float bonus
-		, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
-	virtual ~CStaff();
+		, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, int cout);
 
-	float Utiliser();
+	int GetCout();
+
+	void print();
 };
 
 

@@ -9,11 +9,19 @@ CRanged::CRanged(std::string type, std::string nom, int degats, float critique, 
 {
 }
 
-CRanged::~CRanged()
+void CRanged::print()
 {
-}
-
-float CRanged::Utiliser()
-{
-	return 0.0f;
+	std::cout << "\n\nclasse CWeapon";
+	std::cout << "\ntype : " << m_type;
+	std::cout << "\nnom : " << m_nom;
+	std::cout << "\nDegats : " << m_degats;
+	std::cout << "\nCritique : " << m_critique;
+	std::cout << "\nBonus : " << m_bonusDegatsArme;
+	std::cout << "\nVie : " << m_vie;
+	std::cout << "\nEsquive : " << m_esquive;
+	std::cout << "\nVitesse : " << m_vitesseBase;
+	std::cout << "\nattaque : " << m_attaque;
+	std::cout << "\ndefense : " << m_defense;
+	std::cout << "\nagilite : " << m_agilite;
+	std::cout << "\nintelligence : " << m_intelligence;
 }
