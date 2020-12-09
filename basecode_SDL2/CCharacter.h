@@ -11,7 +11,7 @@ protected :
 	std::string m_nom;
 	int m_vieInitiale;
 	int m_vie;
-	//CWeapon &m_weapon;
+	CWeapon* m_weapon;
 	float m_esquive;
 	int m_vitesseBase;
 	int m_vitesse;
@@ -25,7 +25,7 @@ protected :
 	CCharacter();
 
 public :
-	CCharacter(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CCharacter();
 
 	void AttaquerSansArme(CCharacter CCharacter);
@@ -35,7 +35,7 @@ public :
 	std::string GetNom();
 	int GetVieInitiale();
 	int GetVie();
-	//CWeapon GetWeapon();
+	CWeapon* GetWeapon();
 	int GetEsquive();
 	int GetVitesseBase();
 	int GetVitesse();
@@ -48,6 +48,7 @@ public :
 
 	void SetVie(int vie);
 
+	virtual void PresentationChoix();
 	virtual void print();
 };
 

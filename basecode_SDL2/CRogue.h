@@ -11,7 +11,7 @@ protected :
 	CRogue();
 
 public :
-	CRogue(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison);
+	CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison);
 	virtual ~CRogue();
 
 	void AttaquerAvecArme();

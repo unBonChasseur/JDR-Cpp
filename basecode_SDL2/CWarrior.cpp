@@ -7,8 +7,8 @@ CWarrior::CWarrior():CCharacter()
 	m_hurlement = 0;
 }
 
-CWarrior::CWarrior(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float parade)
-	:CCharacter(nom, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float parade)
+	:CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
 	m_CDHurlement(0),
 	m_parade(parade),
 	m_hurlement(0)

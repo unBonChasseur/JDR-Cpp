@@ -12,7 +12,7 @@ protected :
 	CMage();
 
 public :
-	CMage(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CMage();
 
 	void RegenererMana();

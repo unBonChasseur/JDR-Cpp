@@ -1,100 +1,101 @@
 #include "Parsing.h"
 
 
-void Parsing::LectureArmes(std::vector<CWeapon*> vector) {
+void Parsing::LectureArmes() {
 	std::string line;
 	std::ifstream myFile("data\\weapons.jdc");
 	if (myFile.is_open())
 	{
+		int i = 0;
 		//statistiques liées à l'arme
-		std::string m_type = "";
-		std::string m_nom = "";
-		int m_degats = 0;
-		float m_critique = 0;
-		float m_bonusDegatsArme = 0;
+		std::string type = "";
+		std::string nom = "";
+		int degats = 0;
+		float critique = 0;
+		float bonusDegatsArme = 0;
 
 		//statistiques liées aux personnage porteur
-		int m_vie = 0;
-		float m_esquive = 0;
-		int m_vitesseBase = 0;
-		int m_attaque = 0;
-		int m_defense = 0;
-		int m_agilite = 0;
-		int m_intelligence = 0;
-		int m_CaracArme = 0;
+		int vie = 0;
+		float esquive = 0;
+		int vitesse = 0;
+		int attaque = 0;
+		int defense = 0;
+		int agilite = 0;
+		int intelligence = 0;
+		int caracArme = 0;
 
 		while (myFile >> line) {
 			if (line != "EndWeapon") {
 				if (line == "Type" || line == "Nom" || line == "Degat" || line == "Critique" || line == "HP" || line == "Attack" || line == "Defense" || line == "Agilite" || line == "Intelligence" || line == "Fleche" || line == "Durabilite" || line == "Cout") {
 					if (line == "Type") {
-						myFile >> m_type;
+						myFile >> type;
 					}
 					if (line == "Nom") {
-						myFile >> m_nom;
+						myFile >> nom;
 					}
 					if (line == "Degat") {
-						myFile >> m_degats;
+						myFile >> degats;
 					}
 					if (line == "Critique") {
-						myFile >> m_critique;
+						myFile >> critique;
 					}
 					if (line == "HP") {
-						myFile >> m_vie;
+						myFile >> vie;
 					}
 					if (line == "Attack") {
-						myFile >> m_attaque;
+						myFile >> attaque;
 					}
 					if (line == "Defense") {
-						myFile >> m_defense;
+						myFile >> defense;
 					}
 					if (line == "Agilite") {
-						myFile >> m_agilite;
+						myFile >> agilite;
 					}
 					if (line == "Intelligence") {
-						myFile >> m_intelligence;
+						myFile >> intelligence;
 					}
 					if (line == "Fleche" || line == "Durabilite" || line == "Cout") {
-						myFile >> m_CaracArme;
+						myFile >> caracArme;
 					}
 				}
 				else {
-					m_nom += " " + line;
+					nom += " " + line;
 				}
 			}
 			else {
-				if (m_type == "Baton") {
-					CStaff a = CStaff(m_type, m_nom, m_degats, m_critique, m_bonusDegatsArme, m_vie, m_esquive, m_vitesseBase, m_attaque, m_defense, m_agilite, m_intelligence, m_CaracArme);
-					vector.push_back(&a);
+				if (type == "Baton") {
+					CStaff *a = new CStaff(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					m_weapon.push_back(a);
 				}
-				if (m_type == "Dague") {
-					CDagger a = CDagger(m_type, m_nom, m_degats, m_critique, m_bonusDegatsArme, m_vie, m_esquive, m_vitesseBase, m_attaque, m_defense, m_agilite, m_intelligence, m_CaracArme);
-					vector.push_back(&a);
+				if (type == "Dague") {
+					CDagger *a = new CDagger(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					m_weapon.push_back(a);
 				}
-				if (m_type == "Epee") {
-					CSword a = CSword(m_type, m_nom, m_degats, m_critique, m_bonusDegatsArme, m_vie, m_esquive, m_vitesseBase, m_attaque, m_defense, m_agilite, m_intelligence, m_CaracArme);
-					vector.push_back(&a);
+				if (type == "Epee") {
+					CSword *a = new CSword(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					m_weapon.push_back(a);
 				}
-				if (m_type == "Arc") {
-					CBow a = CBow(m_type, m_nom, m_degats, m_critique, m_bonusDegatsArme, m_vie, m_esquive, m_vitesseBase, m_attaque, m_defense, m_agilite, m_intelligence, m_CaracArme);
-					vector.push_back(&a);
+				if (type == "Arc") {
+					CBow *a = new CBow(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					m_weapon.push_back(a);
 				}
-
+				
 				//statistiques liées à l'arme
-				m_type = "";
-				m_nom = "";
-				m_degats = 0;
-				m_critique = 0;
-				m_bonusDegatsArme = 0;
+				type = "";
+				nom = "";
+				degats = 0;
+				critique = 0;
+				bonusDegatsArme = 0;
 
 				//statistiques liées aux personnage porteur
-				m_vie = 0;
-				m_esquive = 0;
-				m_vitesseBase = 0;
-				m_attaque = 0;
-				m_defense = 0;
-				m_agilite = 0;
-				m_intelligence = 0;
-				m_CaracArme = 0;
+				vie = 0;
+				esquive = 0;
+				vitesse = 0;
+				attaque = 0;
+				defense = 0;
+				agilite = 0;
+				intelligence = 0;
+				caracArme = 0;
 
 			}
 		}
@@ -105,88 +106,90 @@ void Parsing::LectureArmes(std::vector<CWeapon*> vector) {
 
 }
 
-void Parsing::LecturePersonnages(std::vector<CCharacter*> vector) {
+void Parsing::LecturePersonnages() {
 	std::string line;
 	std::ifstream myFile("data\\characters.jdc");
 	if (myFile.is_open())
 	{
-		std::string m_classe = "";
-		std::string m_nom = "";
-		int m_vie = 0;
-		float m_esquive = 0;
-		int m_vitesse = 0;
-		int m_attaque = 0;
-		int m_defense = 0;
-		int m_agilite = 0;
-		int m_intelligence = 0;
-		float m_special = 0;
+		std::string classe = "";
+		std::string nom = "";
+		int vie = 0;
+		float esquive = 0;
+		int vitesse = 0;
+		int attaque = 0;
+		int defense = 0;
+		int agilite = 0;
+		int intelligence = 0;
+		float special = 0;
 
 		while (myFile >> line) {
 			if (line != "EndCharacter") {
 				if (line == "Classe" || line == "Nom" || line == "HP" || line == "Dodge" || line == "Vitesse" || line == "Attaque" || line == "Defense" || line == "Agilite" || line == "Intelligence" || line == "Special") {
 					if (line == "Classe") {
-						myFile >> m_classe;
+						myFile >> classe;
 					}
 					if (line == "Nom") {
-						myFile >> m_nom;
+						myFile >> nom;
 					}
 					if (line == "HP") {
-						myFile >> m_vie;
+						myFile >> vie;
 					}
 					if (line == "Dodge") {
-						myFile >> m_esquive;
+						myFile >> esquive;
 					}
 					if (line == "Vitesse") {
-						myFile >> m_vitesse;
+						myFile >> vitesse;
 					}
 					if (line == "Attaque") {
-						myFile >> m_attaque;
+						myFile >> attaque;
 					}
 					if (line == "Defense") {
-						myFile >> m_defense;
+						myFile >> defense;
 					}
 					if (line == "Agilite") {
-						myFile >> m_agilite;
+						myFile >> agilite;
 					}
 					if (line == "Intelligence") {
-						myFile >> m_intelligence;
+						myFile >> intelligence;
 					}
 					if (line == "Special") {
-						myFile >> m_special;
+						myFile >> special;
 					}
 				}
 				else {
-					m_nom += " " + line;
+					nom += " " + line;
 				}
 			}
 			else {
-				if (m_classe == "Mage") {
-					CMage a = CMage(m_nom, m_vie, m_esquive, m_vitesse, m_attaque, m_defense, m_agilite, m_intelligence);
-					vector.push_back(&a);
+				if (classe == "Mage") {
+					CMage *a = new CMage(nom, vie, nullptr, esquive, vitesse, attaque, defense, agilite, intelligence);
+					m_character.push_back(a);
 				}
-				if (m_classe == "Voleur") {
-					CRogue a = CRogue(m_nom, m_vie, m_esquive, m_vitesse, m_attaque, m_defense, m_agilite, m_intelligence, m_special);
-					vector.push_back(&a);
+				if (classe == "Voleur") {
+					CRogue *a = new CRogue(nom, vie, nullptr, esquive, vitesse, attaque, defense, agilite, intelligence, special);
+					m_character.push_back(a);
 				}
-				if (m_classe == "Guerrier") {
-					CWarrior a = CWarrior(m_nom, m_vie, m_esquive, m_vitesse, m_attaque, m_defense, m_agilite, m_intelligence, m_special);
-					vector.push_back(&a);
+				if (classe == "Guerrier") {
+					CWarrior *a = new CWarrior(nom, vie, nullptr, esquive, vitesse, attaque, defense, agilite, intelligence, special);
+					m_character.push_back(a);
 				}
-				if (m_classe == "Archer") {
-					CArcher a = CArcher(m_nom, m_vie, m_esquive, m_vitesse, m_attaque, m_defense, m_agilite, m_intelligence);
-					vector.push_back(&a);
+				if (classe == "Archer") {
+					CArcher *a = new CArcher(nom, vie, nullptr,esquive, vitesse, attaque, defense, agilite, intelligence);
+					m_character.push_back(a);
 				}
 
-				m_classe = "";
-				m_nom = "";
-				m_vie = 0;
-				m_esquive = 0;
-				m_vitesse = 0;
-				m_attaque = 0;
-				m_defense = 0;
-				m_agilite = 0;
-				m_intelligence = 0;
-				m_special = 0;
+
+
+				classe = "";
+				nom = "";
+				vie = 0;
+				esquive = 0;
+				vitesse = 0;
+				attaque = 0;
+				defense = 0;
+				agilite = 0;
+				intelligence = 0;
+				special = 0;
 
 			}
 		}
@@ -197,12 +200,29 @@ void Parsing::LecturePersonnages(std::vector<CCharacter*> vector) {
 
 }
 
-
-
 Parsing::Parsing()
 {
-	LectureArmes(m_weapon);
-	LecturePersonnages(m_character);
+	LectureArmes();
+	LecturePersonnages();
+}
+
+Parsing::~Parsing()
+{
+}
+
+CCharacter* Parsing::ChooseCharacter(int numero)
+{
+	CCharacter* res = nullptr;
+
+	for (size_t i = 0; i < m_character.size(); i++)
+	{
+		if (i == numero)
+		{
+			res = m_character.at(i);
+		}
+	}
+
+	return res;
 }
 
 void Parsing::PrintCharacter()

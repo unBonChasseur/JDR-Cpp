@@ -4,8 +4,8 @@ CArcher::CArcher()
 {
 }
 
-CArcher::CArcher(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
-	:CCharacter(nom, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence)
+CArcher::CArcher(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
+	:CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence)
 {
 }
 

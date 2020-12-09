@@ -4,18 +4,18 @@
 #include <iostream>
 #include <cstring>
 #include "Parsing.h"
-
+#include "CCharacter.h"
 
 int main(int argc, char** argv)
 {
 	Parsing parsing;
 
-	parsing.PrintWeapon();
+	//CCharacter* a;
+	//a = parsing.ChooseCharacter(2);
+	//a->print();
 	parsing.PrintCharacter();
-
-	int a;
-	std::cin >> a;
-
+	parsing.PrintWeapon();
+	
 	return 0;
 }
 

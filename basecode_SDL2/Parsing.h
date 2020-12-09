@@ -1,9 +1,9 @@
 #pragma once
-#include <cstring>
-#include <fstream>
-#include <stdio.h>
-#include <iostream>
 #include <vector>
+#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include <cstring>
 
 #include <sstream>
 #include "CWeapon.h"
@@ -24,14 +24,16 @@ protected :
 
 	std::vector<CWeapon*> m_weapon;
 	std::vector<CCharacter*> m_character;
-	void LectureArmes(std::vector<CWeapon*> vector);
-	void LecturePersonnages(std::vector<CCharacter*> vector);
+	void LectureArmes();
+	void LecturePersonnages();
 
 public :
 	
 	Parsing();
+	~Parsing();
+
 	void PrintCharacter();
 	void PrintWeapon();
-
+	CCharacter* ChooseCharacter(int numero);
 };
 

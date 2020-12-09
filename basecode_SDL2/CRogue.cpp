@@ -7,8 +7,8 @@ CRogue::CRogue():CCharacter()
 	m_poison = 0;
 }
 
-CRogue::CRogue(std::string nom, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison)
-	:CCharacter(nom, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CRogue::CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison)
+	:CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
 	m_nbToursFurtif(0),
 	m_CDFurtif(0),
 	m_poison(poison)

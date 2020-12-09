@@ -8,8 +8,8 @@ CMage::CMage():CCharacter()
 	m_CDenchantement = 0;
 }
 
-CMage::CMage(std::string nom, int vie,  float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence) :
-	CCharacter(nom, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence) :
+	CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
 	m_mana(intelligence * 10),
 	m_manaMax(intelligence*10),
 	m_CDenchantement(0),
