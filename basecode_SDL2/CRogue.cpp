@@ -13,11 +13,16 @@ CRogue::CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vit
 	m_CDFurtif(0),
 	m_poison(poison)
 {
-
+	m_classe = "Voleur";
 }
 
 CRogue::~CRogue()
 {
+}
+
+float CRogue::GetCaracPartic()
+{
+	return m_poison;
 }
 
 void CRogue::AttaquerAvecArme()
@@ -40,4 +45,10 @@ void CRogue::print()
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
+	std::cout << "\n\t\tProbabilite empoisonnement : " << m_poison << "/1";
+	if (m_weapon == nullptr)
+		std::cout << "\n\t\tArme equipee : Aucune";
+
+	else
+		std::cout << "\n\t\tArme equipee : " << m_weapon->GetNom();
 }

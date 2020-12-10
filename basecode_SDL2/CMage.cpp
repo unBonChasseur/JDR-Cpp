@@ -15,11 +15,16 @@ CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vites
 	m_CDenchantement(0),
 	m_CDsoin(0)
 {
-
+	m_classe = "Mage";
 }
 
 CMage::~CMage()
 {
+}
+
+float CMage::GetCaracPartic()
+{
+	return m_mana;
 }
 
 void CMage::RegenererMana()
@@ -58,4 +63,10 @@ void CMage::print()
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
+	std::cout << "\n\t\tMana : " << m_mana;
+	if (m_weapon == nullptr)
+		std::cout << "\n\t\tArme equipee : Aucune";
+
+	else
+		std::cout << "\n\t\tArme equipee : " << m_weapon->GetNom();
 }

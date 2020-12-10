@@ -18,10 +18,10 @@ public :
 	int VerifierParamPartie();
 	void lancerPartie();
 	
-	void ParamJoueur(std::vector<CCharacter*> p_vector, int i);
-	void PrintJoueur(std::vector<CCharacter*> p_vector, int i);
+	void ParamJoueur(int i);
+	void PrintJoueur(int i);
 
-	void AjouterPersonnage(std::vector<CCharacter*> p_vector, int i);
+	void AjouterPersonnage(int i);
 
 	void ViderVariables();
 	

@@ -6,6 +6,7 @@ class CMage : public CCharacter
 protected :
 	int m_manaMax;
 	int m_mana;
+
 	int m_CDsoin;
 	int m_CDenchantement;
 
@@ -14,6 +15,8 @@ protected :
 public :
 	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CMage();
+
+	float GetCaracPartic();
 
 	void RegenererMana();
 	void Soigner(CCharacter CCharacter);

@@ -34,8 +34,14 @@ public :
 
 	void PrintCharacter();
 	void PrintWeapon();
+
 	CCharacter* ChooseCharacter(int numero);
+	CWeapon* ChooseWeapon(int numero);
+
 	int GetWeaponSize();
 	int GetCharacterSize();
+
+	void EnleverWeapon(CWeapon* ccharacter);
+	void EnleverCharacter(CCharacter* ccharacter);
 };
 

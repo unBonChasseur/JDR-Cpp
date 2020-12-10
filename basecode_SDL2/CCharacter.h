@@ -8,6 +8,7 @@
 class CCharacter
 {
 protected :
+	std::string m_classe;
 	std::string m_nom;
 	int m_vieInitiale;
 	int m_vie;
@@ -32,11 +33,12 @@ public :
 	virtual void AttaquerAvecArme(CCharacter CCharacter);
 	int Esquiver();
 
+	std::string GetClasse();
 	std::string GetNom();
 	int GetVieInitiale();
 	int GetVie();
 	CWeapon* GetWeapon();
-	int GetEsquive();
+	float GetEsquive();
 	int GetVitesseBase();
 	int GetVitesse();
 	int GetAttaque();
@@ -45,8 +47,10 @@ public :
 	int GetIntelligence();
 	int IsEmpoisonne();
 	int HasBonusDegats();
+	virtual float GetCaracPartic();
 
 	void SetVie(int vie);
+	
 
 	virtual void PresentationChoix();
 	virtual void print();

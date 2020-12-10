@@ -35,11 +35,11 @@ void Jeu::DemarrerJeu()
 			break;
 
 		case 2:
-			ParamJoueur(m_vector.at(0), 1);
+			ParamJoueur(1);
 			break;
 
 		case 3:
-			ParamJoueur(m_vector.at(1), 2);
+			ParamJoueur(2);
 			break;
 
 		case 4:
@@ -76,15 +76,15 @@ void Jeu::lancerPartie()
 
 }
 
-void Jeu::ParamJoueur(std::vector<CCharacter*> p_vector, int i)
+void Jeu::ParamJoueur(int i)
 {
-	PrintJoueur(p_vector, i);
+	PrintJoueur(i);
 
 	int choice = 0;
 	int quit = 0;
 
 	while (!quit) {
-		if (p_vector.size() != 3) {
+		if (m_vector.at(i-1).size() != 3) {
 			std::cout << "\n\n\tQue souhaitez vous faire ?";
 			std::cout << "\n\t  1. Ajouter un personnage";
 			std::cout << "\n\t  2. Retourner au menu precedent.";
@@ -93,8 +93,7 @@ void Jeu::ParamJoueur(std::vector<CCharacter*> p_vector, int i)
 			std::cin >> choice;
 			switch (choice) {
 			case 1:
-				AjouterPersonnage(p_vector, i);
-				p_vector.resize(3);
+				AjouterPersonnage(i);
 				break;
 
 			case 2:
@@ -134,44 +133,62 @@ void Jeu::ParamJoueur(std::vector<CCharacter*> p_vector, int i)
 	DemarrerJeu();
 }
 
-
-void Jeu::PrintJoueur(std::vector<CCharacter*> p_vector, int i)
+void Jeu::PrintJoueur(int i)
 {
 	std::cout << "\n\tPersonnages du joueur " << i << " :";
 	std::vector<CCharacter*>::iterator it;
 
-	for (it = p_vector.begin(); it != p_vector.end(); it++) {
+	for (it = m_vector.at(i-1).begin(); it != m_vector.at(i - 1).end(); it++) {
 		(*it)->print();
+		std::cout << "\n";
 	}
 }
 
-void Jeu::AjouterPersonnage(std::vector<CCharacter*> p_vector, int i)
+void Jeu::AjouterPersonnage(int i)
 {
 	m_parsing.PrintCharacter();
-	int choice1 = 0;
-	int choice2 = 0;
+	int choice = 0;
 	int quit = 0;
 
 	while (!quit) {
 
 		std::cout << "\n\n\tQuelle personnage choisissez vous ?\n";
-		std::cin >> choice1;
+		std::cin >> choice;
 
-		if (choice1 <= m_parsing.GetCharacterSize()) {
-			m_parsing.PrintWeapon();
-			std::cout << "\n\n\tQuelle arme choisissez vous ?\n";
-			std::cin >> choice2;
-
-			if (choice2 <= m_parsing.GetWeaponSize()) {
-
+		if (choice <= m_parsing.GetCharacterSize()) {
+			
+			std::string classe = m_parsing.ChooseCharacter(choice-1)->GetClasse();
+			if (classe == "Voleur") {
+				CCharacter* a = m_parsing.ChooseCharacter(choice - 1);
+				CRogue* b = new CRogue(a->GetNom(),a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence(), a->GetCaracPartic());
+				m_vector.at(i - 1).push_back(b);
+				m_parsing.EnleverCharacter(a);
 			}
-			else 
-				quit = 1;
+			if (classe == "Guerrier") {
+				CCharacter* a = m_parsing.ChooseCharacter(choice - 1);
+				CWarrior* b = new CWarrior(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence(), a->GetCaracPartic());
+				m_vector.at(i - 1).push_back(b);
+				m_parsing.EnleverCharacter(a);
+			}
+			if (classe == "Mage") {
+				CCharacter* a = m_parsing.ChooseCharacter(choice - 1);
+				CMage* b = new CMage(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence());
+				m_vector.at(i - 1).push_back(b);
+				m_parsing.EnleverCharacter(a);
+			}
+			if (classe == "Archer") {
+				CCharacter* a = m_parsing.ChooseCharacter(choice - 1);
+				CArcher* b = new CArcher(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence());
+				m_vector.at(i - 1).push_back(b);
+				m_parsing.EnleverCharacter(a);
+			}
 		}
-		else 
-			quit = 1;
+		else {
+			std::cout << "\n\n\t Choix incorrect.";
+		}
+		quit = 1;
 	}
-	ParamJoueur(p_vector, i);
+	ParamJoueur(i);
 }
 
 void Jeu::ViderVariables()

@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 	
 	Jeu jeu;
 	jeu.DemarrerJeu();
-
+	
 	//CCharacter* a;
 	//a = parsing.ChooseCharacter(2);
 	//a->print();

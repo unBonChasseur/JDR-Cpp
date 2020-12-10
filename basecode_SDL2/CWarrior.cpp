@@ -16,10 +16,16 @@ CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int
 	/*
 	if (m_weapon.GetType() == "Epee")
 		m_esquive += m_parade;*/
+	m_classe = "Guerrier";
 }
 
 CWarrior::~CWarrior()
 {
+}
+
+float CWarrior::GetCaracPartic()
+{
+	return m_parade;
 }
 
 void CWarrior::AttaquerAvecArme(CCharacter CCharacter)
@@ -92,4 +98,10 @@ void CWarrior::print()
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
+	std::cout << "\n\t\tParade : " << m_parade;
+	if (m_weapon == nullptr) 
+		std::cout << "\n\t\tArme equipee : Aucune";
+	
+	else 
+		std::cout << "\n\t\tArme equipee : " << m_weapon->GetNom();
 }

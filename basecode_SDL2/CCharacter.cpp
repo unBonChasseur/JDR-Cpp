@@ -2,6 +2,7 @@
 
 CCharacter::CCharacter()
 {
+	m_classe = "";
 	m_nom = "";
 	m_vie = 0;
 	m_weapon = nullptr;
@@ -18,36 +19,35 @@ CCharacter::CCharacter()
 
 CCharacter::CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
 {
+	m_classe = "";
 	m_weapon = weapon;
+	m_nom = nom;
+	m_nom = nom;
+	m_vie = vie;
+	m_vieInitiale = vie;
+	m_esquive = esquive;
+	m_vitesseBase = vitesseBase;
+	m_vitesse = vitesseBase;
+	m_attaque = attaque;
+	m_defense = defense;
+	m_agilite = agilite;
+	m_intelligence = intelligence;
+	m_empoisonne = 0;
+	m_bonusDegats = 0;
+
 	if (weapon != nullptr) {
-		m_nom = nom;
-		m_vie = vie + weapon->GetVie();
-		m_vieInitiale = vie + weapon->GetVie();
-		m_esquive = esquive+weapon->GetEsquive();
-		m_vitesseBase = vitesseBase+weapon->GetVitesseBase();
-		m_vitesse = vitesseBase+weapon->GetVitesseBase();
-		m_attaque = attaque+weapon->GetAttaque();
-		m_defense = defense+weapon->GetDefense();
-		m_agilite = agilite+weapon->GetAgilite();
-		m_intelligence = intelligence+weapon->GetIntelligence();
-		m_empoisonne = 0;
-		m_bonusDegats = 0;
+		
+		m_vie += weapon->GetVie();
+		m_vieInitiale += weapon->GetVie();
+		m_esquive += weapon->GetEsquive();
+		m_vitesseBase += weapon->GetVitesseBase();
+		m_vitesse += weapon->GetVitesseBase();
+		m_attaque += weapon->GetAttaque();
+		m_defense += weapon->GetDefense();
+		m_agilite += weapon->GetAgilite();
+		m_intelligence += weapon->GetIntelligence();
+
 	}
-	else {
-		m_nom = nom;
-		m_vie = vie;//+weapon.GetVie();
-		m_vieInitiale = vie;// +weapon.GetVie();
-		m_esquive = esquive;//+weapon.GetEsquive();
-		m_vitesseBase = vitesseBase;//+weapon.GetVitesseBase();
-		m_vitesse = vitesseBase;//+weapon.GetVitesseBase();
-		m_attaque = attaque;//+weapon.GetAttaque();
-		m_defense = defense;//+weapon.GetDefense();
-		m_agilite = agilite;//+weapon.GetAgilite();
-		m_intelligence = intelligence;//+weapon.GetIntelligence();
-		m_empoisonne = 0;
-		m_bonusDegats = 0;
-	}
-	
 }
 
 CCharacter::~CCharacter()
@@ -77,6 +77,11 @@ int CCharacter::Esquiver()
 	return randEsquive <= m_esquive;
 }
 
+std::string CCharacter::GetClasse()
+{
+	return m_classe;
+}
+
 std::string CCharacter::GetNom()
 {
 	return m_nom;
@@ -97,7 +102,7 @@ CWeapon* CCharacter::GetWeapon()
 	return m_weapon;
 }
 
-int CCharacter::GetEsquive()
+float CCharacter::GetEsquive()
 {
 	return m_esquive;
 }
@@ -142,6 +147,11 @@ int CCharacter::HasBonusDegats()
 	return m_bonusDegats;
 }
 
+float CCharacter::GetCaracPartic()
+{
+	return 0.0f;
+}
+
 void CCharacter::SetVie(int vie)
 {
 	m_vie += vie;
@@ -152,19 +162,13 @@ void CCharacter::SetVie(int vie)
 
 void CCharacter::PresentationChoix()
 {
-	int boucled = 1;
-	int texte = 0;
-	while (boucled) {
-		if (texte == 0) {
-			std::cout << "\nQuelle action souhaitez vous faire ?";
-			std::cout << "\n\t1) Attaquer un adversaire. (Sans utiliser votre arme)";
-			std::cout << "\n\t2) Attaquer un adversaire. (En utilisant votre arme)";
-			std::cout << "\n\t3) Utiliser une capacité spéciale.";
-		}
-		if (texte == 1) {
-			std::cout << "\nQuel adversaire souhaitez vous attaquer ?";
-		}
-
+	int boucled = 0;
+	while (!boucled) {
+		std::cout << "\nQuelle action souhaitez vous faire ?";
+		std::cout << "\n\t1. Attaquer un adversaire. (Sans utiliser votre arme)";
+		std::cout << "\n\t2. Attaquer un adversaire. (En utilisant votre arme)";
+		std::cout << "\n\t3. Utiliser une capacité spéciale.";
+		
 		int choice;
 		std::cin >> choice;
 		switch (choice)
@@ -172,7 +176,7 @@ void CCharacter::PresentationChoix()
 		case 1:
 			
 			break;
-		case 2:
+		case 2:	
 
 			break;
 		case 3:

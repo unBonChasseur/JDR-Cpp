@@ -225,6 +225,21 @@ CCharacter* Parsing::ChooseCharacter(int numero)
 	return res;
 }
 
+CWeapon* Parsing::ChooseWeapon(int numero)
+{
+	CWeapon* res = nullptr;
+
+	for (size_t i = 0; i < m_weapon.size(); i++)
+	{
+		if (i == numero)
+		{
+			res = m_weapon.at(i);
+		}
+	}
+
+	return res;
+}
+
 void Parsing::PrintCharacter()
 {
 	int j = 1;
@@ -260,4 +275,40 @@ int Parsing::GetWeaponSize() {
 
 int Parsing::GetCharacterSize() {
 	return m_character.size();
+}
+
+void Parsing::EnleverWeapon(CWeapon* cweapon)
+{
+	std::vector<CWeapon*>::iterator it;
+
+	if (cweapon == nullptr)
+		return;
+
+	for (it = m_weapon.begin(); it != m_weapon.end(); it++)
+	{
+		if (*it == cweapon)
+		{
+			delete* it;
+			m_weapon.erase(it);
+			break;
+		}
+	}
+}
+
+void Parsing::EnleverCharacter(CCharacter* ccharacter)
+{
+	std::vector<CCharacter*>::iterator it;
+
+	if (ccharacter == nullptr)
+		return;
+
+	for (it = m_character.begin(); it != m_character.end(); it++)
+	{
+		if (*it == ccharacter)
+		{
+			delete* it;
+			m_character.erase(it);
+			break;
+		}
+	}
 }
