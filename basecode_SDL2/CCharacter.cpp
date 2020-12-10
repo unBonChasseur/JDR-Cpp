@@ -187,13 +187,4 @@ void CCharacter::PresentationChoix()
 
 void CCharacter::print()
 {
-	std::cout << "\n\nclasse CCharacter";
-	std::cout << "\nnom : " << m_nom;
-	std::cout << "\nVie : " << m_vie;
-	std::cout << "\nEsquive : " << m_esquive;
-	std::cout << "\nVitesse : " << m_vitesseBase;
-	std::cout << "\nattaque : " << m_attaque;
-	std::cout << "\ndefense : " << m_defense;
-	std::cout << "\nagilite : " << m_agilite;
-	std::cout << "\nintelligence : " << m_intelligence;
 }

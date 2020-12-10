@@ -227,22 +227,37 @@ CCharacter* Parsing::ChooseCharacter(int numero)
 
 void Parsing::PrintCharacter()
 {
-	std::cout << m_character.size();
-	std::vector<CCharacter*>::iterator itCharacter;
-
-	for (itCharacter = m_character.begin(); itCharacter != m_character.end(); itCharacter++) {
-		(*itCharacter)->print();
+	int j = 1;
+	for (size_t i = 0; i < m_character.size(); i++)
+	{
+		std::cout << "\n\nChoix : " << j;
+		m_character.at(i)->print();
+		j++;
 	}
+
+	std::cout << "\n\nChoix : " << j << " ";
+	std::cout << "\n\tRevenir aux parametres du joueur.";
 }
 
 void Parsing::PrintWeapon()
 {
-	std::cout << m_weapon.size();
-	std::vector<CWeapon*>::iterator itWeapon;
-	
-	for (itWeapon = m_weapon.begin(); itWeapon != m_weapon.end(); itWeapon++) {
-		(*itWeapon)->print();
+	int j = 1;
+	for (size_t i = 0; i < m_weapon.size(); i++)
+	{
+		std::cout << "\n\nChoix : " << j;
+		m_weapon.at(i)->print();
+		j++;
 	}
+
+	std::cout << "\n\nChoix : " << j << " ";
+	std::cout << "\n\tRevenir aux parametres du joueur.";
+
 }
 
+int Parsing::GetWeaponSize() {
+	return m_weapon.size();
+}
 
+int Parsing::GetCharacterSize() {
+	return m_character.size();
+}

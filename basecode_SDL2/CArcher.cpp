@@ -20,15 +20,16 @@ void CArcher::GuerirPoison()
 void CArcher::Viser()
 {
 }
+
 void CArcher::print()
 {
-	std::cout << "\n\nclasse CArcher";
-	std::cout << "\nnom : " << m_nom;
-	std::cout << "\nVie : " << m_vie;
-	std::cout << "\nEsquive : " << m_esquive;
-	std::cout << "\nVitesse : " << m_vitesseBase;
-	std::cout << "\nattaque : " << m_attaque;
-	std::cout << "\ndefense : " << m_defense;
-	std::cout << "\nagilite : " << m_agilite;
-	std::cout << "\nintelligence : " << m_intelligence;
+	std::cout << "\n\tClasse archer";
+	std::cout << "\n\t\tNom : " << m_nom;
+	std::cout << "\n\t\tVie : " << m_vie;
+	std::cout << "\n\t\tEsquive : " << m_esquive;
+	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	std::cout << "\n\t\tAttaque : " << m_attaque;
+	std::cout << "\n\t\tDefense : " << m_defense;
+	std::cout << "\n\t\tAgilite : " << m_agilite;
+	std::cout << "\n\t\tIntelligence : " << m_intelligence;
 }

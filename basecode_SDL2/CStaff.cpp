@@ -18,18 +18,32 @@ int CStaff::GetCout()
 
 void CStaff::print()
 {
-	std::cout << "\n\nclasse CStaff";
-	std::cout << "\ntype : " << m_type;
-	std::cout << "\nnom : " << m_nom;
-	std::cout << "\nDegats : " << m_degats;
-	std::cout << "\nCritique : " << m_critique;
-	std::cout << "\nBonus : " << m_bonusDegatsArme;
-	std::cout << "\nVie : " << m_vie;
-	std::cout << "\nEsquive : " << m_esquive;
-	std::cout << "\nVitesse : " << m_vitesseBase;
-	std::cout << "\nattaque : " << m_attaque;
-	std::cout << "\ndefense : " << m_defense;
-	std::cout << "\nagilite : " << m_agilite;
-	std::cout << "\nintelligence : " << m_intelligence;
-	std::cout << "\ncout : " << m_cout;
+	std::cout << "\n\tClasse Baton";
+	std::cout << "\n\t\tType : " << m_type;
+	std::cout << "\n\t\tNom : " << m_nom;
+	std::cout << "\n\t\tDegats : " << m_degats;
+	std::cout << "\n\t\tCritique : " << m_critique;
+	std::cout << "\n\t\tCout : " << m_cout;
+
+	std::cout << "\n\tBuffs/Debuffs statistiques du porteur :";
+	if (m_vie != 0)
+		std::cout << "\n\t\tVie : " << m_vie;
+
+	if (m_esquive != 0)
+		std::cout << "\n\t\tEsquive : " << m_esquive;
+
+	if (m_vitesseBase != 0)
+		std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+
+	if (m_attaque != 0)
+		std::cout << "\n\t\tAttaque : " << m_attaque;
+
+	if (m_defense != 0)
+		std::cout << "\n\t\tDefense : " << m_defense;
+
+	if (m_agilite != 0)
+		std::cout << "\n\t\tAgilite : " << m_agilite;
+
+	if (m_intelligence != 0)
+		std::cout << "\n\t\tIntelligence : " << m_intelligence;
 }

@@ -3,19 +3,19 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
-#include "Parsing.h"
-#include "CCharacter.h"
+#include "Jeu.h"
 
 int main(int argc, char** argv)
 {
-	Parsing parsing;
+	
+	Jeu jeu;
+	jeu.DemarrerJeu();
 
 	//CCharacter* a;
 	//a = parsing.ChooseCharacter(2);
 	//a->print();
-	parsing.PrintCharacter();
-	parsing.PrintWeapon();
-	
+
+
 	return 0;
 }
 
