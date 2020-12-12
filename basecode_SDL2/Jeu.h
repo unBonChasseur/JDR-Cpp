@@ -6,7 +6,7 @@
 class Jeu
 {
 protected :
-	Parsing m_parsing;
+	std::vector<Parsing*> m_parsing;
 	std::vector<std::vector<CCharacter*>> m_vector;
 
 public :

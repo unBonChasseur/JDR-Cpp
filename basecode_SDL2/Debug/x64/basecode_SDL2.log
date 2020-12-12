@@ -1,8 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(476,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
   Jeu.cpp
-  main.cpp
-  Génération de code en cours...
   basecode_SDL2.vcxproj -> D:\cours L3\ProjetC++\projet\basecode_SDL2\bin\x64\basecode_SDL2_d.exe
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libFLAC-8.dll
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libfreetype-6.dll
