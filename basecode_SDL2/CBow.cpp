@@ -28,16 +28,20 @@ void CBow::SetNbFleches(int nbFleches)
 	m_nbFleches += nbFleches;
 }
 
+float CBow::GetSpecial()
+{
+	return m_nbFlechesBase;
+}
+
 void CBow::print()
 {
-	std::cout << "\n\tClasse Arc";
-	std::cout << "\n\t\tType : " << m_type;
+	std::cout << "\n\tClasse : " << m_type;
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
-	std::cout << "\n\t\Nombre de fleches : " << m_nbFlechesBase;
+	std::cout << "\n\t\tNombre de Fleches : " << m_nbFleches;
 
-	std::cout << "\n\tBuffs/Debuffs statistiques du porteur :";
+	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)
 		std::cout << "\n\t\tVie : " << m_vie;
 

@@ -15,7 +15,11 @@ public :
 
 	int GetDurabiliteInitiale();
 	int GetDurabilite();
+
 	void SetDurabilite(int durabilite);
+
+	virtual float GetSpecial();
+
 	virtual void print();
 };
 

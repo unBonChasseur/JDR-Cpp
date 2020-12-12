@@ -16,16 +16,20 @@ int CStaff::GetCout()
 	return m_cout;
 }
 
+float CStaff::GetSpecial()
+{
+	return m_cout;
+}
+
 void CStaff::print()
 {
-	std::cout << "\n\tClasse Baton";
-	std::cout << "\n\t\tType : " << m_type;
+	std::cout << "\n\tClasse : " << m_type;
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
 	std::cout << "\n\t\tCout : " << m_cout;
 
-	std::cout << "\n\tBuffs/Debuffs statistiques du porteur :";
+	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)
 		std::cout << "\n\t\tVie : " << m_vie;
 

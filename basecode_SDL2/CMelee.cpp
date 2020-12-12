@@ -28,6 +28,11 @@ void CMelee::SetDurabilite(int durabilite)
 	m_durabilite = durabilite;
 }
 
+float CMelee::GetSpecial()
+{
+	return m_durabiliteInitiale;
+}
+
 void CMelee::print()
 {
 }

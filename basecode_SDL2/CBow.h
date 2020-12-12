@@ -19,6 +19,8 @@ public:
 
 	void SetNbFleches(int nbFleches);
 
+	float GetSpecial();
+
 	void print();
 };
 

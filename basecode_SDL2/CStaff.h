@@ -15,6 +15,8 @@ public:
 
 	int GetCout();
 
+	float GetSpecial();
+
 	void print();
 };
 

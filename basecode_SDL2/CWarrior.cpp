@@ -102,6 +102,8 @@ void CWarrior::print()
 	if (m_weapon == nullptr) 
 		std::cout << "\n\t\tArme equipee : Aucune";
 	
-	else 
-		std::cout << "\n\t\tArme equipee : " << m_weapon->GetNom();
+	else {
+		std::cout << "\n\t\tArme equipee : \n";
+		m_weapon->print();
+	}
 }

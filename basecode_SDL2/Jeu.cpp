@@ -92,7 +92,7 @@ void Jeu::ParamJoueur(int i)
 			std::cout << "\n\t  1. Ajouter un personnage";
 			std::cout << "\n\t  2. Retourner au menu precedent.";
 
-			std::cout << "\n\n\tQuelle option choisissez vous ?\n";
+			std::cout << "\n\n\tQuelle option choisissez vous ?\n\t";
 			std::cin >> choice;
 			switch (choice) {
 			case 1:
@@ -113,14 +113,15 @@ void Jeu::ParamJoueur(int i)
 			std::cout << "\n\t  2. Remplacer l'arme d'un personnage.";
 			std::cout << "\n\t  3. Retourner au menu precedent.";
 
-			std::cout << "\n\n\tQuelle option choisissez vous ?\n";
+			std::cout << "\n\n\tQuelle option choisissez vous ?\n\t";
 			std::cin >> choice;
 			switch (choice) {
 			case 1:
+				
 				break;
 
 			case 2:
-
+				RemplacerArme(i);
 				break;
 
 			case 3:
@@ -138,10 +139,13 @@ void Jeu::PrintJoueur(int i)
 {
 	std::cout << "\n\tPersonnages du joueur " << i+1 << " :";
 	std::vector<CCharacter*>::iterator it;
+	int x = 1;
 
 	for (it = m_vector.at(i).begin(); it != m_vector.at(i).end(); it++) {
+		std::cout << "\n\n\tPersonnage "<< x << " : ";
 		(*it)->print();
 		std::cout << "\n";
+		x++;
 	}
 }
 
@@ -153,34 +157,105 @@ void Jeu::AjouterPersonnage(int i)
 
 	while (!quit) {
 
-		std::cout << "\n\n\tQuelle personnage choisissez vous ?\n";
+		std::cout << "\n\n\tQuel personnage choisissez vous ?\n\t";
 		std::cin >> choice;
 
 		if (choice <= m_parsing.at(i)->GetCharacterSize()) {
+
 			choice--;
-			std::string classe = m_parsing.at(i)->ChooseCharacter(choice)->GetClasse();
-			CCharacter* a = m_parsing.at(i)->ChooseCharacter(choice);
+			CCharacter* character = m_parsing.at(i)->ChooseCharacter(choice);
+			std::string classe = character->GetClasse();
+
 			if (classe == "Voleur") {
-				CRogue* b = new CRogue(a->GetNom(),a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence(), a->GetCaracPartic());
-				m_vector.at(i).push_back(b);
+				CRogue* temp = new CRogue(character->GetNom(),character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character->GetCaracPartic());
+				m_vector.at(i).push_back(temp);
 			}
 			if (classe == "Guerrier") {
-				CWarrior* b = new CWarrior(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence(), a->GetCaracPartic());
-				m_vector.at(i).push_back(b);
+				CWarrior* temp = new CWarrior(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character->GetCaracPartic());
+				m_vector.at(i).push_back(temp);
 			}
 			if (classe == "Mage") {
-				CMage* b = new CMage(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence());
-				m_vector.at(i).push_back(b);
+				CMage* temp = new CMage(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
+				m_vector.at(i).push_back(temp);
 			}
 			if (classe == "Archer") {
-				CArcher* b = new CArcher(a->GetNom(), a->GetVie(), a->GetWeapon(), a->GetEsquive(), a->GetVitesseBase(), a->GetAttaque(), a->GetDefense(), a->GetAgilite(), a->GetIntelligence());
-				m_vector.at(i).push_back(b);
+				CArcher* temp = new CArcher(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
+				m_vector.at(i).push_back(temp);
 			}
-			m_parsing.at(i)->EnleverCharacter(a);
+			m_parsing.at(i)->EnleverCharacter(character);
 		}
-		else {
-			std::cout << "\n\n\t Choix incorrect.";
+		else 
+			std::cout << "\n\n\t Choix incorrect.\n";
+		
+		quit = 1;
+	}
+}
+
+void Jeu::RemplacerArme(int i)
+{
+	int choice = 0;
+	int quit = 0;
+
+	while (!quit) {
+		PrintJoueur(i);
+
+		std::cout << "\n\n\tQuel est le personnage dont vous souhaitez changer l'equipement ?\n\t";
+		std::cin >> choice;
+
+		if (choice <= m_vector.at(i).size()) {
+			choice--;
+			CCharacter* character = m_vector.at(i).at(choice);
+			std::string classe = character->GetClasse();
+			std::string type1, type2;
+
+			if (classe == "Guerrier") {
+				type1 = "Epee";
+				type2 = "Dague";
+			}
+			if (classe == "Mage") {
+				type1 = "Baton";
+				type2 = "Epee";
+			}
+			if (classe == "Archer") {
+				type1 = "Arc";
+				type2 = "Dague";
+			}
+			if (classe == "Voleur") {
+				type1 = "Dague";
+				type2 = "Arc";
+			}
+			m_parsing.at(i)->PrintWeapon(type1, type2);
+
+			std::cout << "\n\n\tQuelle arme souhaitez vous lui donner ?\n\t";
+			std::cin >> choice;
+			
+			if (choice <= m_parsing.at(i)->GetWeaponSize(type1, type2)) {
+				CWeapon* weapon = m_parsing.at(i)->ChooseWeapon(type1, type2, choice);
+				std::string type = weapon->GetType();
+
+				if (type == "Epee") {
+					CSword* temp = new CSword(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					
+				}
+				if (type == "Dague") {
+					CDagger* temp = new CDagger(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					
+				}
+				if (type == "arc") {
+					CBow* temp = new CBow(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					
+				}
+				if (type == "Baton") {
+					CStaff* temp = new CStaff(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					
+				}
+			}
+
+			else 
+				std::cout << "\n\n\t Choix d'arme incorrect.\n";
 		}
+		else
+			std::cout << "\n\n\t Choix de personnage incorrect.\n";
 		quit = 1;
 	}
 }

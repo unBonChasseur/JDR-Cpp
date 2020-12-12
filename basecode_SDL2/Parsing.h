@@ -34,11 +34,14 @@ public :
 
 	void PrintCharacter();
 	void PrintWeapon();
+	void PrintWeapon(std::string type1, std::string type2);
 
 	CCharacter* ChooseCharacter(int numero);
 	CWeapon* ChooseWeapon(int numero);
+	CWeapon* ChooseWeapon(std::string type1, std::string type2, int choix);
 
 	int GetWeaponSize();
+	int GetWeaponSize(std::string type1, std::string type2);
 	int GetCharacterSize();
 
 	void EnleverWeapon(CWeapon* ccharacter);

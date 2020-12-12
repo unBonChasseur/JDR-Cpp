@@ -11,14 +11,13 @@ CDagger::CDagger(std::string type, std::string nom, int degats, float critique, 
 
 void CDagger::print()
 {
-	std::cout << "\n\n\tClasse Dague";
-	std::cout << "\n\t\tType : " << m_type;
+	std::cout << "\n\tClasse : " << m_type;
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
 	std::cout << "\n\t\tDurabilite : " << m_durabilite;
 
-	std::cout << "\n\tBuffs/Debuffs statistiques du porteur :";
+	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)
 		std::cout << "\n\t\tVie : " << m_vie;
 

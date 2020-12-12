@@ -11,7 +11,7 @@ CMage::CMage():CCharacter()
 CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence) :
 	CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
 	m_mana(intelligence * 10),
-	m_manaMax(intelligence*10),
+	m_manaMax(intelligence * 10),
 	m_CDenchantement(0),
 	m_CDsoin(0)
 {
@@ -67,6 +67,8 @@ void CMage::print()
 	if (m_weapon == nullptr)
 		std::cout << "\n\t\tArme equipee : Aucune";
 
-	else
-		std::cout << "\n\t\tArme equipee : " << m_weapon->GetNom();
+	else {
+		std::cout << "\n\t\tArme equipee : \n";
+		m_weapon->print();
+	}
 }

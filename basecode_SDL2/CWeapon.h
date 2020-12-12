@@ -41,6 +41,8 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 
+	virtual float GetSpecial();
+
 	virtual void print();
 
 };

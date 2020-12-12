@@ -22,6 +22,7 @@ public :
 	void PrintJoueur(int i);
 
 	void AjouterPersonnage(int i);
+	void RemplacerArme(int i);
 
 	void ViderVariables();
 	

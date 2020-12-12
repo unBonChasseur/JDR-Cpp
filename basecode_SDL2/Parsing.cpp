@@ -240,37 +240,84 @@ CWeapon* Parsing::ChooseWeapon(int numero)
 	return res;
 }
 
-void Parsing::PrintCharacter()
+CWeapon* Parsing::ChooseWeapon(std::string type1, std::string type2, int choix)
 {
 	int j = 1;
+	CWeapon* res = nullptr;
+
+	for (size_t i = 0; i < m_weapon.size(); i++)
+	{
+		std::string type = m_weapon.at(i)->GetType();
+		if (type == type1 || type == type2) {
+			std::cout << "\n\n\tChoix : " << j;
+			m_weapon.at(i)->print();
+			if (j == choix) {
+				res = m_weapon.at(i);
+			}
+			j++;
+		}
+	}
+	return res;
+}
+
+void Parsing::PrintCharacter()
+{
 	for (size_t i = 0; i < m_character.size(); i++)
 	{
-		std::cout << "\n\nChoix : " << j;
+		std::cout << "\n\n\tChoix : " << i+1;
 		m_character.at(i)->print();
-		j++;
 	}
 
-	std::cout << "\n\nChoix : " << j << " ";
+	std::cout << "\n\n\tChoix : " << m_character.size()+1 << " ";
 	std::cout << "\n\tRevenir aux parametres du joueur.";
 }
 
 void Parsing::PrintWeapon()
 {
+	for (size_t i = 0; i < m_weapon.size(); i++)
+	{
+		std::cout << "\n\n\tChoix : " << i+1;
+		m_weapon.at(i)->print();
+	}
+
+	std::cout << "\n\n\tChoix : " << m_weapon.size()+1 << " ";
+	std::cout << "\n\tRevenir aux parametres du joueur.";
+
+}
+
+void Parsing::PrintWeapon(std::string type1, std::string type2)
+{
 	int j = 1;
 	for (size_t i = 0; i < m_weapon.size(); i++)
 	{
-		std::cout << "\n\nChoix : " << j;
-		m_weapon.at(i)->print();
-		j++;
+		std::string type = m_weapon.at(i)->GetType();
+		if (type == type1 || type == type2) {
+			std::cout << "\n\n\tChoix : " << j;
+			m_weapon.at(i)->print();
+			j++;
+		}
 	}
 
-	std::cout << "\n\nChoix : " << j << " ";
+	std::cout << "\n\n\tChoix : " << j << " ";
 	std::cout << "\n\tRevenir aux parametres du joueur.";
 
 }
 
 int Parsing::GetWeaponSize() {
 	return m_weapon.size();
+}
+
+int Parsing::GetWeaponSize(std::string type1, std::string type2)
+{
+	int j = 0;
+	for (size_t i = 0; i < m_weapon.size(); i++)
+	{
+		std::string type = m_weapon.at(i)->GetType();
+		if (type == type1 || type == type2) {
+			j++;
+		}
+	}
+	return j;
 }
 
 int Parsing::GetCharacterSize() {

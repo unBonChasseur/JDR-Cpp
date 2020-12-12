@@ -94,6 +94,11 @@ int CWeapon::GetIntelligence()
 	return m_intelligence;
 }
 
+float CWeapon::GetSpecial()
+{
+	return 0.0f;
+}
+
 void CWeapon::print()
 {
 	std::cout << "\n\nclasse CWeapon";
