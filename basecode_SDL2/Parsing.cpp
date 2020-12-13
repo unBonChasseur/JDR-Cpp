@@ -344,10 +344,11 @@ void Parsing::EnleverWeapon(CWeapon* cweapon)
 
 void Parsing::EnleverCharacter(CCharacter* ccharacter)
 {
-	std::vector<CCharacter*>::iterator it;
 
 	if (ccharacter == nullptr)
 		return;
+
+	std::vector<CCharacter*>::iterator it;
 
 	for (it = m_character.begin(); it != m_character.end(); it++)
 	{
@@ -358,4 +359,8 @@ void Parsing::EnleverCharacter(CCharacter* ccharacter)
 			break;
 		}
 	}
+}
+
+void Parsing::AjouterCharacter(CCharacter* ccharacter) {
+	m_character.push_back(ccharacter);
 }

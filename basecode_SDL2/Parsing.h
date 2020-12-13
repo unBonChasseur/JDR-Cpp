@@ -46,5 +46,7 @@ public :
 
 	void EnleverWeapon(CWeapon* ccharacter);
 	void EnleverCharacter(CCharacter* ccharacter);
+
+	void AjouterCharacter(CCharacter* ccharacter);
 };
 

@@ -160,6 +160,34 @@ void CCharacter::SetVie(int vie)
 	}
 }
 
+void CCharacter::SetWeapon(CWeapon* weapon)
+{
+	if (m_weapon != nullptr) {
+		m_vie -= m_weapon->GetVie();
+		m_vieInitiale -= m_weapon->GetVie();
+		m_esquive -= m_weapon->GetEsquive();
+		m_vitesseBase -= m_weapon->GetVitesseBase();
+		m_vitesse -= m_weapon->GetVitesseBase();
+		m_attaque -= m_weapon->GetAttaque();
+		m_defense -= m_weapon->GetDefense();
+		m_agilite -= m_weapon->GetAgilite();
+		m_intelligence -= m_weapon->GetIntelligence();
+	}
+	delete m_weapon;
+	m_weapon = weapon;
+	if (m_weapon != nullptr) {
+		m_vie += weapon->GetVie();
+		m_vieInitiale += weapon->GetVie();
+		m_esquive += weapon->GetEsquive();
+		m_vitesseBase += weapon->GetVitesseBase();
+		m_vitesse += weapon->GetVitesseBase();
+		m_attaque += weapon->GetAttaque();
+		m_defense += weapon->GetDefense();
+		m_agilite += weapon->GetAgilite();
+		m_intelligence += weapon->GetIntelligence();
+	}
+}
+
 void CCharacter::PresentationChoix()
 {
 	int boucled = 0;

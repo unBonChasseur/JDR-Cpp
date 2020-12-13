@@ -50,7 +50,7 @@ public :
 	virtual float GetCaracPartic();
 
 	void SetVie(int vie);
-	
+	void SetWeapon(CWeapon* weapon);
 
 	virtual void PresentationChoix();
 	virtual void print();

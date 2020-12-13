@@ -16,13 +16,16 @@ public :
 	void DemarrerJeu();
 
 	int VerifierParamPartie();
-	void lancerPartie();
+	int lancerPartie();
 	
 	void ParamJoueur(int i);
 	void PrintJoueur(int i);
 
 	void AjouterPersonnage(int i);
+	void RemplacerPersonnage(int i);
 	void RemplacerArme(int i);
+
+	void EnleverCharacter(CCharacter* ccharacter, int i);
 
 	void ViderVariables();
 	
