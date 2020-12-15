@@ -5,8 +5,8 @@ CStaff::CStaff():CRanged()
 	m_cout = 0;
 }
 
-CStaff::CStaff(std::string type, std::string nom, int degats, float critique, float bonus, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, int cout)
-	: CRanged(type, nom, degats, critique, bonus, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CStaff::CStaff(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int cout)
+	: CRanged(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence),
 	m_cout(cout)
 {
 }
@@ -27,6 +27,7 @@ void CStaff::print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
+	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de dégats)";
 	std::cout << "\n\t\tCout : " << m_cout;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
@@ -36,8 +37,8 @@ void CStaff::print()
 	if (m_esquive != 0)
 		std::cout << "\n\t\tEsquive : " << m_esquive;
 
-	if (m_vitesseBase != 0)
-		std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	if (m_vitesse != 0)
+		std::cout << "\n\t\tVitesse : " << m_vitesse;
 
 	if (m_attaque != 0)
 		std::cout << "\n\t\tAttaque : " << m_attaque;

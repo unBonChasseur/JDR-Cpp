@@ -64,19 +64,19 @@ void Parsing::LectureArmes() {
 			}
 			else {
 				if (type == "Baton") {
-					CStaff *a = new CStaff(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					CStaff *a = new CStaff(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
 					m_weapon.push_back(a);
 				}
 				if (type == "Dague") {
-					CDagger *a = new CDagger(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					CDagger *a = new CDagger(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
 					m_weapon.push_back(a);
 				}
 				if (type == "Epee") {
-					CSword *a = new CSword(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					CSword *a = new CSword(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
 					m_weapon.push_back(a);
 				}
 				if (type == "Arc") {
-					CBow *a = new CBow(type, nom, degats, critique, bonusDegatsArme, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
+					CBow *a = new CBow(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, caracArme);
 					m_weapon.push_back(a);
 				}
 				

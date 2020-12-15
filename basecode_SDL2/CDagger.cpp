@@ -4,8 +4,8 @@ CDagger::CDagger():CMelee()
 {
 }
 
-CDagger::CDagger(std::string type, std::string nom, int degats, float critique, float bonus, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, int durabilite)
-	:CMelee(type, nom, degats, critique, bonus, vie, esquive, vitesseBase, attaque, defense, agilite, intelligence, durabilite)
+CDagger::CDagger(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int durabilite)
+	:CMelee(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, durabilite)
 {
 }
 
@@ -15,6 +15,7 @@ void CDagger::print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
+	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de dégats)";
 	std::cout << "\n\t\tDurabilite : " << m_durabilite;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
@@ -24,8 +25,8 @@ void CDagger::print()
 	if (m_esquive != 0)
 		std::cout << "\n\t\tEsquive : " << m_esquive;
 
-	if (m_vitesseBase != 0)
-		std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	if (m_vitesse != 0)
+		std::cout << "\n\t\tVitesse : " << m_vitesse;
 
 	if (m_attaque != 0)
 		std::cout << "\n\t\tAttaque : " << m_attaque;

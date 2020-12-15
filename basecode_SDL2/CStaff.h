@@ -10,8 +10,7 @@ protected:
 	CStaff();
 
 public:
-	CStaff(std::string type, std::string nom, int degats, float critique, float bonus
-		, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, int cout);
+	CStaff(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int cout);
 
 	int GetCout();
 

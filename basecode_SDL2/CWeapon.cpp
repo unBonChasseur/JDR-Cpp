@@ -6,28 +6,28 @@ CWeapon::CWeapon()
 	m_nom = "";
 	m_degats = 0;
 	m_critique = 0;
-	m_bonusDegatsArme = 1;
+	m_enchantement = 1;
 
 	m_vie = 0;
 	m_esquive = 0;
-	m_vitesseBase = 0;
+	m_vitesse = 0;
 	m_attaque = 0;
 	m_defense = 0;
 	m_agilite = 0;
 	m_intelligence = 0;
 }
 
-CWeapon::CWeapon(std::string type, std::string nom, int degats, float critique, float bonus, int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
+CWeapon::CWeapon(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence)
 {
 	m_type = type;
 	m_nom = nom;
 	m_degats = degats;
 	m_critique = critique;
-	m_bonusDegatsArme = bonus;
+	m_enchantement = 1;
 
 	m_vie = vie;
 	m_esquive = esquive;
-	m_vitesseBase = vitesseBase;
+	m_vitesse = vitesse;
 	m_attaque = attaque;
 	m_defense = defense;
 	m_agilite = agilite;
@@ -54,9 +54,9 @@ float CWeapon::GetCritique()
 	return m_critique;
 }
 
-float CWeapon::GetBonus()
+float CWeapon::GetEnchantement()
 {
-	return m_bonusDegatsArme;
+	return m_enchantement;
 }
 
 int CWeapon::GetVie()
@@ -69,9 +69,9 @@ float CWeapon::GetEsquive()
 	return m_esquive;
 }
 
-int CWeapon::GetVitesseBase()
+int CWeapon::GetVitesse()
 {
-	return m_vitesseBase;
+	return m_vitesse;
 }
 
 int CWeapon::GetAttaque()
@@ -101,17 +101,4 @@ float CWeapon::GetSpecial()
 
 void CWeapon::print()
 {
-	std::cout << "\n\nclasse CWeapon";
-	std::cout << "\ntype : " << m_type;
-	std::cout << "\nnom : " << m_nom;
-	std::cout << "\nDegats : " << m_degats;
-	std::cout << "\nCritique : " << m_critique;
-	std::cout << "\nBonus : " << m_bonusDegatsArme;
-	std::cout << "\nVie : " << m_vie;
-	std::cout << "\nEsquive : " << m_esquive;
-	std::cout << "\nVitesse : " << m_vitesseBase;
-	std::cout << "\nattaque : " << m_attaque;
-	std::cout << "\ndefense : " << m_defense;
-	std::cout << "\nagilite : " << m_agilite;
-	std::cout << "\nintelligence : " << m_intelligence;
 }

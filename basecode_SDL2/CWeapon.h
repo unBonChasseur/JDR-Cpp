@@ -10,12 +10,12 @@ protected :
 	std::string m_nom;
 	int m_degats;
 	float m_critique;
-	float m_bonusDegatsArme;
+	float m_enchantement;
 
 	//statistiques liées aux personnage porteur
 	int m_vie;
 	float m_esquive;
-	int m_vitesseBase;
+	int m_vitesse;
 	int m_attaque;
 	int m_defense;
 	int m_agilite;
@@ -24,18 +24,17 @@ protected :
 	CWeapon();
 
 public :
-	CWeapon(std::string type, std::string nom, int degats, float critique, float bonus
-	,int vie, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CWeapon(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 
 	std::string GetType();
 	std::string GetNom();
 	int GetDegats();
 	float GetCritique();
-	float GetBonus();
+	float GetEnchantement();
 
 	int GetVie();
 	float GetEsquive();
-	int GetVitesseBase();
+	int GetVitesse();
 	int GetAttaque();
 	int GetDefense();
 	int GetAgilite();

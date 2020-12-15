@@ -327,19 +327,19 @@ void Jeu::RemplacerArme(int i)
 				std::string type = weapon->GetType();
 
 				if (type == "Epee") {
-					CSword* temp = new CSword(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CSword* temp = new CSword(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
 					character->SetWeapon(temp);
 				}
 				if (type == "Dague") {
-					CDagger* temp = new CDagger(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CDagger* temp = new CDagger(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
 					character->SetWeapon(temp);
 				}
 				if (type == "Arc") {
-					CBow* temp = new CBow(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CBow* temp = new CBow(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
 					character->SetWeapon(temp);
 				}
 				if (type == "Baton") {
-					CStaff* temp = new CStaff(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetBonus(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesseBase(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CStaff* temp = new CStaff(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
 					character->SetWeapon(temp);
 				}
 			}
