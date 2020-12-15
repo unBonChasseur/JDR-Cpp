@@ -7,8 +7,8 @@ CWarrior::CWarrior():CCharacter()
 	m_hurlement = 0;
 }
 
-CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float parade)
-	:CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float parade)
+	:CCharacter(nom, vie, weapon, esquive, vitesse, attaque, defense, agilite, intelligence),
 	m_CDHurlement(0),
 	m_parade(parade),
 	m_hurlement(0)
@@ -16,11 +16,15 @@ CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int
 	/*
 	if (m_weapon.GetType() == "Epee")
 		m_esquive += m_parade;*/
-	m_classe = "Guerrier";
 }
 
 CWarrior::~CWarrior()
 {
+}
+
+std::string CWarrior::GetClasse()
+{
+	return "Guerrier";
 }
 
 float CWarrior::GetCaracPartic()
@@ -87,7 +91,7 @@ void CWarrior::ReparerArme()
 
 }
 
-void CWarrior::print()
+void CWarrior::Print()
 {
 	std::cout << "\n\tClasse guerrier";
 	std::cout << "\n\t\tNom : " << m_nom;

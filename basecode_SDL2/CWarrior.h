@@ -12,15 +12,16 @@ protected :
 	CWarrior();
 
 public :
-	CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float parade);
+	CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float parade);
 	virtual ~CWarrior();
 
+	std::string GetClasse();
 	float GetCaracPartic();
 
 	void AttaquerAvecArme(CCharacter CCharacter);
 
 	void Hurler();
 	void ReparerArme();
-	void print();
+	void Print();
 };
 

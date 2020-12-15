@@ -6,17 +6,15 @@ Jeu::Jeu()
 	m_parsing.at(0) = new Parsing();
 	m_parsing.at(1) = new Parsing();
 
-	m_vector.resize(4);
+	m_vector.resize(2);
 	m_vector.at(0).resize(0);
 	m_vector.at(1).resize(0);
-	m_vector.at(2).resize(0);
-	m_vector.at(3).resize(0);
 }
-
 Jeu::~Jeu()
 {
 }
 
+//Fonctions menu principal
 void Jeu::DemarrerJeu()
 {
 	int choix = 0;
@@ -38,7 +36,7 @@ void Jeu::DemarrerJeu()
 			if (VerifierParamPartie()) {
 				int quitGame = 0;
 				while (!quitGame) {
-					quitGame = lancerPartie();
+					quitGame = LancerPartie();
 				}
 				if (quitGame == 2)
 					quit = 1;
@@ -65,13 +63,14 @@ void Jeu::DemarrerJeu()
 	}
 }
 
+//Option 1 : Lancer une partie
 int Jeu::VerifierParamPartie()
 {
-	size_t j1 = m_vector.at(0).size();
-	size_t j2 = m_vector.at(1).size();
-	if (j1 == 3 && j2 == 3) {
-		for (int i = 0; i <= 1; i++) {
-			for (int j = 0; j < 3; j++) {
+	size_t vectorSize = m_vector.size();
+	size_t fullTeamSize = 3;
+	if (m_vector.at(0).size() == fullTeamSize && m_vector.at(1).size() == fullTeamSize) {
+		for (int i = 0; i <= vectorSize; i++) {
+			for (int j = 0; j < fullTeamSize; j++) {
 				if (m_vector.at(i).at(j)->GetWeapon() == nullptr) {
 					std::cout << "\n\nLe " << j + 1 << "e personnage du joueur " << i + 1 << " ne possede pas d'arme.\nVeuillez equiper chaque personnage d'une arme.";
 					return 0;
@@ -86,16 +85,7 @@ int Jeu::VerifierParamPartie()
 	return 0;
 }
 
-int Jeu::lancerPartie()
-{
-	int quit = 0;
-	std::cout << "\n\n\n\n\n\n\n\n\n\nDebut de la partie : ";
-	while (!quit) {
-
-	}
-	return 0;
-}
-
+//Option 2 & 3 : Modifier les paramètres d'équipe des joueurs
 void Jeu::ParamJoueur(int i)
 {
 	int choix = 0;
@@ -151,20 +141,7 @@ void Jeu::ParamJoueur(int i)
 	}
 }
 
-void Jeu::PrintJoueur(int i)
-{
-	std::cout << "\n\tPersonnages du joueur " << i+1 << " :";
-	std::vector<CCharacter*>::iterator it;
-	int x = 1;
-
-	for (it = m_vector.at(i).begin(); it != m_vector.at(i).end(); it++) {
-		std::cout << "\n\n\tPersonnage "<< x << " : ";
-		(*it)->print();
-		std::cout << "\n";
-		x++;
-	}
-}
-
+//Sous options : modifier la liste des personnages et armes de chaque joueur
 void Jeu::AjouterPersonnage(int i)
 {
 	int choix = 0;
@@ -206,7 +183,6 @@ void Jeu::AjouterPersonnage(int i)
 		quit = 1;
 	}
 }
-
 void Jeu::RemplacerPersonnage(int i)
 {
 	int choix = 0;
@@ -283,7 +259,6 @@ void Jeu::RemplacerPersonnage(int i)
 		quit = 1;
 	}
 }
-
 void Jeu::RemplacerArme(int i)
 {
 	int choix = 0;
@@ -355,6 +330,126 @@ void Jeu::RemplacerArme(int i)
 	}
 }
 
+//Option 4 : Quitter le jeu
+void Jeu::ViderVariables()
+{
+
+}
+
+//Fonctions déroulement partie 
+int Jeu::LancerPartie()
+{
+	int quit = 0;
+	int choix = 0;
+	std::cout << "\n\n\n\n\n\n\n\n\n\nDebut de la partie : ";
+	while (!quit) {
+		//Au début de chaque tour, on vérifie si tous les personnages d'une liste sont morts
+		//On vérifie également si la vitesse du prochain personnage qui jouera
+		
+
+		if (VerifierMorts() != 0) {
+			quit = 1;
+		}
+
+		std::cout << "\nQue souhaitez vous faire ?";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+
+		std::cout << "\n\n\n";
+		std::cin >> choix;
+
+		switch (choix) {
+		case 1:
+			if (VerifierParamPartie()) {
+				int quitGame = 0;
+				while (!quitGame) {
+					quitGame = LancerPartie();
+				}
+				if (quitGame == 2)
+					quit = 1;
+			}
+			break;
+
+		case 2:
+			ParamJoueur(0);
+			break;
+
+		case 3:
+			ParamJoueur(1);
+			break;
+
+		case 4:
+			quit = 1;
+			ViderVariables();
+			break;
+
+		default:
+			break;
+		}
+	}
+	return Rejouer();
+}
+
+int Jeu::Rejouer() {
+
+	int choix = 0;
+	int quit = 0;
+
+	while (!quit) {
+		std::cout << "\n\nQue souhaitez vous faire ?";
+		std::cout << "\n  1. ";
+
+		std::cout << "\n\nQuelle option choisissez vous ? \n";
+		std::cin >> choix;
+
+		switch (choix) {
+		case 1:
+			if (VerifierParamPartie()) {
+				int quitGame = 0;
+				while (!quitGame) {
+					quitGame = LancerPartie();
+				}
+				if (quitGame == 2)
+					quit = 1;
+			}
+			break;
+
+		case 2:
+			ParamJoueur(0);
+			break;
+
+		case 3:
+			ParamJoueur(1);
+			break;
+
+		case 4:
+			quit = 1;
+			ViderVariables();
+			break;
+
+		default:
+			break;
+		}
+
+}
+
+//Fontions annexes 
+void Jeu::PrintJoueur(int i)
+{
+	std::cout << "\n\tPersonnages du joueur " << i + 1 << " :";
+	std::vector<CCharacter*>::iterator it;
+	int x = 1;
+
+	for (it = m_vector.at(i).begin(); it != m_vector.at(i).end(); it++) {
+		std::cout << "\n\n\tPersonnage " << x << " : ";
+		(*it)->Print();
+		std::cout << "\n";
+		x++;
+	}
+}
 void Jeu::EnleverCharacter(CCharacter* ccharacter, int i)
 {
 
@@ -373,8 +468,20 @@ void Jeu::EnleverCharacter(CCharacter* ccharacter, int i)
 		}
 	}
 }
-
-void Jeu::ViderVariables()
-{
-
+int Jeu::VerifierMorts() {
+	size_t vectorSize = m_vector.size();
+	size_t fullTeamSize = 3;
+	int nbMorts = 0;
+	for (int i = 0; i <= vectorSize; i++) {
+		for (int j = 0; j < fullTeamSize; j++) {
+			if (m_vector.at(i).at(j)->GetVie() == 0) {
+				nbMorts++;
+				if (nbMorts == 3) {
+					return i+1;
+				}
+			}
+		}
+		nbMorts = 0; //Remet à 0 le compteur de morts de l'équipe
+	}
+	return 0;
 }

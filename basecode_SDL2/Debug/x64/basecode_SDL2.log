@@ -1,10 +1,33 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(476,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
+  CArcher.cpp
+  CBow.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CBow.cpp(33,9): warning C4244: 'return' : conversion de 'int' en 'float', perte possible de données
+  CCharacter.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CCharacter.cpp(57,15): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CCharacter.cpp(58,16): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+  CDagger.cpp
+  CMage.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CMage.cpp(31,9): warning C4244: 'return' : conversion de 'int' en 'float', perte possible de données
+  CMelee.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CMelee.cpp(33,9): warning C4244: 'return' : conversion de 'int' en 'float', perte possible de données
+  CRanged.cpp
+  CRogue.cpp
+  CStaff.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CStaff.cpp(21,9): warning C4244: 'return' : conversion de 'int' en 'float', perte possible de données
+  CSword.cpp
+  CWarrior.cpp
+  CWeapon.cpp
   Jeu.cpp
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(330,310): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(334,312): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(338,306): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(342,310): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(330,286): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(334,288): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(338,282): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(342,286): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+  Parsing.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Parsing.cpp(307,24): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Parsing.cpp(324,27): warning C4267: 'return' : conversion de 'size_t' en 'int', perte possible de données
+  main.cpp
+  Génération de code en cours...
   basecode_SDL2.vcxproj -> D:\cours L3\ProjetC++\projet\basecode_SDL2\bin\x64\basecode_SDL2_d.exe
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libFLAC-8.dll
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libfreetype-6.dll

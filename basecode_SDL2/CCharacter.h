@@ -8,9 +8,9 @@
 class CCharacter
 {
 protected :
-	std::string m_classe;
+
 	std::string m_nom;
-	int m_vieInitiale;
+	int m_vieBase;
 	int m_vie;
 	CWeapon* m_weapon;
 	float m_esquive;
@@ -26,14 +26,14 @@ protected :
 	CCharacter();
 
 public :
-	CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CCharacter();
 
-	void AttaquerSansArme(CCharacter CCharacter);
-	virtual void AttaquerAvecArme(CCharacter CCharacter);
+	void AttaquerSansArme(CCharacter* ccharacter);
+	virtual void AttaquerAvecArme(CCharacter* ccharacter);
 	int Esquiver();
 
-	std::string GetClasse();
+	virtual std::string GetClasse();
 	std::string GetNom();
 	int GetVieInitiale();
 	int GetVie();
@@ -52,7 +52,6 @@ public :
 	void SetVie(int vie);
 	void SetWeapon(CWeapon* weapon);
 
-	virtual void PresentationChoix();
-	virtual void print();
+	virtual void Print();
 };
 

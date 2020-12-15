@@ -265,7 +265,7 @@ void Parsing::PrintCharacter()
 	for (size_t i = 0; i < m_character.size(); i++)
 	{
 		std::cout << "\n\n\tChoix : " << i+1;
-		m_character.at(i)->print();
+		m_character.at(i)->Print();
 	}
 
 	std::cout << "\n\n\tChoix : " << m_character.size()+1 << " ";

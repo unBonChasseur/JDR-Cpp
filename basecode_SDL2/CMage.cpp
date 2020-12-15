@@ -8,18 +8,22 @@ CMage::CMage():CCharacter()
 	m_CDenchantement = 0;
 }
 
-CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence) :
-	CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence),
+CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence) :
+	CCharacter(nom, vie, weapon, esquive, vitesse, attaque, defense, agilite, intelligence),
 	m_mana(intelligence * 10),
 	m_manaMax(intelligence * 10),
 	m_CDenchantement(0),
 	m_CDsoin(0)
 {
-	m_classe = "Mage";
 }
 
 CMage::~CMage()
 {
+}
+
+std::string CMage::GetClasse()
+{
+	return "Mage";
 }
 
 float CMage::GetCaracPartic()
@@ -52,7 +56,7 @@ void CMage::Enchanter(CCharacter CCharacter)
 	m_CDenchantement = 3;
 }
 
-void CMage::print()
+void CMage::Print()
 {
 	std::cout << "\n\tClasse mage";
 	std::cout << "\n\t\tNom : " << m_nom;

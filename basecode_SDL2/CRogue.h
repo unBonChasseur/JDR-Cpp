@@ -16,12 +16,13 @@ public :
 	CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison);
 	virtual ~CRogue();
 
+	std::string GetClasse();
 	float GetCaracPartic();
 
 	void AttaquerAvecArme();
 
 	void Furtivite();
 
-	void print();
+	void Print();
 };
 

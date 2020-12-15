@@ -4,14 +4,18 @@ CArcher::CArcher()
 {
 }
 
-CArcher::CArcher(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence)
-	:CCharacter(nom, vie, weapon, esquive, vitesseBase, attaque, defense, agilite, intelligence)
+CArcher::CArcher(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence)
+	:CCharacter(nom, vie, weapon, esquive, vitesse, attaque, defense, agilite, intelligence)
 {
-	m_classe = "Archer";
 }
 
 CArcher::~CArcher()
 {
+}
+
+std::string CArcher::GetClasse()
+{
+	return "Archer";
 }
 
 void CArcher::GuerirPoison()
@@ -22,7 +26,7 @@ void CArcher::Viser()
 {
 }
 
-void CArcher::print()
+void CArcher::Print()
 {
 	std::cout << "\n\tClasse archer";
 	std::cout << "\n\t\tNom : " << m_nom;
