@@ -16,9 +16,9 @@ public :
 	virtual ~CWarrior();
 
 	std::string GetClasse();
+	void AttaquerAvecArme(CCharacter* ccharacter);
+	int Esquiver();
 	float GetCaracPartic();
-
-	void AttaquerAvecArme(CCharacter CCharacter);
 
 	void Hurler();
 	void ReparerArme();

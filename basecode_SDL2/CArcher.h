@@ -12,6 +12,7 @@ public :
 	virtual ~CArcher();
 
 	std::string GetClasse();
+	void AttaquerAvecArme(CCharacter* ccharacter);
 
 	void GuerirPoison();
 	void Viser();

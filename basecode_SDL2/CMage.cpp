@@ -26,6 +26,18 @@ std::string CMage::GetClasse()
 	return "Mage";
 }
 
+void CMage::AttaquerAvecArme(CCharacter* cible)
+{
+	if (!cible->Esquiver()) {																					//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
+		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
+		int p_degats = 5 * ((m_intelligence + m_weapon->GetDegats()) / cible->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
+		cible->SetVie(-p_degats);																				//on inflige les dégats à l'adversaire
+	}
+	else {
+		std::cout << "\n" << cible->GetNom() << " a esquive.";													//on informe l'utilisateur que l'adversaire a esquivé
+	}
+}
+
 float CMage::GetCaracPartic()
 {
 	return m_mana;
@@ -39,17 +51,17 @@ void CMage::RegenererMana()
 		m_mana = m_manaMax;
 }
 
-void CMage::Soigner(CCharacter CCharacter)
+void CMage::Soigner(CCharacter* cible)
 {
 	m_mana -= 5;
 	int randNum = rand() % (20 - 10 + 1) + 10;
-	CCharacter.SetVie(CCharacter.GetVie() + randNum);
-	if (CCharacter.GetVie() > CCharacter.GetVieInitiale())
-		CCharacter.SetVie(CCharacter.GetVieInitiale());
+	cible->SetVie(cible->GetVie() + randNum);
+	if (cible->GetVie() > cible->GetVieInitiale())
+		cible->SetVie(cible->GetVieInitiale());
 	m_CDsoin = 4;
 }
 
-void CMage::Enchanter(CCharacter CCharacter)
+void CMage::Enchanter(CCharacter* cible)
 {
 	m_mana -= 7;
 

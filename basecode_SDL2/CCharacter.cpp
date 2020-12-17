@@ -13,7 +13,6 @@ CCharacter::CCharacter()
 	m_agilite = 0;
 	m_intelligence = 0;
 	m_empoisonne = 0;
-	m_bonusDegats = 0;
 }
 
 CCharacter::CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence)
@@ -30,7 +29,6 @@ CCharacter::CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive,
 	m_agilite = agilite;
 	m_intelligence = intelligence;
 	m_empoisonne = 0;
-	m_bonusDegats = 0;
 
 	if (weapon != nullptr) {
 		
@@ -55,12 +53,11 @@ void CCharacter::AttaquerSansArme(CCharacter* ccharacter)
 {
 	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
 		float coeff = 0.95 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.05 - 0.95)));	//calcul du coeff
-		int p_degats = 15*(GetAttaque()/ccharacter->GetDefense())*coeff;											//calcul des dégats
-		p_degats = p_degats*-1;																					//on transforme les dégats en valeur négative
-		ccharacter->SetVie(p_degats);																			//on inflige les dégats à l'adversaire
+		int p_degats = 15*(m_attaque/ccharacter->GetDefense())*coeff;											//calcul des dégats																				//on transforme les dégats en valeur négative
+		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
 	}
 	else {
-		std::cout << ccharacter->GetNom() <<" a esquivé";														//on informe l'utilisateur que l'adversaire a esquivé
+		std::cout << "\n" << ccharacter->GetNom() <<" a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
 	}
 }
 
@@ -139,11 +136,6 @@ int CCharacter::IsEmpoisonne()
 	return m_empoisonne;
 }
 
-int CCharacter::HasBonusDegats()
-{
-	return m_bonusDegats;
-}
-
 float CCharacter::GetCaracPartic()
 {
 	return 0.0f;
@@ -183,6 +175,11 @@ void CCharacter::SetWeapon(CWeapon* weapon)
 		m_agilite += weapon->GetAgilite();
 		m_intelligence += weapon->GetIntelligence();
 	}
+}
+
+void CCharacter::SetPoison(int poison)
+{
+	m_empoisonne = poison;
 }
 
 void CCharacter::Print()

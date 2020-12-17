@@ -21,7 +21,6 @@ protected :
 	int m_agilite;
 	int m_intelligence;
 	int m_empoisonne;
-	int m_bonusDegats;
 
 	CCharacter();
 
@@ -31,7 +30,7 @@ public :
 
 	void AttaquerSansArme(CCharacter* ccharacter);
 	virtual void AttaquerAvecArme(CCharacter* ccharacter);
-	int Esquiver();
+	virtual int Esquiver();
 
 	virtual std::string GetClasse();
 	std::string GetNom();
@@ -46,11 +45,11 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 	int IsEmpoisonne();
-	int HasBonusDegats();
 	virtual float GetCaracPartic();
 
 	void SetVie(int vie);
 	void SetWeapon(CWeapon* weapon);
+	void SetPoison(int poison);
 
 	virtual void Print();
 };

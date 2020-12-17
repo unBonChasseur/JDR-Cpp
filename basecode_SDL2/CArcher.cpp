@@ -1,6 +1,6 @@
 #include "CArcher.h"
 
-CArcher::CArcher()
+CArcher::CArcher():CCharacter()
 {
 }
 
@@ -16,6 +16,18 @@ CArcher::~CArcher()
 std::string CArcher::GetClasse()
 {
 	return "Archer";
+}
+
+void CArcher::AttaquerAvecArme(CCharacter* ccharacter)
+{
+	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
+		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
+		int p_degats = 9 * ((m_agilite + m_weapon->GetDegats()) / ccharacter->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
+		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
+	}
+	else {
+		std::cout << "\n" << ccharacter->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
+	}
 }
 
 void CArcher::GuerirPoison()

@@ -13,15 +13,16 @@ protected :
 	CMage();
 
 public :
-	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence);
+	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CMage();
 
 	std::string GetClasse();
+	void AttaquerAvecArme(CCharacter* cible);
 	float GetCaracPartic();
 
 	void RegenererMana();
-	void Soigner(CCharacter CCharacter);
-	void Enchanter(CCharacter CCharacter);
+	void Soigner(CCharacter* cible);
+	void Enchanter(CCharacter* cible);
 	void Print();
 };
 

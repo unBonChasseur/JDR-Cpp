@@ -13,9 +13,6 @@ CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int
 	m_parade(parade),
 	m_hurlement(0)
 {
-	/*
-	if (m_weapon.GetType() == "Epee")
-		m_esquive += m_parade;*/
 }
 
 CWarrior::~CWarrior()
@@ -32,8 +29,17 @@ float CWarrior::GetCaracPartic()
 	return m_parade;
 }
 
-void CWarrior::AttaquerAvecArme(CCharacter CCharacter)
+void CWarrior::AttaquerAvecArme(CCharacter* ccharacter)
 {
+	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
+		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
+		int p_degats = 7 * ((m_attaque+m_weapon->GetDegats()) / ccharacter->GetDefense()) * coeff;				//calcul des dégats																				//on transforme les dégats en valeur négative
+		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
+	}
+	else {
+		std::cout << "\n" << ccharacter->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
+	}
+	
 	/*
 	if (!CCharacter.Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
 		if(m_weapon)
@@ -77,6 +83,15 @@ void CWarrior::AttaquerAvecArme(CCharacter CCharacter)
 	}
 
 	return DegatsFinaux;*/
+}
+
+int CWarrior::Esquiver()
+{
+	float randEsquive = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	if (m_weapon->GetType() == "Epee")
+		return randEsquive <= m_esquive + m_parade;
+
+	return randEsquive <= m_esquive;
 }
 
 void CWarrior::Hurler()

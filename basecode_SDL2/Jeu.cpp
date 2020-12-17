@@ -341,53 +341,61 @@ int Jeu::LancerPartie()
 {
 	int quit = 0;
 	int choix = 0;
+
+	int gagnant = 0;
+	int erreur = 0;
+
+	int joueur;
+	int personnage;
+
 	std::cout << "\n\n\n\n\n\n\n\n\n\nDebut de la partie : ";
 	while (!quit) {
 		//Au début de chaque tour, on vérifie si tous les personnages d'une liste sont morts
-		//On vérifie également si la vitesse du prochain personnage qui jouera
 		
-
-		if (VerifierMorts() != 0) {
+		gagnant = VerifierMorts();
+		if (gagnant != 0) {
+			std::cout << "\nLe joueur " << gagnant << " a gagne.";
 			quit = 1;
 		}
+		else {
+			if (!erreur) {
+				size_t vectorSize = m_vector.size();
+				size_t fullTeamSize = 3;
+				int nbMorts = 0;
+				for (int i = 0; i <= vectorSize; i++) {
+					for (int j = 0; j < fullTeamSize; j++) {
 
-		std::cout << "\nQue souhaitez vous faire ?";
-		std::cout << "\n";
-		std::cout << "\n";
-		std::cout << "\n";
-		std::cout << "\n";
-		std::cout << "\n";
-
-		std::cout << "\n\n\n";
-		std::cin >> choix;
-
-		switch (choix) {
-		case 1:
-			if (VerifierParamPartie()) {
-				int quitGame = 0;
-				while (!quitGame) {
-					quitGame = LancerPartie();
+					}
 				}
-				if (quitGame == 2)
-					quit = 1;
+
 			}
-			break;
+			erreur = 0;
 
-		case 2:
-			ParamJoueur(0);
-			break;
+			std::cout << "\nQue souhaitez vous faire ?";
+			std::cout << "\n";
+			std::cout << "\n";
+			std::cout << "\n";
+			std::cout << "\n";
+			std::cout << "\n";
 
-		case 3:
-			ParamJoueur(1);
-			break;
+			std::cout << "\n\n\n";
+			std::cin >> choix;
+			
 
-		case 4:
-			quit = 1;
-			ViderVariables();
-			break;
+			switch (choix) {
+			case 1:
+				break;
 
-		default:
-			break;
+			case 2:
+				break;
+
+			case 3:
+				break;
+
+			default:
+				erreur = 1;
+				break;
+			}
 		}
 	}
 	return Rejouer();
@@ -400,40 +408,33 @@ int Jeu::Rejouer() {
 
 	while (!quit) {
 		std::cout << "\n\nQue souhaitez vous faire ?";
-		std::cout << "\n  1. ";
+		std::cout << "\n  1. Rejouer une partie en conservant les paramètres d'équipe de chaque joueur.";
+		std::cout << "\n  2. Revenir au menu principal.";
+		std::cout << "\n  3. Quitter le jeu.";
 
 		std::cout << "\n\nQuelle option choisissez vous ? \n";
 		std::cin >> choix;
 
 		switch (choix) {
 		case 1:
-			if (VerifierParamPartie()) {
-				int quitGame = 0;
-				while (!quitGame) {
-					quitGame = LancerPartie();
-				}
-				if (quitGame == 2)
-					quit = 1;
-			}
+			quit = 1;
+			return 0;
 			break;
 
 		case 2:
-			ParamJoueur(0);
+			quit = 1;
+			return 1;
 			break;
 
 		case 3:
-			ParamJoueur(1);
-			break;
-
-		case 4:
 			quit = 1;
-			ViderVariables();
+			return 2;
 			break;
 
 		default:
 			break;
 		}
-
+	}
 }
 
 //Fontions annexes 
