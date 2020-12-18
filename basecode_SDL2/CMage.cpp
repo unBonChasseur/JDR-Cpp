@@ -6,6 +6,7 @@ CMage::CMage():CCharacter()
 	m_manaMax = 0;
 	m_CDsoin = 0;
 	m_CDenchantement = 0;
+	m_classe = "Mage";
 }
 
 CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence) :
@@ -15,23 +16,21 @@ CMage::CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vites
 	m_CDenchantement(0),
 	m_CDsoin(0)
 {
+	m_classe = "Mage";
 }
 
 CMage::~CMage()
 {
 }
 
-std::string CMage::GetClasse()
-{
-	return "Mage";
-}
 
 void CMage::AttaquerAvecArme(CCharacter* cible)
 {
 	if (!cible->Esquiver()) {																					//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
 		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
-		int p_degats = 5 * ((m_intelligence + m_weapon->GetDegats()) / cible->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
+		int p_degats = 5 * ((m_intelligence + m_weapon->CalculerDegats()) / cible->GetDefense()) * coeff;		//calcul des dégats																				//on transforme les dégats en valeur négative
 		cible->SetVie(-p_degats);																				//on inflige les dégats à l'adversaire
+		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
 	}
 	else {
 		std::cout << "\n" << cible->GetNom() << " a esquive.";													//on informe l'utilisateur que l'adversaire a esquivé
@@ -56,8 +55,8 @@ void CMage::Soigner(CCharacter* cible)
 	m_mana -= 5;
 	int randNum = rand() % (20 - 10 + 1) + 10;
 	cible->SetVie(cible->GetVie() + randNum);
-	if (cible->GetVie() > cible->GetVieInitiale())
-		cible->SetVie(cible->GetVieInitiale());
+	if (cible->GetVie() > cible->GetVieBase())
+		cible->SetVie(cible->GetVieBase());
 	m_CDsoin = 4;
 }
 

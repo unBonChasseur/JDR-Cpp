@@ -14,10 +14,9 @@ protected :
 	int Empoisonner();
 
 public :
-	CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesseBase, int attaque, int defense, int agilite, int intelligence, float poison);
+	CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float poison);
 	virtual ~CRogue();
 
-	std::string GetClasse();
 	void AttaquerAvecArme(CCharacter* ccharacter);
 	float GetCaracPartic();
 

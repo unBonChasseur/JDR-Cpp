@@ -2,6 +2,7 @@
 
 CCharacter::CCharacter()
 {
+	m_classe = "";
 	m_nom = "";
 	m_vie = 0;
 	m_weapon = nullptr;
@@ -17,6 +18,7 @@ CCharacter::CCharacter()
 
 CCharacter::CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence)
 {
+	m_classe = "character";
 	m_nom = nom;
 	m_vie = vie;
 	m_vieBase = vie;
@@ -73,7 +75,7 @@ int CCharacter::Esquiver()
 
 std::string CCharacter::GetClasse()
 {
-	return "Personnage";
+	return m_classe;
 }
 
 std::string CCharacter::GetNom()
@@ -81,7 +83,7 @@ std::string CCharacter::GetNom()
 	return m_nom;
 }
 
-int CCharacter::GetVieInitiale()
+int CCharacter::GetVieBase()
 {
 	return m_vieBase;
 }
@@ -147,6 +149,11 @@ void CCharacter::SetVie(int vie)
 	if (m_vie < 0) {
 		m_vie = 0;
 	}
+}
+
+void CCharacter::SetVitesse(int vitesse)
+{
+	m_vitesse = vitesse;
 }
 
 void CCharacter::SetWeapon(CWeapon* weapon)

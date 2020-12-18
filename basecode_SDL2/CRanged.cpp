@@ -9,6 +9,10 @@ CRanged::CRanged(std::string type, std::string nom, int degats, float critique, 
 {
 }
 
+void CRanged::Reparer()
+{
+}
+
 float CRanged::GetSpecial()
 {
 	return 0.0f;

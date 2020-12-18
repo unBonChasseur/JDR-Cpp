@@ -6,8 +6,10 @@ class CMelee : public CWeapon
 protected :
 	int m_durabiliteInitiale;
 	int m_durabilite;
+	int m_enchantee;
 
 	CMelee();
+	virtual void Utiliser();
 
 public :
 	CMelee(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int durabilite);
@@ -15,9 +17,10 @@ public :
 	int GetDurabiliteInitiale();
 	int GetDurabilite();
 
-	void SetDurabilite(int durabilite);
+	float CalculerDegats();
+	void Reparer();
 
-	virtual float GetSpecial();
+	float GetSpecial();
 
 	virtual void print();
 };

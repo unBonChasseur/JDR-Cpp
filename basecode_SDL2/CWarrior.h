@@ -15,13 +15,12 @@ public :
 	CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float parade);
 	virtual ~CWarrior();
 
-	std::string GetClasse();
 	void AttaquerAvecArme(CCharacter* ccharacter);
 	int Esquiver();
 	float GetCaracPartic();
 
 	void Hurler();
-	void ReparerArme();
+	void ReparerArme(CCharacter* allie);
 	void Print();
 };
 

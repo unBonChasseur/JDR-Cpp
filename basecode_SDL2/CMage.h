@@ -16,7 +16,6 @@ public :
 	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CMage();
 
-	std::string GetClasse();
 	void AttaquerAvecArme(CCharacter* cible);
 	float GetCaracPartic();
 

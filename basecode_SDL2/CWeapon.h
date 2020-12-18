@@ -22,6 +22,7 @@ protected :
 	int m_intelligence;
 
 	CWeapon();
+	int CoupCritique();
 
 public :
 	CWeapon(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
@@ -41,6 +42,8 @@ public :
 	int GetIntelligence();
 
 	virtual float GetSpecial();
+	virtual float CalculerDegats();
+	virtual void Reparer();
 
 	virtual void print();
 

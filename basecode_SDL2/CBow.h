@@ -16,8 +16,7 @@ public:
 	int GetNbFleches();
 	int GetNbFlechesBase();
 
-	void SetNbFleches(int nbFleches);
-
+	void Reparer();
 	float GetSpecial();
 
 	void print();

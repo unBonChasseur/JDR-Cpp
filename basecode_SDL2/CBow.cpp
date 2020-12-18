@@ -23,9 +23,11 @@ int CBow::GetNbFlechesBase()
 	return m_nbFlechesBase;
 }
 
-void CBow::SetNbFleches(int nbFleches)
+void CBow::Reparer()
 {
-	m_nbFleches += nbFleches;
+	int nbFleches = rand() % (3 - 1 + 1) + 1;
+	m_nbFleches = nbFleches;
+	std::cout << "\nVous avez recupere " << nbFleches << " sur le champ de bataille et les remettez dans votre carquois.";
 }
 
 float CBow::GetSpecial()

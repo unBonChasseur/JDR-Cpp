@@ -5,6 +5,7 @@ CRogue::CRogue():CCharacter()
 	m_nbToursFurtif = 0;
 	m_CDFurtif = 0;
 	m_poison = 0;
+	m_classe = "Voleur";
 }
 
 int CRogue::Empoisonner()
@@ -19,15 +20,11 @@ CRogue::CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vit
 	m_CDFurtif(0),
 	m_poison(poison)
 {
+	m_classe = "Voleur";
 }
 
 CRogue::~CRogue()
 {
-}
-
-std::string CRogue::GetClasse()
-{
-	return "Voleur";
 }
 
 float CRogue::GetCaracPartic()
@@ -39,7 +36,7 @@ void CRogue::AttaquerAvecArme(CCharacter* ccharacter)
 {
 	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
 		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
-		int p_degats = 7 * ((m_agilite + m_weapon->GetDegats()) / ccharacter->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
+		int p_degats = 7 * ((m_agilite + m_weapon->CalculerDegats()) / ccharacter->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
 		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
 		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
 		if (m_weapon->GetType() == "Dague" && Empoisonner()) {

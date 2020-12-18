@@ -4,6 +4,20 @@ CSword::CSword():CMelee()
 {
 }
 
+void CSword::Utiliser()
+{
+	int durabilitePerdue = rand() % (5 - 2 + 1) + 2;
+	m_durabilite -= durabilitePerdue;
+	std::cout << "\nVotre arme a perdu " << durabilitePerdue << " points de durabilite.";
+	if (m_durabilite <= 0) {
+		m_durabilite = 0;
+		std::cout << "\nVotre arme viens de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de dégats lors votre prochain coup.";
+	}
+	else {
+		std::cout << "\nIl reste " << m_durabilite << " points de durabilite a votre arme. (/" << m_durabiliteInitiale << ").";
+	}
+}
+
 CSword::CSword(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int durabilite)
 	:CMelee(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, durabilite)
 {

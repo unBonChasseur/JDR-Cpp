@@ -5,6 +5,7 @@ CWarrior::CWarrior():CCharacter()
 	m_CDHurlement = 0;
 	m_parade = 0;
 	m_hurlement = 0;
+	m_classe = "Guerrier";
 }
 
 CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float parade)
@@ -13,15 +14,11 @@ CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int
 	m_parade(parade),
 	m_hurlement(0)
 {
+	m_classe = "Guerrier";
 }
 
 CWarrior::~CWarrior()
 {
-}
-
-std::string CWarrior::GetClasse()
-{
-	return "Guerrier";
 }
 
 float CWarrior::GetCaracPartic()
@@ -29,15 +26,16 @@ float CWarrior::GetCaracPartic()
 	return m_parade;
 }
 
-void CWarrior::AttaquerAvecArme(CCharacter* ccharacter)
+void CWarrior::AttaquerAvecArme(CCharacter* cible)
 {
-	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
+	if (!cible->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
 		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
-		int p_degats = 7 * ((m_attaque+m_weapon->GetDegats()) / ccharacter->GetDefense()) * coeff;				//calcul des dégats																				//on transforme les dégats en valeur négative
-		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
+		int p_degats = 7 * ((m_attaque+m_weapon->CalculerDegats()) / cible->GetDefense()) * coeff;				//calcul des dégats																				//on transforme les dégats en valeur négative
+		cible->SetVie(-p_degats);		
+		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
 	}
 	else {
-		std::cout << "\n" << ccharacter->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
+		std::cout << "\n" << cible->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
 	}
 	
 	/*
@@ -101,9 +99,11 @@ void CWarrior::Hurler()
 	m_hurlement = randNum;
 }
 
-void CWarrior::ReparerArme()
+void CWarrior::ReparerArme(CCharacter* allie)
 {
-
+	CWeapon* weaponAllie = allie->GetWeapon();
+	if(weaponAllie->GetNom() == "Epee" || weaponAllie->GetNom() == "Dague")
+		allie->GetWeapon()->Reparer();
 }
 
 void CWarrior::Print()

@@ -4,6 +4,19 @@ CDagger::CDagger():CMelee()
 {
 }
 
+void CDagger::Utiliser()
+{
+	m_durabilite--;
+	std::cout << "\nVotre arme a perdu 1 point de durabilite.";
+	if (m_durabilite <= 0) {
+		m_durabilite = 0;
+		std::cout << "\nVotre arme viens de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de dégats lors votre prochain coup.";
+	}
+	else {
+		std::cout << "\nIl reste " << m_durabilite << " points de durabilite a votre arme. (/" << m_durabiliteInitiale << ").";
+	}
+}
+
 CDagger::CDagger(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int durabilite)
 	:CMelee(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence, durabilite)
 {

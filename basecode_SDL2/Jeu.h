@@ -32,6 +32,7 @@ public :
 	
 	//Fonctions déroulement partie 
 	int LancerPartie();
+	void AttaquerSansArme(CCharacter* ccharacter, int i);
 	int Rejouer();
 
 	//Fontions annexes 

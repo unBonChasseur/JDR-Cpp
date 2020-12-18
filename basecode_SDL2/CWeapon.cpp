@@ -17,6 +17,12 @@ CWeapon::CWeapon()
 	m_intelligence = 0;
 }
 
+int CWeapon::CoupCritique()
+{
+	float randCritique = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	return randCritique <= m_critique;
+}
+
 CWeapon::CWeapon(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence)
 {
 	m_type = type;
@@ -97,6 +103,15 @@ int CWeapon::GetIntelligence()
 float CWeapon::GetSpecial()
 {
 	return 0.0f;
+}
+
+float CWeapon::CalculerDegats()
+{
+	return 0.0f;
+}
+
+void CWeapon::Reparer()
+{
 }
 
 void CWeapon::print()

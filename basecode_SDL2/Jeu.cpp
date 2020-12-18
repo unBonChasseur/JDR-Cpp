@@ -34,9 +34,12 @@ void Jeu::DemarrerJeu()
 		switch (choix) {
 		case 1:
 			if (VerifierParamPartie()) {
-				int quitGame = 0;
-				while (!quitGame) {
-					quitGame = LancerPartie();
+				int quitGame = LancerPartie();
+				if (quitGame == 0) {
+
+				}
+				if (quitGame == 1) {
+
 				}
 				if (quitGame == 2)
 					quit = 1;
@@ -69,7 +72,7 @@ int Jeu::VerifierParamPartie()
 	size_t vectorSize = m_vector.size();
 	size_t fullTeamSize = 3;
 	if (m_vector.at(0).size() == fullTeamSize && m_vector.at(1).size() == fullTeamSize) {
-		for (int i = 0; i <= vectorSize; i++) {
+		for (int i = 0; i < vectorSize; i++) {
 			for (int j = 0; j < fullTeamSize; j++) {
 				if (m_vector.at(i).at(j)->GetWeapon() == nullptr) {
 					std::cout << "\n\nLe " << j + 1 << "e personnage du joueur " << i + 1 << " ne possede pas d'arme.\nVeuillez equiper chaque personnage d'une arme.";
@@ -77,10 +80,11 @@ int Jeu::VerifierParamPartie()
 				}
 			}
 		}
+
 		return 1;
 	}
 	else 
-		std::cout << "\n\nAu moins l'un des deux joueurs n'a pas une équipe complète.\nVeuillez les completer pour pouvoir jouer.";
+		std::cout << "\n\nAu moins l'un des deux joueurs n'a pas une equipe complete.\nVeuillez les completer pour pouvoir jouer.";
 
 	return 0;
 }
@@ -348,42 +352,79 @@ int Jeu::LancerPartie()
 	int joueur;
 	int personnage;
 
+	int vitesse = 100;
+	int vitesseIdentique = 0;
+	int vitesseReference = 0;
+
+	CCharacter* personnageChoisi = nullptr;
+
 	std::cout << "\n\n\n\n\n\n\n\n\n\nDebut de la partie : ";
 	while (!quit) {
+
 		//Au début de chaque tour, on vérifie si tous les personnages d'une liste sont morts
-		
 		gagnant = VerifierMorts();
 		if (gagnant != 0) {
 			std::cout << "\nLe joueur " << gagnant << " a gagne.";
 			quit = 1;
 		}
+		
 		else {
-			if (!erreur) {
+			if (!erreur) {	//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
 				size_t vectorSize = m_vector.size();
-				size_t fullTeamSize = 3;
-				int nbMorts = 0;
-				for (int i = 0; i <= vectorSize; i++) {
+				size_t fullTeamSize = m_vector.at(0).size();
+				//On choisi le Personnage dont ca va être le tour
+				for (int i = 0; i < vectorSize; i++) {
 					for (int j = 0; j < fullTeamSize; j++) {
-
+						if (m_vector.at(i).at(j)->GetVie() != 0) {					//Si le personnage n'est pas mort
+							if (!vitesseReference) {								//On le choisi comme valeur de référence si il n'y en a pas déjà
+								vitesse = m_vector.at(i).at(j)->GetVitesse();
+								vitesseReference = 1;
+								std::cout << "\nVitesse reference " << vitesse;
+							}
+							else {
+								if (vitesse > m_vector.at(i).at(j)->GetVitesse()) {	//Si un personnage a une vitesse inférieure, on le met comme référence.
+									vitesse = m_vector.at(i).at(j)->GetVitesse();
+									vitesseIdentique = 0;
+									personnageChoisi = m_vector.at(i).at(j);
+									std::cout << "\nVitesse reference " << vitesse;
+								}
+								if (vitesse == m_vector.at(i).at(j)->GetVitesse()) {//Si il a la même vitesse que la plus petite vitesse on incrémente la variable indiquant que deux personnages ont une vitesses identique.
+									personnageChoisi = nullptr;
+									vitesseIdentique++;
+									std::cout << "\nVitesse Identique.(" << vitesseIdentique<< ")";
+								}
+							}
+						}
 					}
 				}
-
+				//if (vitesseIdentique != 0) {//Si deux personnages ou plus ont la meme vitesse}
+				std::cout << vitesse;
+				for (int i = 0; i < vectorSize; i++) {
+					for (int j = 0; j < fullTeamSize; j++) {
+						if (m_vector.at(i).at(j)->GetVie() != 0) {	//Si le personnage n'est pas mort on met a jour sa vitesse
+							//m_vector.at(i).at(j)->SetVitesse(m_vector.at(i).at(j)->GetVitesse()-vitesse);
+						}
+					}
+				}
+				personnageChoisi->SetVitesse(personnageChoisi->GetVitesseBase());
+				vitesseIdentique = 0;
+				vitesseReference = 0;
 			}
+			
 			erreur = 0;
 
 			std::cout << "\nQue souhaitez vous faire ?";
-			std::cout << "\n";
-			std::cout << "\n";
-			std::cout << "\n";
-			std::cout << "\n";
-			std::cout << "\n";
+			std::cout << "\n  1. Attaquer sans arme.";
+			std::cout << "\n  2. Attaquer avec arme.";
+			std::cout << "\n  3. Utiliser une capacite speciale.";
 
 			std::cout << "\n\n\n";
 			std::cin >> choix;
-			
+
 
 			switch (choix) {
 			case 1:
+				//AttaquerSansArme();
 				break;
 
 			case 2:
@@ -399,6 +440,11 @@ int Jeu::LancerPartie()
 		}
 	}
 	return Rejouer();
+}
+
+void Jeu::AttaquerSansArme(CCharacter* ccharacter, int i)
+{
+
 }
 
 int Jeu::Rejouer() {
@@ -471,9 +517,9 @@ void Jeu::EnleverCharacter(CCharacter* ccharacter, int i)
 }
 int Jeu::VerifierMorts() {
 	size_t vectorSize = m_vector.size();
-	size_t fullTeamSize = 3;
+	size_t fullTeamSize = m_vector.at(0).size();
 	int nbMorts = 0;
-	for (int i = 0; i <= vectorSize; i++) {
+	for (int i = 0; i < vectorSize; i++) {
 		for (int j = 0; j < fullTeamSize; j++) {
 			if (m_vector.at(i).at(j)->GetVie() == 0) {
 				nbMorts++;
