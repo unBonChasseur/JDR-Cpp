@@ -41,7 +41,7 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 
-	virtual float GetSpecial();
+	virtual int GetSpecial();
 	virtual float CalculerDegats();
 	virtual void Reparer();
 

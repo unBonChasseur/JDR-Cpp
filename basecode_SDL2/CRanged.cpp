@@ -13,9 +13,9 @@ void CRanged::Reparer()
 {
 }
 
-float CRanged::GetSpecial()
+int CRanged::GetSpecial()
 {
-	return 0.0f;
+	return 0;
 }
 
 void CRanged::print()

@@ -30,7 +30,7 @@ void CBow::Reparer()
 	std::cout << "\nVous avez recupere " << nbFleches << " sur le champ de bataille et les remettez dans votre carquois.";
 }
 
-float CBow::GetSpecial()
+int CBow::GetSpecial()
 {
 	return m_nbFlechesBase;
 }
@@ -41,7 +41,7 @@ void CBow::print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
-	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de dégats)";
+	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de degats)";
 	std::cout << "\n\t\tNombre de Fleches : " << m_nbFleches;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";

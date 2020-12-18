@@ -17,7 +17,7 @@ public:
 	int GetNbFlechesBase();
 
 	void Reparer();
-	float GetSpecial();
+	int GetSpecial();
 
 	void print();
 };

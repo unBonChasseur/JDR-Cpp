@@ -347,12 +347,11 @@ int Jeu::LancerPartie()
 	int choix = 0;
 
 	int gagnant = 0;
-	int erreur = 0;
+	int TourSuivant = 1;
 
-	int joueur;
-	int personnage;
+	int joueur = 0;
 
-	int vitesse = 100;
+	int vitesse = 0;
 	int vitesseIdentique = 0;
 	int vitesseReference = 0;
 
@@ -369,7 +368,7 @@ int Jeu::LancerPartie()
 		}
 		
 		else {
-			if (!erreur) {	//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
+			if (TourSuivant) {	//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
 				size_t vectorSize = m_vector.size();
 				size_t fullTeamSize = m_vector.at(0).size();
 				//On choisi le Personnage dont ca va être le tour
@@ -379,39 +378,58 @@ int Jeu::LancerPartie()
 							if (!vitesseReference) {								//On le choisi comme valeur de référence si il n'y en a pas déjà
 								vitesse = m_vector.at(i).at(j)->GetVitesse();
 								vitesseReference = 1;
-								std::cout << "\nVitesse reference " << vitesse;
 							}
 							else {
 								if (vitesse > m_vector.at(i).at(j)->GetVitesse()) {	//Si un personnage a une vitesse inférieure, on le met comme référence.
 									vitesse = m_vector.at(i).at(j)->GetVitesse();
 									vitesseIdentique = 0;
 									personnageChoisi = m_vector.at(i).at(j);
-									std::cout << "\nVitesse reference " << vitesse;
+									joueur = i;
 								}
 								if (vitesse == m_vector.at(i).at(j)->GetVitesse()) {//Si il a la même vitesse que la plus petite vitesse on incrémente la variable indiquant que deux personnages ont une vitesses identique.
 									personnageChoisi = nullptr;
 									vitesseIdentique++;
-									std::cout << "\nVitesse Identique.(" << vitesseIdentique<< ")";
 								}
 							}
 						}
 					}
 				}
-				//if (vitesseIdentique != 0) {//Si deux personnages ou plus ont la meme vitesse}
-				std::cout << vitesse;
-				for (int i = 0; i < vectorSize; i++) {
-					for (int j = 0; j < fullTeamSize; j++) {
-						if (m_vector.at(i).at(j)->GetVie() != 0) {	//Si le personnage n'est pas mort on met a jour sa vitesse
-							//m_vector.at(i).at(j)->SetVitesse(m_vector.at(i).at(j)->GetVitesse()-vitesse);
+				if (vitesseIdentique != 0) {//Si deux personnages (ou plus) ont la meme vitesse
+					int choixPersonnage = rand() % vitesseIdentique;
+					vitesseIdentique = 0;
+
+					for (int i = 0; i < vectorSize; i++) {
+						for (int j = 0; j < fullTeamSize; j++) {
+							if (m_vector.at(i).at(j)->GetVie() != 0) {					//Si le personnage n'est pas mort
+								if (vitesse == m_vector.at(i).at(j)->GetVitesse()) {	//Si il a la même vitesse que la plus petite vitesse on incrémente la variable indiquant que deux personnages ont une vitesses identique.
+									if (vitesseIdentique == choixPersonnage) {			//Si le personnage est celui choisi par le tirage au sort.
+										personnageChoisi = m_vector.at(i).at(j);
+										joueur = i;
+									}
+									vitesseIdentique++;
+								}
+							}
 						}
 					}
 				}
+				
+				for (int i = 0; i < vectorSize; i++) {
+					for (int j = 0; j < fullTeamSize; j++) {
+						if (m_vector.at(i).at(j)->GetVie() != 0) {	//Si le personnage n'est pas mort on met a jour sa vitesse
+							m_vector.at(i).at(j)->SetVitesse(m_vector.at(i).at(j)->GetVitesse()-vitesse);
+						}
+					}
+				}
+
 				personnageChoisi->SetVitesse(personnageChoisi->GetVitesseBase());
+
+				std::cout << "\n\nC'est au tour du joueur " << joueur+1;
+
 				vitesseIdentique = 0;
 				vitesseReference = 0;
 			}
-			
-			erreur = 0;
+
+			personnageChoisi->Print();
 
 			std::cout << "\nQue souhaitez vous faire ?";
 			std::cout << "\n  1. Attaquer sans arme.";
@@ -434,7 +452,7 @@ int Jeu::LancerPartie()
 				break;
 
 			default:
-				erreur = 1;
+				TourSuivant = 0;
 				break;
 			}
 		}

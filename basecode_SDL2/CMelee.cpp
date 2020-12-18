@@ -33,7 +33,7 @@ float CMelee::CalculerDegats()
 {
 	float p_degats;
 	if (m_durabilite == 0) {
-		std::cout << "\nVotre arme est brisée, elle infligera donc 10 fois moins de dégats.\nPensez a vite la réparer.";
+		std::cout << "\nVotre arme est brisee, elle infligera donc 10 fois moins de degats.\nPensez a vite la reparer.";
 		p_degats = (float)m_degats / 10;
 	}
 	else {
@@ -46,7 +46,7 @@ float CMelee::CalculerDegats()
 	}
 	if (m_enchantee != 1) {
 		p_degats *= m_enchantee;
-		std::cout << "\nL'arme inflige " << m_enchantee << " fois plus de dégats du fait de son enchantement.";
+		std::cout << "\nL'arme inflige " << m_enchantee << " fois plus de degats du fait de son enchantement.";
 		m_enchantee = 1;
 	}
 
@@ -72,9 +72,9 @@ void CMelee::Reparer()
 	}
 }
 
-float CMelee::GetSpecial()
+int CMelee::GetSpecial()
 {
-	return (float)m_durabiliteInitiale;
+	return m_durabiliteInitiale;
 }
 
 void CMelee::print()

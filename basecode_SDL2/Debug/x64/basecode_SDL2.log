@@ -1,13 +1,7 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(476,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
   Jeu.cpp
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(309,286): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(313,288): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(317,282): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(321,286): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(353,6): warning C4101: 'personnage' : variable locale non référencée
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(352,6): warning C4101: 'joueur' : variable locale non référencée
-D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(484): warning C4715: 'Jeu::Rejouer' : les chemins de contrôle ne retournent pas tous une valeur
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\Jeu.cpp(509): warning C4715: 'Jeu::Rejouer' : les chemins de contrôle ne retournent pas tous une valeur
   basecode_SDL2.vcxproj -> D:\cours L3\ProjetC++\projet\basecode_SDL2\bin\x64\basecode_SDL2_d.exe
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libFLAC-8.dll
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libfreetype-6.dll

@@ -16,7 +16,7 @@ int CStaff::GetCout()
 	return m_cout;
 }
 
-float CStaff::GetSpecial()
+int CStaff::GetSpecial()
 {
 	return m_cout;
 }
@@ -27,7 +27,7 @@ void CStaff::print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
-	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de dégats)";
+	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de degats)";
 	std::cout << "\n\t\tCout : " << m_cout;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
