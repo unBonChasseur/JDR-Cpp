@@ -36,45 +36,18 @@ int CWarrior::GetCDHurlement()
 	return m_CDHurlement;
 }
 
-void CWarrior::DebuterTour()
-{
-	if (m_empoisonne == 1) {
-		float p_degats = (float)m_vieBase / 12;
-		m_vie -= p_degats;
-		std::cout << "\nVotre personnage vient de perdre " << p_degats << " points de vie du fait de son empoisonnement.";
-	}
-	if (m_nbToursHurlement >= 1) {
-		m_nbToursHurlement--;
-		if (m_nbToursHurlement == 0) {
-			std::cout << "\nLe hurlement de votre personnage n'est plus actif, vos autres personnages pourront donc être ciblés à nouveau.";
-		}
-		else {
-			std::cout << "\nLe hurlement de votre personnage est encore actif pour " << m_nbToursHurlement << " tour(s).";
-		}
-	}
-	if (m_CDHurlement >= 1) {
-		m_CDHurlement--;
-		if (m_CDHurlement == 0) {
-			std::cout << "\nVous pouvez de nouveau utiliser le hurlement de votre personnage si vous le souhaitez.";
-		}
-		else {
-			std::cout << "\nLe hurlement de votre personnage sera de nouveau utilisable dans " << m_CDHurlement << " tour(s).";
-		}
-	}
-	
-}
-
-void CWarrior::AttaquerAvecArme(CCharacter* cible)
+int CWarrior::AttaquerAvecArme(CCharacter* cible)
 {
 	if (!cible->Esquiver()) {																				
 		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
-		int p_degats = 7 * (((float)m_attaque + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff;
+		float p_degats = (((float)m_attaque + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 7;
 		cible->SetVie(-p_degats);		
-		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
+		std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
 	}
 	else {
 		std::cout << "\n" << cible->GetNom() << " a esquive.";												
 	}
+	return 1;
 }
 
 int CWarrior::Esquiver()
@@ -106,7 +79,7 @@ void CWarrior::Print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tVie : " << m_vie << "/" << m_vieBase;
 	std::cout << "\n\t\tEsquive : " << m_esquive;
-	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	std::cout << "\n\t\tVitesse : " << m_vitesse << "/" << m_vitesseBase;
 	std::cout << "\n\t\tAttaque : " << m_attaque;
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;
@@ -119,4 +92,32 @@ void CWarrior::Print()
 		std::cout << "\n\t\tArme equipee : \n";
 		m_weapon->print();
 	}
+}
+
+void CWarrior::DebuterTour()
+{
+	if (m_empoisonne == 1) {
+		float p_degats = (float)m_vieBase / 12;
+		m_vie -= p_degats;
+		std::cout << "\nVotre personnage vient de perdre " << p_degats << " points de vie du fait de son empoisonnement.";
+	}
+	if (m_nbToursHurlement >= 1) {
+		m_nbToursHurlement--;
+		if (m_nbToursHurlement == 0) {
+			std::cout << "\nLe hurlement de votre personnage n'est plus actif, vos autres personnages pourront donc être ciblés à nouveau.";
+		}
+		else {
+			std::cout << "\nLe hurlement de votre personnage est encore actif pour " << m_nbToursHurlement << " tour(s).";
+		}
+	}
+	if (m_CDHurlement >= 1) {
+		m_CDHurlement--;
+		if (m_CDHurlement == 0) {
+			std::cout << "\nVous pouvez de nouveau utiliser le hurlement de votre personnage si vous le souhaitez.";
+		}
+		else {
+			std::cout << "\nLe hurlement de votre personnage sera de nouveau utilisable dans " << m_CDHurlement << " tour(s).";
+		}
+	}
+
 }

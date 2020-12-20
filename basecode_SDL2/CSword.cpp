@@ -14,7 +14,7 @@ void CSword::Utiliser()
 		std::cout << "\nVotre arme viens de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de degats lors votre prochain coup.";
 	}
 	else {
-		std::cout << "\nIl reste " << m_durabilite << " points de durabilite a votre arme. (/" << m_durabiliteInitiale << ").";
+		std::cout << "\nIl reste " << m_durabilite << " points de durabilite a votre arme. (/" << m_durabiliteBase << ").";
 	}
 }
 
@@ -30,7 +30,7 @@ void CSword::print()
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
 	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de degats)";
-	std::cout << "\n\t\tDurabilite : " << m_durabilite;
+	std::cout << "\n\t\tDurabilite : " << m_durabilite << "/" << m_durabiliteBase;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)

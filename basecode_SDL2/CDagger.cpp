@@ -13,7 +13,7 @@ void CDagger::Utiliser()
 		std::cout << "\nVotre arme vient de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de dégats lors votre prochain coup.";
 	}
 	else {
-		std::cout << "\nIl reste " << m_durabilite << "/" << m_durabiliteInitiale << " points de durabilite a votre arme.";
+		std::cout << "\nIl reste " << m_durabilite << "/" << m_durabiliteBase << " points de durabilite a votre arme.";
 	}
 }
 
@@ -29,7 +29,7 @@ void CDagger::print()
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
 	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de degats)";
-	std::cout << "\n\t\tDurabilite : " << m_durabilite;
+	std::cout << "\n\t\tDurabilite : " << m_durabilite << "/" << m_durabiliteBase;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)

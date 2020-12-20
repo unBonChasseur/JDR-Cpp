@@ -4,7 +4,7 @@
 class CMelee : public CWeapon
 {
 protected :
-	int m_durabiliteInitiale;
+	int m_durabiliteBase;
 	int m_durabilite;
 	int m_enchantee;
 

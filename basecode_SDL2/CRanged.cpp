@@ -9,6 +9,11 @@ CRanged::CRanged(std::string type, std::string nom, int degats, float critique, 
 {
 }
 
+float CRanged::CalculerDegats()
+{
+	return 0.0f;
+}
+
 void CRanged::print()
 {
 }

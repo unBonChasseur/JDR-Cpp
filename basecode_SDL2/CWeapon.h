@@ -41,6 +41,8 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 
+
+	virtual void Utiliser();
 	virtual float CalculerDegats();
 
 	virtual void print();

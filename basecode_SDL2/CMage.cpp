@@ -23,17 +23,31 @@ CMage::~CMage()
 {
 }
 
-void CMage::AttaquerAvecArme(CCharacter* cible)
+int CMage::AttaquerAvecArme(CCharacter* cible)
 {
+	int nbRetourne=1;
+	if (m_weapon->GetType() == "Baton") {
+		CStaff* ptrWeapon = dynamic_cast<CStaff*>(m_weapon);
+		if (ptrWeapon->GetCout() <= m_mana) {
+			std::cout << "\nVotre personnage a depense " << ptrWeapon->GetCout() << " points de mana pour effectuer son attaque." ;
+			m_mana -= ptrWeapon->GetCout();
+		}
+		else {
+			std::cout << "\nIl semblerait que vous ayez trop peu de mana pour utiliser votre arme, pensez a regenerer votre mana.";
+			nbRetourne = 0;
+		}
+	}
+
 	if (!cible->Esquiver()) {
 		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
-		int p_degats = 5 * (((float)m_intelligence + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff;																						//on transforme les dégats en valeur négative
+		float p_degats = (((float)m_intelligence + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 5;																						//on transforme les dégats en valeur négative
 		cible->SetVie(-p_degats);
 		std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
 	}
 	else {
 		std::cout << "\n" << cible->GetNom() << " a esquive.";
 	}
+	return nbRetourne;
 }
 
 int CMage::GetManaBase()
@@ -60,6 +74,7 @@ void CMage::RegenererMana()
 {
 	int randNum = rand() % (7 - 2 + 1) + 2;
 	m_mana += randNum;
+	std::cout << "\n Votre personnage a recupere " << randNum << " points de mana.";
 	if (m_mana > m_manaBase)
 		m_mana = m_manaBase;
 }
@@ -86,7 +101,7 @@ void CMage::Print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tVie : " << m_vie << "/" << m_vieBase;
 	std::cout << "\n\t\tEsquive : " << m_esquive;
-	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	std::cout << "\n\t\tVitesse : " << m_vitesse << "/" << m_vitesseBase;
 	std::cout << "\n\t\tAttaque : " << m_attaque;
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;

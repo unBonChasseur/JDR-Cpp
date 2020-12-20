@@ -51,21 +51,23 @@ CCharacter::~CCharacter()
 {
 }
 
-void CCharacter::AttaquerSansArme(CCharacter* ccharacter)
+int CCharacter::AttaquerSansArme(CCharacter* ccharacter)
 {
 	if (!ccharacter->Esquiver()) {																			
 		float coeff = 0.95 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.05 - 0.95)));	
-		float p_degats = 15*((float)m_attaque/(float)ccharacter->GetDefense())*coeff;										
+		float p_degats = (float)m_attaque / (float)ccharacter->GetDefense() * coeff * 15;										
 		ccharacter->SetVie(-p_degats);
 		std::cout << "\n\nLa cible a pris " << p_degats << " points de degats.\nIl lui reste " << ccharacter->GetVie() << "/" << ccharacter->GetVieBase() << " points de vie.";
 	}
 	else {
 		std::cout << "\n\nVotre cible (" << ccharacter->GetNom() <<") a esquive.";
 	}
+	return 1;
 }
 
-void CCharacter::AttaquerAvecArme(CCharacter* CCharacter)
+int CCharacter::AttaquerAvecArme(CCharacter* CCharacter)
 {
+	return 0;
 }
 
 int CCharacter::Esquiver()

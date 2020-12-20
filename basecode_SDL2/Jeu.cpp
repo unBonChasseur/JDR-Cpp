@@ -361,7 +361,7 @@ int Jeu::LancerPartie()
 	int quit = 0;
 	int choix = 0;
 
-	int gagnant = 0;
+	int gagnant = 2;
 	int TourSuivant = 1;
 
 	int joueur = 0;
@@ -378,19 +378,23 @@ int Jeu::LancerPartie()
 	while (!quit) {
 
 		//Au début de chaque tour, on vérifie si tous les personnages d'une liste sont morts
+		for (int i = 0; i < m_vector.size(); i++) {
+			gagnant = VerifierMorts(i);
+			if (gagnant != 2) {
+				std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+				std::cout << "\n----------------------------------------------------Fin de la partie--------------------------------------------------";
+				std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+				std::cout << "\n\n\n Felicitations : Le joueur " << gagnant+1 << " a gagne.";
+				quit = 1;
+			}
+		}
+		if (quit != 1) {
+			std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+			std::cout << "\n------------------------------------------------Debut du tour : joueur " << joueur + 1 << "----------------------------------------------";
+			std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
 
-		/*gagnant = VerifierMorts();
-		if (gagnant != 0) {
-			std::cout << "\nLe joueur " << gagnant << " a gagne.";
-			quit = 1;
-		}*/
-		
-		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
-		std::cout << "\n------------------------------------------------Debut du tour : joueur " << joueur+1 << "----------------------------------------------";
-		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
-		/*else {*/
 			//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
-			if (TourSuivant) {	
+			if (TourSuivant) {
 				size_t vectorSize = m_vector.size();
 				size_t fullTeamSize = m_vector.at(0).size();
 				//On choisi le Personnage dont ca va être le tour
@@ -434,11 +438,11 @@ int Jeu::LancerPartie()
 						}
 					}
 				}
-				
+
 				for (int i = 0; i < vectorSize; i++) {
 					for (int j = 0; j < fullTeamSize; j++) {
 						if (m_vector.at(i).at(j)->GetVie() != 0) {	//Si le personnage n'est pas mort on met a jour sa vitesse
-							m_vector.at(i).at(j)->SetVitesse(m_vector.at(i).at(j)->GetVitesse()-vitesse);
+							m_vector.at(i).at(j)->SetVitesse(m_vector.at(i).at(j)->GetVitesse() - vitesse);
 						}
 					}
 				}
@@ -448,36 +452,45 @@ int Jeu::LancerPartie()
 				vitesseIdentique = 0;
 				vitesseReference = 0;
 			}
-			
-			personnageChoisi->Print();
-
-			std::cout << "\n\nQue souhaitez vous faire ?";
-			std::cout << "\n  1. Attaquer sans arme.";
-			std::cout << "\n  2. Attaquer avec arme.";
-			std::cout << "\n  3. Utiliser une capacite speciale.";
-
-			std::cout << "\n\n\n";
-			std::cin >> choix;
-
-
-			switch (choix) {
-			case 1:
-				TourSuivant = Attaquer(personnageChoisi, (joueur+1)%2, 0);
-				break;
-				
-			case 2:
-				TourSuivant = Attaquer(personnageChoisi, (joueur+1)%2, 1);
-				break;
-
-			case 3:
-				//TourSuivant = Special(personnageChoisi, joueur);
-				break;
-
-			default:
-				TourSuivant = 0;
-				break;
+			if (personnageChoisi->GetVie() == 0) {
+				std::cout << "\nVotre personnage est mort du poison au debut de ce tour.";
 			}
-		//}
+			else {
+				personnageChoisi->Print();
+
+				std::cout << "\n\nQue souhaitez vous faire ?";
+				std::cout << "\n  1. Attaquer sans arme.";
+				std::cout << "\n  2. Attaquer avec arme.";
+				std::cout << "\n  3. Utiliser une capacite speciale.";
+				std::cout << "\n  4. Afficher les equipes.";
+
+				std::cout << "\n\n\n";
+				std::cin >> choix;
+				switch (choix) {
+				case 1 :
+					TourSuivant = Attaquer(personnageChoisi, (joueur + 1) % 2, 0);
+					break;
+
+				case 2 :
+					TourSuivant = Attaquer(personnageChoisi, (joueur + 1) % 2, 1);
+					break;
+
+				case 3 :
+					//TourSuivant = Special(personnageChoisi, joueur);
+					break;
+
+				case 4 : 
+					PrintJoueur(0);
+					PrintJoueur(1);
+					TourSuivant = 0;
+					break;
+
+				default:
+					TourSuivant = 0;
+					break;
+				}
+			}
+		}
 	}
 	return Rejouer();
 }
@@ -583,11 +596,14 @@ int Jeu::Attaquer(CCharacter* ccharacter, int equipe, int arme)
 		std::cin >> choix;
 		choix--;
 		if (choix < nbAfficher && choix > -1) {
-			if (arme == 0)
-				ccharacter->AttaquerSansArme(m_vector.at(equipe).at(tableau[choix]));
-			else
-				ccharacter->AttaquerAvecArme(m_vector.at(equipe).at(tableau[choix]));
-			return 1;
+			int nbRetourne = 0;
+			if (arme == 0) {
+				nbRetourne = ccharacter->AttaquerSansArme(m_vector.at(equipe).at(tableau[choix]));
+			}
+			else {
+				nbRetourne = ccharacter->AttaquerAvecArme(m_vector.at(equipe).at(tableau[choix]));
+			}
+			return nbRetourne;
 		}
 		else {
 			if (choix == nbAfficher) {
@@ -678,5 +694,5 @@ int Jeu::VerifierMorts(int equipe) {
 		}
 	}
 	
-	return 0;
+	return 2;
 }

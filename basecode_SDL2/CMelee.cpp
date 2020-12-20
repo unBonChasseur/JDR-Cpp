@@ -3,7 +3,7 @@
 CMelee::CMelee():CWeapon()
 {
 	m_durabilite = 0;
-	m_durabiliteInitiale = 0;
+	m_durabiliteBase = 0;
 	m_enchantee = 1;
 }
 
@@ -14,14 +14,14 @@ void CMelee::Utiliser()
 CMelee::CMelee(std::string type, std::string nom, int degats, float critique, int vie, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, int durabilite)
 	:CWeapon(type, nom, degats, critique, vie, esquive, vitesse, attaque, defense, agilite, intelligence),
 	m_durabilite(durabilite),
-	m_durabiliteInitiale(durabilite)
+	m_durabiliteBase(durabilite)
 {
 	m_enchantee = 1;
 }
 
 int CMelee::GetDurabiliteInitiale()
 {
-	return m_durabiliteInitiale;
+	return m_durabiliteBase;
 }
 
 int CMelee::GetDurabilite()
@@ -62,12 +62,12 @@ void CMelee::Reparer()
 	else {
 		int randDurabilite = rand() % (15 - 3 + 1) + 3;
 		m_durabilite += randDurabilite;
-		if (m_durabilite > m_durabiliteInitiale) {
-			m_durabilite = m_durabiliteInitiale;
+		if (m_durabilite > m_durabiliteBase) {
+			m_durabilite = m_durabiliteBase;
 			std::cout << "\nVotre arme a ete completement reparee et dispose donc de " << m_durabilite << " points de durabilite.";
 		}
 		else {
-			std::cout << "\nVotre arme a ete reparee de " << randDurabilite << " et a donc " << m_durabilite << "points de durabilite. (/"<< m_durabiliteInitiale << ").";
+			std::cout << "\nVotre arme a ete reparee de " << randDurabilite << " et a donc " << m_durabilite << "points de durabilite. (/"<< m_durabiliteBase << ").";
 		}
 	}
 }

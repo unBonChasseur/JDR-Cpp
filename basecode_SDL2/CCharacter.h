@@ -29,8 +29,8 @@ public :
 	CCharacter(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CCharacter();
 
-	void AttaquerSansArme(CCharacter* ccharacter);
-	virtual void AttaquerAvecArme(CCharacter* ccharacter);
+	int AttaquerSansArme(CCharacter* ccharacter);
+	virtual int AttaquerAvecArme(CCharacter* ccharacter);
 	virtual int Esquiver();
 
 	std::string GetClasse();

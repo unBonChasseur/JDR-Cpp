@@ -100,9 +100,21 @@ int CWeapon::GetIntelligence()
 	return m_intelligence;
 }
 
+void CWeapon::Utiliser()
+{
+}
+
 float CWeapon::CalculerDegats()
 {
-	return 0.0f;
+	float p_degats;
+
+	p_degats = (float)m_degats;
+	if (CoupCritique()) {
+		std::cout << "\nVous utiliser votre arme a son meilleur potentiel, elle va faire deux fois plus mal.";
+		p_degats *= 2;
+	}
+	Utiliser();
+	return p_degats;
 }
 
 void CWeapon::print()

@@ -17,6 +17,7 @@ public:
 	int GetNbFlechesBase();
 
 	void RecupererFleches();
+	void Utiliser();
 
 	void print();
 };

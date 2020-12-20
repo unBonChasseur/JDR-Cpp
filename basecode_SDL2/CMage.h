@@ -1,5 +1,6 @@
 #pragma once
 #include "CCharacter.h"
+#include "CStaff.h"
 
 class CMage : public CCharacter
 {
@@ -16,7 +17,7 @@ public :
 	CMage(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence);
 	virtual ~CMage();
 
-	void AttaquerAvecArme(CCharacter* cible);
+	int AttaquerAvecArme(CCharacter* cible);
 
 	int GetManaBase();
 	int GetMana();

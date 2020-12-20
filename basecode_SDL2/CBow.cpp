@@ -30,6 +30,13 @@ void CBow::RecupererFleches()
 	std::cout << "\nVous avez recupere " << nbFleches << " sur le champ de bataille et les remettez dans votre carquois.";
 }
 
+void CBow::Utiliser()
+{
+	std::cout << "\nVotre arme a perdu 1 fleche.";
+	if(m_nbFleches!=0)
+		m_nbFleches--;
+}
+
 void CBow::print()
 {
 	std::cout << "\n\tClasse : " << m_type;

@@ -1,5 +1,6 @@
 #pragma once
 #include "CCharacter.h"
+#include "CBow.h"
 
 class CRogue : public CCharacter
 {
@@ -16,7 +17,7 @@ public :
 	CRogue(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float poison);
 	virtual ~CRogue();
 
-	void AttaquerAvecArme(CCharacter* ccharacter);
+	int AttaquerAvecArme(CCharacter* ccharacter);
 
 	float GetPoison();
 	int GetNbToursFurtif();

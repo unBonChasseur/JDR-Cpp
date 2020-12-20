@@ -19,18 +19,33 @@ CArcher::~CArcher()
 {
 }
 
-void CArcher::AttaquerAvecArme(CCharacter* cible)
+int CArcher::AttaquerAvecArme(CCharacter* cible)
 {
-	if (!cible->Esquiver()) {																				
-		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	
-		int p_degats = 9 * (((float)m_agilite*m_visee + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff;
-		m_visee = 1;
-		cible->SetVie(-p_degats);																			
-		std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
+	if (m_weapon->GetType() == "Arc") {
+		CBow* ptrWeapon = dynamic_cast<CBow*>(m_weapon);
+		if (ptrWeapon->GetNbFleches() == 0) {
+			std::cout << "\nVous n'avez plus de fleches et allez donc en recuperer sur le champ de bataille.";
+			ptrWeapon->RecupererFleches();
+		}
+		else {
+			if (!cible->Esquiver()) {
+				float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+				float p_degats = (((float)m_agilite * m_visee + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 9;
+				m_visee = 1;
+				cible->SetVie(-p_degats);
+				std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
+			}
+			else {
+				std::cout << "\n" << cible->GetNom() << " a esquive.";
+			}
+		}
 	}
-	else {
-		std::cout << "\n" << cible->GetNom() << " a esquive.";			
-	}
+	return 1;
+}
+
+int CArcher::GetNbGuerison()
+{
+	return m_nbGuerison;
 }
 
 void CArcher::GuerirPoison(CCharacter* allie)
@@ -46,18 +61,13 @@ void CArcher::Viser()
 	std::cout << "\nVotre prochaine fleche infligera 33% de dégats en plus soit au total " << m_visee;
 }
 
-int CArcher::GetNbGuerison()
-{
-	return m_nbGuerison;
-}
-
 void CArcher::Print()
 {
 	std::cout << "\n\tClasse archer";
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tVie : " << m_vie << "/" << m_vieBase;
 	std::cout << "\n\t\tEsquive : " << m_esquive;
-	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
+	std::cout << "\n\t\tVitesse : " << m_vitesse << "/" << m_vitesseBase;
 	std::cout << "\n\t\tAttaque : " << m_attaque;
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;

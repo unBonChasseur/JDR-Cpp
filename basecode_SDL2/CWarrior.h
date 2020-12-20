@@ -16,7 +16,7 @@ public :
 	CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int vitesse, int attaque, int defense, int agilite, int intelligence, float parade);
 	virtual ~CWarrior();
 
-	void AttaquerAvecArme(CCharacter* ccharacter);
+	int AttaquerAvecArme(CCharacter* ccharacter);
 	int Esquiver();
 
 	float GetParade();
