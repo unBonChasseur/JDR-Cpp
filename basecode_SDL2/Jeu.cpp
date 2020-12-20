@@ -204,64 +204,20 @@ void Jeu::RemplacerPersonnage(int equipe)
 		std::cin >> choix;
 
 		if (choix > 0 && choix <= m_vector.at(equipe).size()) {
-
+			choix--;
 			int choix2;
 			m_parsing.at(equipe)->PrintCharacter();
 			std::cout << "\n\n\tPar quel personnage souhaitez vous le remplacer ?\n\t";
 			std::cin >> choix2;
 
 			if (choix2 > 0 && choix2 <= m_parsing.at(equipe)->GetCharacterSize()) {
+				choix2--;
 				//On récupère le personnage, lui enlève l'équipement et le remet dans la liste du parsing puis on le delete du vector du joueur 
-
 				
-				CCharacter* character = m_vector.at(equipe).at(choix);
-				std::string classe = character->GetClasse();
-				character->SetWeapon(nullptr);
-
-				if (classe == "Voleur") {
-					CRogue* cast = dynamic_cast<CRogue*>(character);
-					CRogue* temp = new CRogue(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), cast->GetPoison());
-					m_parsing.at(equipe)->AjouterCharacter(temp);
-				}
-				if (classe == "Guerrier") {
-					CWarrior* cast = dynamic_cast<CWarrior*>(character);
-					CWarrior* temp = new CWarrior(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), cast->GetParade());
-					m_parsing.at(equipe)->AjouterCharacter(temp);
-				}
-				if (classe == "Mage") {
-					CMage* temp = new CMage(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
-					m_parsing.at(equipe)->AjouterCharacter(temp);
-				}
-				if (classe == "Archer") {
-					CArcher* temp = new CArcher(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
-					m_parsing.at(equipe)->AjouterCharacter(temp);
-				}
-				EnleverCharacter(character, equipe);
-
-				
-				//On récupère le personnage de la liste de la liste de parsing
-				CCharacter* character2 = m_parsing.at(equipe)->ChooseCharacter(choix2);
-				std::string classe2 = character->GetClasse();
-
-				if (classe2 == "Voleur") {
-					CRogue* cast2 = dynamic_cast<CRogue*>(character2);
-					CRogue* temp = new CRogue(character2->GetNom(), character2->GetVie(), character2->GetWeapon(), character2->GetEsquive(), character2->GetVitesseBase(), character2->GetAttaque(), character2->GetDefense(), character2->GetAgilite(), character2->GetIntelligence(), cast2->GetPoison());
-					m_vector.at(equipe).push_back(temp);
-				}
-				if (classe2 == "Guerrier") {
-					CWarrior* cast2 = dynamic_cast<CWarrior*>(character2);
-					CWarrior* temp = new CWarrior(character2->GetNom(), character2->GetVie(), character2->GetWeapon(), character2->GetEsquive(), character2->GetVitesseBase(), character2->GetAttaque(), character2->GetDefense(), character2->GetAgilite(), character2->GetIntelligence(), cast2->GetParade());
-					m_vector.at(equipe).push_back(temp);
-				}
-				if (classe2 == "Mage") {
-					CMage* temp = new CMage(character2->GetNom(), character2->GetVie(), character2->GetWeapon(), character2->GetEsquive(), character2->GetVitesseBase(), character2->GetAttaque(), character2->GetDefense(), character2->GetAgilite(), character2->GetIntelligence());
-					m_vector.at(equipe).push_back(temp);
-				}
-				if (classe2 == "Archer") {
-					CArcher* temp = new CArcher(character2->GetNom(), character2->GetVie(), character2->GetWeapon(), character2->GetEsquive(), character2->GetVitesseBase(), character2->GetAttaque(), character2->GetDefense(), character2->GetAgilite(), character2->GetIntelligence());
-					m_vector.at(equipe).push_back(temp);
-				}
-				m_parsing.at(equipe)->EnleverCharacter(character2);
+				m_parsing.at(equipe)->AjouterCharacter(m_vector.at(equipe).at(choix));
+				m_vector.at(equipe).erase(m_vector.at(equipe).begin()+choix);
+				m_vector.at(equipe).push_back(m_parsing.at(equipe)->ChooseCharacter(choix2));
+				m_parsing.at(equipe)->EnleverCharacter(m_parsing.at(equipe)->ChooseCharacter(choix2));
 				
 			}
 			else 
@@ -401,6 +357,7 @@ int Jeu::LancerPartie()
 						if (m_vector.at(i).at(j)->GetVie() != 0) {					//Si le personnage n'est pas mort
 							if (!vitesseReference) {								//On le choisi comme valeur de référence si il n'y en a pas déjà
 								vitesse = m_vector.at(i).at(j)->GetVitesse();
+								personnageChoisi = m_vector.at(i).at(j);
 								vitesseReference = 1;
 							}
 							else {
@@ -927,8 +884,8 @@ void Jeu::EnleverCharacter(CCharacter* ccharacter, int equipe)
 	{
 		if (*it == ccharacter)
 		{
-			delete* it;
 			m_vector.at(equipe).erase(it);
+			delete* it;
 			break;
 		}
 	}

@@ -1,6 +1,13 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(476,5): warning MSB8004: Le répertoire Intermediate ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Intermediate.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(477,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale. Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
+  CArcher.cpp
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CArcher.cpp(32,17): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CArcher.cpp(35,19): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CArcher.cpp(47,16): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CArcher.cpp(50,18): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\cours L3\ProjetC++\projet\basecode_SDL2\basecode_SDL2\CArcher.cpp(76,18): warning C4305: '+=' : troncation de 'double' à 'float'
   Jeu.cpp
+  Génération de code en cours...
   basecode_SDL2.vcxproj -> D:\cours L3\ProjetC++\projet\basecode_SDL2\bin\x64\basecode_SDL2_d.exe
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libFLAC-8.dll
   D:\cours L3\ProjetC++\projet\basecode_SDL2\librairies\SDL2-2.0.6\bin\x64\libfreetype-6.dll

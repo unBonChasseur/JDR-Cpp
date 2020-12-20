@@ -335,7 +335,6 @@ void Parsing::EnleverWeapon(CWeapon* cweapon)
 	{
 		if (*it == cweapon)
 		{
-			delete* it;
 			m_weapon.erase(it);
 			break;
 		}
@@ -354,7 +353,6 @@ void Parsing::EnleverCharacter(CCharacter* ccharacter)
 	{
 		if (*it == ccharacter)
 		{
-			delete* it;
 			m_character.erase(it);
 			break;
 		}
