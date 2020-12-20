@@ -41,13 +41,21 @@ int CRogue::AttaquerAvecArme(CCharacter* cible)
 				float p_degats = (((float)m_agilite + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 7;
 				cible->SetVie(-p_degats);
 				std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
-				if (m_weapon->GetType() == "Dague" && Empoisonner() && cible->GetClasse() != "Archer") {
-					cible->SetPoison(1);
-					std::cout << "\nVotre coup a empoisonne l'adversaire !   (Il perdra 1/12e de ses pv par tour)";
-				}
 			}
 			else {
 				std::cout << "\n" << cible->GetNom() << " a esquive.";
+			}
+		}
+	}
+	else {
+		if (!cible->Esquiver()) {
+			float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+			float p_degats = (((float)m_agilite + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 7;
+			cible->SetVie(-p_degats);
+			std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
+			if (Empoisonner() && cible->GetClasse() != "Archer") {
+				cible->SetPoison(1);
+				std::cout << "\nVotre coup a empoisonne l'adversaire !   (Il perdra 1/12e de ses points de vie par tour)";
 			}
 		}
 	}
@@ -89,11 +97,14 @@ void CRogue::Print()
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
 	std::cout << "\n\t\tProbabilite empoisonnement : " << m_poison << "/1";
+	std::cout << "\n\n\t\tNombre de tours furtif restant : " << m_nbToursFurtif << " (" << m_CDFurtif << " tour(s) avant reutilisation).";
+	std::cout << "\n\t\tEst empoisonne ? " << m_empoisonne << " (1 = oui; 0 = non)";
+	
 	if (m_weapon == nullptr)
-		std::cout << "\n\t\tArme equipee : Aucune";
+		std::cout << "\n\n\t\tArme equipee : Aucune";
 
 	else {
-		std::cout << "\n\t\tArme equipee : \n";
+		std::cout << "\n\n\tArme equipee : ";
 		m_weapon->print();
 	}
 }
@@ -123,4 +134,13 @@ void CRogue::DebuterTour()
 			std::cout << "\nLe camouflage de votre personnage sera de nouveau utilisable dans " << m_CDFurtif << " tour(s).";
 		}
 	}
+}
+
+void CRogue::Reinitialiser()
+{
+	m_weapon->Reinitialiser();
+	m_vie = m_vieBase;
+	m_vitesse = m_vitesseBase;
+	m_nbToursFurtif = 0;
+	m_CDFurtif = 0;
 }

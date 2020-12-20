@@ -6,7 +6,6 @@ CWeapon::CWeapon()
 	m_nom = "";
 	m_degats = 0;
 	m_critique = 0;
-	m_enchantement = 1;
 
 	m_vie = 0;
 	m_esquive = 0;
@@ -29,7 +28,6 @@ CWeapon::CWeapon(std::string type, std::string nom, int degats, float critique, 
 	m_nom = nom;
 	m_degats = degats;
 	m_critique = critique;
-	m_enchantement = 1;
 
 	m_vie = vie;
 	m_esquive = esquive;
@@ -58,11 +56,6 @@ int CWeapon::GetDegats()
 float CWeapon::GetCritique()
 {
 	return m_critique;
-}
-
-float CWeapon::GetEnchantement()
-{
-	return m_enchantement;
 }
 
 int CWeapon::GetVie()
@@ -113,8 +106,11 @@ float CWeapon::CalculerDegats()
 		std::cout << "\nVous utiliser votre arme a son meilleur potentiel, elle va faire deux fois plus mal.";
 		p_degats *= 2;
 	}
-	Utiliser();
 	return p_degats;
+}
+
+void CWeapon::Reinitialiser()
+{
 }
 
 void CWeapon::print()

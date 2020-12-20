@@ -23,6 +23,19 @@ int CBow::GetNbFlechesBase()
 	return m_nbFlechesBase;
 }
 
+float CBow::CalculerDegats()
+{
+	float p_degats;
+
+	p_degats = (float)m_degats;
+	if (CoupCritique()) {
+		std::cout << "\nVous utiliser votre arme a son meilleur potentiel, elle va faire deux fois plus mal.";
+		p_degats *= 2;
+	}
+	Utiliser();
+	return p_degats;
+}
+
 void CBow::RecupererFleches()
 {
 	int nbFleches = rand() % (3 - 1 + 1) + 1;
@@ -33,8 +46,14 @@ void CBow::RecupererFleches()
 void CBow::Utiliser()
 {
 	std::cout << "\nVotre arme a perdu 1 fleche.";
-	if(m_nbFleches!=0)
+	if (m_nbFleches != 0) {
 		m_nbFleches--;
+	}
+}
+
+void CBow::Reinitialiser()
+{
+	m_nbFleches = m_nbFlechesBase;
 }
 
 void CBow::print()
@@ -43,8 +62,7 @@ void CBow::print()
 	std::cout << "\n\t\tNom : " << m_nom;
 	std::cout << "\n\t\tDegats : " << m_degats;
 	std::cout << "\n\t\tCritique : " << m_critique;
-	std::cout << "\n\t\tEnchantement : " << m_enchantement << " (=multiplicateur de degats)";
-	std::cout << "\n\t\tNombre de Fleches : " << m_nbFleches;
+	std::cout << "\n\t\tNombre de Fleches : " << m_nbFleches << "/" << m_nbFlechesBase;
 
 	std::cout << "\n\n\tBuffs/Debuffs statistiques du porteur :";
 	if (m_vie != 0)

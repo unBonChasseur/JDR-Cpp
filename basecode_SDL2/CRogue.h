@@ -27,5 +27,6 @@ public :
 
 	void Print();
 	void DebuterTour();
+	void Reinitialiser();
 };
 

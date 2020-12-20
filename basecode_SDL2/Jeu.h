@@ -33,6 +33,7 @@ public :
 	//Fonctions déroulement partie 
 	int LancerPartie();
 	int Attaquer(CCharacter* ccharacter, int equipe, int arme);
+	int Special(CCharacter* ccharacter, int equipe);
 	int Rejouer();
 
 	//Fontions annexes 

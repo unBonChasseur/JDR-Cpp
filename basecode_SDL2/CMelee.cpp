@@ -29,6 +29,12 @@ int CMelee::GetDurabilite()
 	return m_durabilite;
 }
 
+void CMelee::Enchanter()
+{
+	m_enchantee += 0.33;
+	std::cout << "\nL'arme infligera 0.33 fois plus de degats du fait de son enchantement soit " << m_enchantee << " fois plus au total.";
+}
+
 float CMelee::CalculerDegats()
 {
 	float p_degats;
@@ -70,6 +76,12 @@ void CMelee::Reparer()
 			std::cout << "\nVotre arme a ete reparee de " << randDurabilite << " et a donc " << m_durabilite << "points de durabilite. (/"<< m_durabiliteBase << ").";
 		}
 	}
+}
+
+void CMelee::Reinitialiser()
+{
+	m_durabilite = m_durabiliteBase;
+	m_enchantee = 1;
 }
 
 void CMelee::print()

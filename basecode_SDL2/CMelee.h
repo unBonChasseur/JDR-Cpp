@@ -17,8 +17,10 @@ public :
 	int GetDurabiliteInitiale();
 	int GetDurabilite();
 
+	void Enchanter();
 	float CalculerDegats();
 	void Reparer();
+	void Reinitialiser();
 
 	virtual void print();
 };

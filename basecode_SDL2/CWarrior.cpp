@@ -67,10 +67,15 @@ void CWarrior::Hurler()
 	std::cout << "\nVotre guerrier " << m_nom << " viens de hurler et va donc catalyser toutes les attaques adverses pour " << randNum << " tours.";
 }
 
-void CWarrior::ReparerArme(CCharacter* allie)
+int CWarrior::ReparerArme(CCharacter* allie)
 {
 	CMelee* arme = dynamic_cast<CMelee*>(allie->GetWeapon());
-	arme->Reparer();
+	if (arme != nullptr) {
+		arme->Reparer();
+		return 1;
+	}
+	std::cout << "\nLe personnage selectionne ne porte pas d'arme de melee : Reparation impossible";
+	return 0;
 }
 
 void CWarrior::Print()
@@ -85,11 +90,14 @@ void CWarrior::Print()
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
 	std::cout << "\n\t\tParade : " << m_parade;
-	if (m_weapon == nullptr) 
-		std::cout << "\n\t\tArme equipee : Aucune";
+	std::cout << "\n\n\t\tNombre de tours hurlement restant : " << m_nbToursHurlement << " (" << m_CDHurlement << " tour(s) avant reutilisation).";
+	std::cout << "\n\t\tEst empoisonne ? " << m_empoisonne << " (1 = oui; 0 = non)";
 	
+	if (m_weapon == nullptr)
+		std::cout << "\n\n\t\tArme equipee : Aucune";
+
 	else {
-		std::cout << "\n\t\tArme equipee : \n";
+		std::cout << "\n\n\tArme equipee : ";
 		m_weapon->print();
 	}
 }
@@ -120,4 +128,13 @@ void CWarrior::DebuterTour()
 		}
 	}
 
+}
+
+void CWarrior::Reinitialiser()
+{
+	m_weapon->Reinitialiser();
+	m_vie = m_vieBase;
+	m_vitesse = m_vitesseBase;
+	m_nbToursHurlement = 0;
+	m_CDHurlement = 0;
 }

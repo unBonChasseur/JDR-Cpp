@@ -1,6 +1,7 @@
 #pragma once
 #include "CCharacter.h"
 #include "CStaff.h"
+#include "CMelee.h"
 
 class CMage : public CCharacter
 {
@@ -25,10 +26,11 @@ public :
 	int GetCDEnchantement();
 
 	void RegenererMana();
-	void Soigner(CCharacter* cible);
-	void Enchanter(CCharacter* cible);
+	int Soigner(CCharacter* cible);
+	int Enchanter(CCharacter* cible);
 
 	void Print();
 	void DebuterTour();
+	void Reinitialiser();
 };
 

@@ -16,9 +16,10 @@ public :
 	int AttaquerAvecArme(CCharacter* ccharacter);
 
 	void GuerirPoison(CCharacter* allie);
-	void Viser();
+	int Viser();
 	int GetNbGuerison();
 
 	void Print();
+	void Reinitialiser();
 };
 

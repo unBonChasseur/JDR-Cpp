@@ -16,8 +16,11 @@ public:
 	int GetNbFleches();
 	int GetNbFlechesBase();
 
+	float CalculerDegats();
+
 	void RecupererFleches();
 	void Utiliser();
+	void Reinitialiser();
 
 	void print();
 };

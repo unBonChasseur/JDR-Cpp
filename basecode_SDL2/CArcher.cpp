@@ -36,8 +36,23 @@ int CArcher::AttaquerAvecArme(CCharacter* cible)
 				std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
 			}
 			else {
+				m_visee = 1;
+				cible->GetWeapon()->Utiliser();
 				std::cout << "\n" << cible->GetNom() << " a esquive.";
 			}
+		}
+	}
+	else {
+		if (!cible->Esquiver()) {
+			float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+			float p_degats = (((float)m_agilite * m_visee + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 9;
+			m_visee = 1;
+			cible->SetVie(-p_degats);
+			std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
+		}
+		else {
+			cible->GetWeapon()->Utiliser();
+			std::cout << "\n" << cible->GetNom() << " a esquive.";
 		}
 	}
 	return 1;
@@ -52,13 +67,20 @@ void CArcher::GuerirPoison(CCharacter* allie)
 {
 	allie->SetPoison(0);
 	m_nbGuerison--;
-	std::cout << "\nVous venez de guérir votre allié " << allie->GetNom() << ".\nCe personnage pourra encore utiliser sa capacite de guerison " << m_nbGuerison << " fois.";
+	std::cout << "\nVous venez de guerir votre allie " << allie->GetNom() << ".\nCe personnage pourra encore utiliser sa capacite de guerison " << m_nbGuerison << " fois.";
 }
 
-void CArcher::Viser()
+int CArcher::Viser()
 {
-	m_visee += 0.33;
-	std::cout << "\nVotre prochaine fleche infligera 33% de dégats en plus soit au total " << m_visee;
+	if (m_weapon->GetType() == "Arc") {
+		m_visee += 0.33;
+		std::cout << "\nVotre prochaine fleche infligera 33% de degats en plus soit au total " << m_visee;
+		return 1;
+	}
+	else {
+		std::cout <<"\nVous ne pouvez pas viser car vous n'etes pas equipe d'un arc.";
+		return 0;
+	}
 }
 
 void CArcher::Print()
@@ -72,12 +94,23 @@ void CArcher::Print()
 	std::cout << "\n\t\tDefense : " << m_defense;
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
+	std::cout << "\n\n\t\tVisee : " << m_visee;
+	std::cout << "\n\t\tNombre de guerisons restantes : " << m_nbGuerison;
 
 	if (m_weapon == nullptr)
-		std::cout << "\n\t\tArme equipee : Aucune";
+		std::cout << "\n\n\t\tArme equipee : Aucune";
 
 	else {
-		std::cout << "\n\t\tArme equipee : \n";
+		std::cout << "\n\n\tArme equipee : ";
 		m_weapon->print();
 	}
+}
+
+void CArcher::Reinitialiser()
+{
+	m_weapon->Reinitialiser();
+	m_vie = m_vieBase;
+	m_vitesse = m_vitesseBase;
+	m_visee = 1;
+	m_nbGuerison = 3;
 }

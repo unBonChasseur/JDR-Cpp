@@ -24,9 +24,10 @@ public :
 	int GetCDHurlement();
 
 	void Hurler();
-	void ReparerArme(CCharacter* allie);
+	int ReparerArme(CCharacter* allie);
 
 	void Print();
 	void DebuterTour();
+	void Reinitialiser();
 };
 

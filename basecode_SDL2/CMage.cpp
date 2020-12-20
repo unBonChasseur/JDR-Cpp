@@ -37,16 +37,18 @@ int CMage::AttaquerAvecArme(CCharacter* cible)
 			nbRetourne = 0;
 		}
 	}
-
-	if (!cible->Esquiver()) {
-		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
-		float p_degats = (((float)m_intelligence + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 5;																						//on transforme les dégats en valeur négative
-		cible->SetVie(-p_degats);
-		std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
-	}
 	else {
-		std::cout << "\n" << cible->GetNom() << " a esquive.";
+		if (!cible->Esquiver()) {
+			float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+			float p_degats = (((float)m_intelligence + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff * 5;																						//on transforme les dégats en valeur négative
+			cible->SetVie(-p_degats);
+			std::cout << "\nL'adversaire prend " << p_degats << " points de degats.";
+		}
+		else {
+			std::cout << "\n" << cible->GetNom() << " a esquive.";
+		}
 	}
+	
 	return nbRetourne;
 }
 
@@ -79,20 +81,46 @@ void CMage::RegenererMana()
 		m_mana = m_manaBase;
 }
 
-void CMage::Soigner(CCharacter* cible)
+int CMage::Soigner(CCharacter* cible)
 {
-	m_mana -= 5;
-	int randNum = rand() % (20 - 10 + 1) + 10;
-	cible->SetVie(cible->GetVie() + randNum);
-	std::cout << "\nVotre personnage " << cible->GetNom() << " a été soigné de "<< randNum << " points de vie.";
-	m_CDsoin = 4;
+	if (m_weapon->GetType() == "Baton") {
+		if (m_mana > 5) {
+			m_mana -= 5;
+			int randNum = rand() % (20 - 10 + 1) + 10;
+			cible->SetVie(cible->GetVie() + randNum);
+			std::cout << "\nVotre personnage " << cible->GetNom() << " a ete soigne de " << randNum << " points de vie.";
+			m_CDsoin = 4;
+			return 1;
+		}
+		else {
+			std::cout << "\nVous n'avez pas assez de mana pour effectuer cette action";
+		}
+	}
+	else {
+		std::cout << "\nVous ne pouvez pas soigner d'allie sans avoir un baton";
+	}
+	
+	return 0;
 }
 
-void CMage::Enchanter(CCharacter* cible)
+int CMage::Enchanter(CCharacter* cible)
 {
-	m_mana -= 7;
-	//cible->m_weapon;
-	m_CDenchantement = 3;
+	CMelee* weapon = dynamic_cast<CMelee*>(cible->GetWeapon());
+	if (weapon != nullptr) {
+		if (m_mana > 7) {
+			m_mana -= 7;
+			weapon->Enchanter();
+			m_CDenchantement = 3;
+			return 1;
+		}
+		else {
+			std::cout << "\nVous n'avez pas assez de mana pour effectuer cette action";
+		}
+	}
+	else {
+		std::cout << "\nLe personnage selectionne ne porte pas d'arme de melee : Reparation impossible";
+	}
+	return 0;
 }
 
 void CMage::Print()
@@ -107,11 +135,15 @@ void CMage::Print()
 	std::cout << "\n\t\tAgilite : " << m_agilite;
 	std::cout << "\n\t\tIntelligence : " << m_intelligence;
 	std::cout << "\n\t\tMana : " << m_mana << "/" << m_manaBase;
+	std::cout << "\n\n\t\tCD soigner allie : " << m_CDsoin;
+	std::cout << "\n\t\tCD enchanter allie : " << m_CDenchantement;
+	std::cout << "\n\t\tEst empoisonne ? " << m_empoisonne << " (1 = oui; 0 = non)";
+
 	if (m_weapon == nullptr)
-		std::cout << "\n\t\tArme equipee : Aucune";
+		std::cout << "\n\n\t\tArme equipee : Aucune";
 
 	else {
-		std::cout << "\n\t\tArme equipee : \n";
+		std::cout << "\n\n\tArme equipee : ";
 		m_weapon->print();
 	}
 }
@@ -142,4 +174,14 @@ void CMage::DebuterTour()
 		}
 	}
 
+}
+
+void CMage::Reinitialiser()
+{
+	m_weapon->Reinitialiser();
+	m_vie = m_vieBase;
+	m_vitesse = m_vitesseBase;
+	m_mana = m_manaBase;
+	m_CDenchantement = 0;
+	m_CDsoin = 0;
 }

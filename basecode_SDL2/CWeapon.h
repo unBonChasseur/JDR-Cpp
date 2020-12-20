@@ -10,7 +10,6 @@ protected :
 	std::string m_nom;
 	int m_degats;
 	float m_critique;
-	float m_enchantement;
 
 	//statistiques liées aux personnage porteur
 	int m_vie;
@@ -31,7 +30,6 @@ public :
 	std::string GetNom();
 	int GetDegats();
 	float GetCritique();
-	float GetEnchantement();
 
 	int GetVie();
 	float GetEsquive();
@@ -44,6 +42,7 @@ public :
 
 	virtual void Utiliser();
 	virtual float CalculerDegats();
+	virtual void Reinitialiser();
 
 	virtual void print();
 };
