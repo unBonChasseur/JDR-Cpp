@@ -4,7 +4,8 @@
 class CArcher : public CCharacter
 {
 protected :
-
+	float m_visee;
+	int m_nbGuerison;
 	CArcher();
 
 public :
@@ -13,8 +14,9 @@ public :
 
 	void AttaquerAvecArme(CCharacter* ccharacter);
 
-	void GuerirPoison();
+	void GuerirPoison(CCharacter* allie);
 	void Viser();
+	int GetNbGuerison();
 
 	void Print();
 };

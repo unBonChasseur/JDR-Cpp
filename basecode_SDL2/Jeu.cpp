@@ -21,8 +21,10 @@ void Jeu::DemarrerJeu()
 	int quit = 0;
 
 	while (!quit) {
-		std::cout << "\n\nBienvenue dans le meilleur jeu du monde";
-		std::cout << "\nQue souhaitez vous faire ?";
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n-----------------------------------------------------Menu Principal---------------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+		std::cout << "\n\nQue souhaitez vous faire ?";
 		std::cout << "\n  1. Jouer une partie";
 		std::cout << "\n  2. Parametres du joueur 1";
 		std::cout << "\n  3. Parametres du joueur 2";
@@ -90,14 +92,17 @@ int Jeu::VerifierParamPartie()
 }
 
 //Option 2 & 3 : Modifier les paramètres d'équipe des joueurs
-void Jeu::ParamJoueur(int i)
+void Jeu::ParamJoueur(int equipe)
 {
 	int choix = 0;
 	int quit = 0;
 
 	while (!quit) {
-		PrintJoueur(i);
-		if (m_vector.at(i).size() != 3) {
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n-------------------------------------------------Parametres du joueur "<< equipe+1 <<"-----------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+		PrintJoueur(equipe);
+		if (m_vector.at(equipe).size() != 3) {
 			std::cout << "\n\n\tQue souhaitez vous faire ?";
 			std::cout << "\n\t  1. Ajouter un personnage";
 			std::cout << "\n\t  2. Retourner au menu precedent.";
@@ -106,7 +111,7 @@ void Jeu::ParamJoueur(int i)
 			std::cin >> choix;
 			switch (choix) {
 			case 1:
-				AjouterPersonnage(i);
+				AjouterPersonnage(equipe);
 				break;
 
 			case 2:
@@ -127,11 +132,11 @@ void Jeu::ParamJoueur(int i)
 			std::cin >> choix;
 			switch (choix) {
 			case 1:
-				RemplacerPersonnage(i);
+				RemplacerPersonnage(equipe);
 				break;
 
 			case 2:
-				RemplacerArme(i);
+				RemplacerArme(equipe);
 				break;
 
 			case 3:
@@ -146,40 +151,44 @@ void Jeu::ParamJoueur(int i)
 }
 
 //Sous options : modifier la liste des personnages et armes de chaque joueur
-void Jeu::AjouterPersonnage(int i)
+void Jeu::AjouterPersonnage(int equipe)
 {
 	int choix = 0;
 	int quit = 0;
 
 	while (!quit) {
-
-		m_parsing.at(i)->PrintCharacter();
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n-------------------------------------------------Ajout d'un personnage------------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+		m_parsing.at(equipe)->PrintCharacter();
 		std::cout << "\n\n\tQuel personnage souhaitez vous ajouter a votre equipe ?\n\t";
 		std::cin >> choix;
 
-		if (choix > 0 && choix <= m_parsing.at(i)->GetCharacterSize()) {
+		if (choix > 0 && choix <= m_parsing.at(equipe)->GetCharacterSize()) {
 
 			choix--;
-			CCharacter* character = m_parsing.at(i)->ChooseCharacter(choix);
+			CCharacter* character = m_parsing.at(equipe)->ChooseCharacter(choix);
 			std::string classe = character->GetClasse();
 
 			if (classe == "Voleur") {
-				CRogue* temp = new CRogue(character->GetNom(),character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character->GetCaracPartic());
-				m_vector.at(i).push_back(temp);
+				CRogue* character2 = dynamic_cast<CRogue*>(character);
+				CRogue* temp = new CRogue(character->GetNom(),character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character2->GetPoison());
+				m_vector.at(equipe).push_back(temp);
 			}
 			if (classe == "Guerrier") {
-				CWarrior* temp = new CWarrior(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character->GetCaracPartic());
-				m_vector.at(i).push_back(temp);
+				CWarrior* character2 = dynamic_cast<CWarrior*>(character);
+				CWarrior* temp = new CWarrior(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence(), character2->GetParade());
+				m_vector.at(equipe).push_back(temp);
 			}
 			if (classe == "Mage") {
 				CMage* temp = new CMage(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
-				m_vector.at(i).push_back(temp);
+				m_vector.at(equipe).push_back(temp);
 			}
 			if (classe == "Archer") {
 				CArcher* temp = new CArcher(character->GetNom(), character->GetVie(), character->GetWeapon(), character->GetEsquive(), character->GetVitesseBase(), character->GetAttaque(), character->GetDefense(), character->GetAgilite(), character->GetIntelligence());
-				m_vector.at(i).push_back(temp);
+				m_vector.at(equipe).push_back(temp);
 			}
-			m_parsing.at(i)->EnleverCharacter(character);
+			m_parsing.at(equipe)->EnleverCharacter(character);
 		}
 		else 
 			std::cout << "\n\n\t Choix incorrect.\n";
@@ -269,8 +278,10 @@ void Jeu::RemplacerArme(int i)
 	int quit = 0;
 
 	while (!quit) {
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n---------------------------------------------------Remplacer une arme-------------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
 		PrintJoueur(i);
-
 		std::cout << "\n\n\tQuel est le personnage dont vous souhaitez changer l'equipement ?\n\t";
 		std::cin >> choix;
 
@@ -306,19 +317,23 @@ void Jeu::RemplacerArme(int i)
 				std::string type = weapon->GetType();
 
 				if (type == "Epee") {
-					CSword* temp = new CSword(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CSword* weapon2 = dynamic_cast<CSword*>(weapon);
+					CSword* temp = new CSword(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon2->GetDurabiliteInitiale());
 					character->SetWeapon(temp);
 				}
 				if (type == "Dague") {
-					CDagger* temp = new CDagger(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CDagger* weapon2 = dynamic_cast<CDagger*>(weapon);
+					CDagger* temp = new CDagger(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon2->GetDurabiliteInitiale());
 					character->SetWeapon(temp);
 				}
 				if (type == "Arc") {
-					CBow* temp = new CBow(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CBow* weapon2 = dynamic_cast<CBow*>(weapon);
+					CBow* temp = new CBow(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon2->GetNbFlechesBase());
 					character->SetWeapon(temp);
 				}
 				if (type == "Baton") {
-					CStaff* temp = new CStaff(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon->GetSpecial());
+					CStaff* weapon2 = dynamic_cast<CStaff*>(weapon);
+					CStaff* temp = new CStaff(weapon->GetType(), weapon->GetNom(), weapon->GetDegats(), weapon->GetCritique(), weapon->GetVie(), weapon->GetEsquive(), weapon->GetVitesse(), weapon->GetAttaque(), weapon->GetDefense(), weapon->GetAgilite(), weapon->GetIntelligence(), weapon2->GetCout());
 					character->SetWeapon(temp);
 				}
 			}
@@ -357,18 +372,25 @@ int Jeu::LancerPartie()
 
 	CCharacter* personnageChoisi = nullptr;
 
-	std::cout << "\n\n\n\n\n\n\n\n\n\nDebut de la partie : ";
+	std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+	std::cout << "\n---------------------------------------------------Debut de la partie-------------------------------------------------";
+	std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
 	while (!quit) {
 
 		//Au début de chaque tour, on vérifie si tous les personnages d'une liste sont morts
-		gagnant = VerifierMorts();
+
+		/*gagnant = VerifierMorts();
 		if (gagnant != 0) {
 			std::cout << "\nLe joueur " << gagnant << " a gagne.";
 			quit = 1;
-		}
+		}*/
 		
-		else {
-			if (TourSuivant) {	//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n------------------------------------------------Debut du tour : joueur " << joueur+1 << "----------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+		/*else {*/
+			//Si une action a été menée a bien par le personnage précédent, on choisi un nouveau personnage
+			if (TourSuivant) {	
 				size_t vectorSize = m_vector.size();
 				size_t fullTeamSize = m_vector.at(0).size();
 				//On choisi le Personnage dont ca va être le tour
@@ -422,16 +444,14 @@ int Jeu::LancerPartie()
 				}
 
 				personnageChoisi->SetVitesse(personnageChoisi->GetVitesseBase());
-
-				std::cout << "\n\nC'est au tour du joueur " << joueur+1;
-
+				personnageChoisi->DebuterTour();
 				vitesseIdentique = 0;
 				vitesseReference = 0;
 			}
-
+			
 			personnageChoisi->Print();
 
-			std::cout << "\nQue souhaitez vous faire ?";
+			std::cout << "\n\nQue souhaitez vous faire ?";
 			std::cout << "\n  1. Attaquer sans arme.";
 			std::cout << "\n  2. Attaquer avec arme.";
 			std::cout << "\n  3. Utiliser une capacite speciale.";
@@ -442,27 +462,140 @@ int Jeu::LancerPartie()
 
 			switch (choix) {
 			case 1:
-				//AttaquerSansArme();
+				TourSuivant = Attaquer(personnageChoisi, (joueur+1)%2, 0);
 				break;
-
+				
 			case 2:
+				TourSuivant = Attaquer(personnageChoisi, (joueur+1)%2, 1);
 				break;
 
 			case 3:
+				//TourSuivant = Special(personnageChoisi, joueur);
 				break;
 
 			default:
 				TourSuivant = 0;
 				break;
 			}
-		}
+		//}
 	}
 	return Rejouer();
 }
 
-void Jeu::AttaquerSansArme(CCharacter* ccharacter, int i)
+int Jeu::Attaquer(CCharacter* ccharacter, int equipe, int arme)
 {
+	int choix = 0;
+	int quit = 0;
+	int tableau[3] = { -1,-1,-1 };
 
+	while (!quit) {
+		std::cout << "\n\n\n\n\n\n\n\n\n\n----------------------------------------------------------------------------------------------------------------------";
+		std::cout << "\n---------------------------------------------------Cible de l'attaque-------------------------------------------------";
+		std::cout << "\n----------------------------------------------------------------------------------------------------------------------\n";
+		size_t fullTeamSize = m_vector.at(equipe).size();
+		int nbAfficher = 0;
+		int nbFurtif = 0;
+		int nbHurlement = 0;
+		int numeroPersonnage = 0;
+		
+		//Récupère le nombre de personnages furtifs et le nombre de personnages a afficher
+		for (int j = 0; j < fullTeamSize; j++) {
+			if (m_vector.at(equipe).at(j)->GetVie() != 0) {
+				nbAfficher++;
+				if (m_vector.at(equipe).at(j)->GetClasse() == "Voleur") {
+					CRogue* ptrVoleur = dynamic_cast<CRogue*>(m_vector.at(equipe).at(j));
+					if (ptrVoleur->GetNbToursFurtif() > 0) {
+						nbFurtif++;
+					}
+				}
+				if (m_vector.at(equipe).at(j)->GetClasse() == "Guerrier") {
+					CWarrior* ptrGuerrier = dynamic_cast<CWarrior*>(m_vector.at(equipe).at(j));
+					if (ptrGuerrier->GetNbToursHurlement() > 0) {
+						nbHurlement++;
+					}
+				}
+			}
+		}	 
+
+		//Si au moins un personnage adverse, on l'affiche
+		if (nbHurlement != 0) {
+			nbAfficher = 0;
+			for (int j = 0; j < fullTeamSize; j++) {
+				if (m_vector.at(equipe).at(j)->GetVie() != 0) {
+					if (m_vector.at(equipe).at(j)->GetClasse() == "Guerrier") {
+						CWarrior* ptrGuerrier = dynamic_cast<CWarrior*>(m_vector.at(equipe).at(j));
+						if (ptrGuerrier->GetNbToursHurlement() <= 0) {
+							tableau[nbAfficher] = j;
+							nbAfficher++;
+							std::cout << "\nPersonnage adverse numero " << nbAfficher << " : \n";
+							m_vector.at(equipe).at(j)->Print();
+						}
+					}
+				}
+				std::cout << "\n";
+			}
+		}
+		else {
+			//Si il n'y a que des voleurs furtifs, on les affiche 
+			if (nbAfficher - nbFurtif == 0) {
+				nbAfficher = 0;
+				for (int j = 0; j < fullTeamSize; j++) {
+					if (m_vector.at(equipe).at(j)->GetVie() != 0) {
+						tableau[nbAfficher] = j;
+						nbAfficher++;
+						std::cout << "\nPersonnage adverse numero " << nbAfficher << " : \n";
+						m_vector.at(equipe).at(j)->Print();
+					}
+					std::cout << "\n";
+				}
+			}
+
+			//Sinon on affiche que les personnages adverses non furtifs
+			else {
+				nbAfficher = 0;
+				for (int j = 0; j < fullTeamSize; j++) {
+					if (m_vector.at(equipe).at(j)->GetVie() != 0) {
+						if (m_vector.at(equipe).at(j)->GetClasse() == "Voleur") {
+							CRogue* ptrVoleur = dynamic_cast<CRogue*>(m_vector.at(equipe).at(j));
+							if (ptrVoleur->GetNbToursFurtif() <= 0) {
+								tableau[nbAfficher] = j;
+								nbAfficher++;
+								std::cout << "\nPersonnage adverse numero " << nbAfficher << " : \n";
+								m_vector.at(equipe).at(j)->Print();
+							}
+						}
+						else {
+							tableau[nbAfficher] = j;
+							nbAfficher++;
+							std::cout << "\nPersonnage adverse numero " << nbAfficher << " : \n";
+							m_vector.at(equipe).at(j)->Print();
+						}
+					}
+					std::cout << "\n";
+				}
+			}
+		}
+		
+
+		std::cout << "\nChoix numero " << nbAfficher+1 << " : revenir au menu precedent.";
+
+		std::cout << "\n\nQuel personnage souhaitez vous attaquer ?\n";
+		std::cin >> choix;
+		choix--;
+		if (choix < nbAfficher && choix > -1) {
+			if (arme == 0)
+				ccharacter->AttaquerSansArme(m_vector.at(equipe).at(tableau[choix]));
+			else
+				ccharacter->AttaquerAvecArme(m_vector.at(equipe).at(tableau[choix]));
+			return 1;
+		}
+		else {
+			if (choix == nbAfficher) {
+				quit = 1;
+			}
+		}
+	}
+	return 0;
 }
 
 int Jeu::Rejouer() {
@@ -472,7 +605,7 @@ int Jeu::Rejouer() {
 
 	while (!quit) {
 		std::cout << "\n\nQue souhaitez vous faire ?";
-		std::cout << "\n  1. Rejouer une partie en conservant les paramètres d'équipe de chaque joueur.";
+		std::cout << "\n  1. Rejouer une partie en conservant les parametres d'equipe de chaque joueur.";
 		std::cout << "\n  2. Revenir au menu principal.";
 		std::cout << "\n  3. Quitter le jeu.";
 
@@ -502,20 +635,20 @@ int Jeu::Rejouer() {
 }
 
 //Fontions annexes 
-void Jeu::PrintJoueur(int i)
+void Jeu::PrintJoueur(int equipe)
 {
-	std::cout << "\n\tPersonnages du joueur " << i + 1 << " :";
+	std::cout << "\n\tPersonnages du joueur " << equipe + 1 << " :";
 	std::vector<CCharacter*>::iterator it;
 	int x = 1;
 
-	for (it = m_vector.at(i).begin(); it != m_vector.at(i).end(); it++) {
+	for (it = m_vector.at(equipe).begin(); it != m_vector.at(equipe).end(); it++) {
 		std::cout << "\n\n\tPersonnage " << x << " : ";
 		(*it)->Print();
 		std::cout << "\n";
 		x++;
 	}
 }
-void Jeu::EnleverCharacter(CCharacter* ccharacter, int i)
+void Jeu::EnleverCharacter(CCharacter* ccharacter, int equipe)
 {
 
 	if (ccharacter == nullptr)
@@ -523,30 +656,27 @@ void Jeu::EnleverCharacter(CCharacter* ccharacter, int i)
 
 	std::vector<CCharacter*>::iterator it;
 
-	for (it = m_vector.at(i).begin(); it != m_vector.at(i).end(); it++)
+	for (it = m_vector.at(equipe).begin(); it != m_vector.at(equipe).end(); it++)
 	{
 		if (*it == ccharacter)
 		{
 			delete* it;
-			m_vector.at(i).erase(it);
+			m_vector.at(equipe).erase(it);
 			break;
 		}
 	}
 }
-int Jeu::VerifierMorts() {
-	size_t vectorSize = m_vector.size();
+int Jeu::VerifierMorts(int equipe) {
 	size_t fullTeamSize = m_vector.at(0).size();
 	int nbMorts = 0;
-	for (int i = 0; i < vectorSize; i++) {
-		for (int j = 0; j < fullTeamSize; j++) {
-			if (m_vector.at(i).at(j)->GetVie() == 0) {
-				nbMorts++;
-				if (nbMorts == 3) {
-					return i+1;
-				}
+	for (int j = 0; j < fullTeamSize; j++) {
+		if (m_vector.at(equipe).at(j)->GetVie() == 0) {
+			nbMorts++;
+			if (nbMorts == 3) {
+				return equipe;
 			}
 		}
-		nbMorts = 0; //Remet à 0 le compteur de morts de l'équipe
 	}
+	
 	return 0;
 }

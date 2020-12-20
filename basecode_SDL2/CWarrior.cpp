@@ -4,7 +4,7 @@ CWarrior::CWarrior():CCharacter()
 {
 	m_CDHurlement = 0;
 	m_parade = 0;
-	m_hurlement = 0;
+	m_nbToursHurlement = 0;
 	m_classe = "Guerrier";
 }
 
@@ -12,7 +12,7 @@ CWarrior::CWarrior(std::string nom, int vie, CWeapon* weapon, float esquive, int
 	:CCharacter(nom, vie, weapon, esquive, vitesse, attaque, defense, agilite, intelligence),
 	m_CDHurlement(0),
 	m_parade(parade),
-	m_hurlement(0)
+	m_nbToursHurlement(0)
 {
 	m_classe = "Guerrier";
 }
@@ -21,66 +21,60 @@ CWarrior::~CWarrior()
 {
 }
 
-float CWarrior::GetCaracPartic()
+float CWarrior::GetParade()
 {
 	return m_parade;
 }
 
+int CWarrior::GetNbToursHurlement()
+{
+	return m_nbToursHurlement;
+}
+
+int CWarrior::GetCDHurlement()
+{
+	return m_CDHurlement;
+}
+
+void CWarrior::DebuterTour()
+{
+	if (m_empoisonne == 1) {
+		float p_degats = (float)m_vieBase / 12;
+		m_vie -= p_degats;
+		std::cout << "\nVotre personnage vient de perdre " << p_degats << " points de vie du fait de son empoisonnement.";
+	}
+	if (m_nbToursHurlement >= 1) {
+		m_nbToursHurlement--;
+		if (m_nbToursHurlement == 0) {
+			std::cout << "\nLe hurlement de votre personnage n'est plus actif, vos autres personnages pourront donc être ciblés à nouveau.";
+		}
+		else {
+			std::cout << "\nLe hurlement de votre personnage est encore actif pour " << m_nbToursHurlement << " tour(s).";
+		}
+	}
+	if (m_CDHurlement >= 1) {
+		m_CDHurlement--;
+		if (m_CDHurlement == 0) {
+			std::cout << "\nVous pouvez de nouveau utiliser le hurlement de votre personnage si vous le souhaitez.";
+		}
+		else {
+			std::cout << "\nLe hurlement de votre personnage sera de nouveau utilisable dans " << m_CDHurlement << " tour(s).";
+		}
+	}
+	
+}
+
 void CWarrior::AttaquerAvecArme(CCharacter* cible)
 {
-	if (!cible->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
-		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
-		int p_degats = 7 * ((m_attaque+m_weapon->CalculerDegats()) / cible->GetDefense()) * coeff;				//calcul des dégats																				//on transforme les dégats en valeur négative
+	if (!cible->Esquiver()) {																				
+		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+		int p_degats = 7 * (((float)m_attaque + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff;
 		cible->SetVie(-p_degats);		
 		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
 	}
 	else {
-		std::cout << "\n" << cible->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
+		std::cout << "\n" << cible->GetNom() << " a esquive.";												
 	}
-	
-	/*
-	if (!CCharacter.Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
-		if(m_weapon)
-
-		float coeff = 0.95 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.05 - 0.95)));	//calcul du coeff
-		int p_degats = 15 * (GetAttaque() / CCharacter.GetDefense()) * coeff;									//calcul des dégats
-		p_degats = p_degats * -1;																				//on transforme les dégats en valeur négative
-		CCharacter.SetVie(p_degats);																			//on inflige les dégats à l'adversaire
-	}
-	else {
-		std::cout << CCharacter.GetNom() << " a esquivé votre coup !";											//on informe l'utilisateur que l'adversaire a esquivé
-	}
-
-
-
-
-	float DegatsFinaux;
-	if (m_durabilite == 0) {							//on vérifie si l'arme est cassée avant d'ascener le coup
-		DegatsFinaux = (float)m_degats / 10;			//Si oui, on divise les dégats par 10
-	}
-	else {												//sinon, les dégats sont normaux
-		DegatsFinaux = m_degats;
-
-		int randDurabilite = rand() % (5 - 2 + 1) + 2;	//on choisi un chiffre au hasard entre 2 et 5
-		m_durabilite -= randDurabilite;					//on soustrait ce chiffre à la durabilité de l'arme
-		if (m_durabilite <= 0) {
-			m_durabilite = 0;
-			std::cout << "\nVotre arme '" << m_nom <<	//informe le joueur que l'arme viens de se briser
-				"' viens de se casser lors de ce coup!\nPensez à la faire réparer au plus vite !";
-		}
-		else {
-			std::cout << "\nVotre arme viens de perdre " //informe l'utilisateur de la durabilité restante de l'arme
-				<< randDurabilite << " de durabilité lors de ce coup.\nIl reste " << m_durabilite << " de durabilité à votre arme.(/" << m_durabiliteInitiale << ")";
-		}
-	}
-
-	float randomNumber = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
-	if (randomNumber <= m_critique) {
-		std::cout << "Le coup est fluide et sans bavure, si l'adversaire est touché ce sera un vrai carnage !";
-		DegatsFinaux += DegatsFinaux;
-	}
-
-	return DegatsFinaux;*/
 }
 
 int CWarrior::Esquiver()
@@ -96,21 +90,21 @@ void CWarrior::Hurler()
 {
 	m_CDHurlement = 4;
 	int randNum = rand() % (2 - 1 + 1) + 1;
-	m_hurlement = randNum;
+	m_nbToursHurlement = randNum;
+	std::cout << "\nVotre guerrier " << m_nom << " viens de hurler et va donc catalyser toutes les attaques adverses pour " << randNum << " tours.";
 }
 
 void CWarrior::ReparerArme(CCharacter* allie)
 {
-	CWeapon* weaponAllie = allie->GetWeapon();
-	if(weaponAllie->GetNom() == "Epee" || weaponAllie->GetNom() == "Dague")
-		allie->GetWeapon()->Reparer();
+	CMelee* arme = dynamic_cast<CMelee*>(allie->GetWeapon());
+	arme->Reparer();
 }
 
 void CWarrior::Print()
 {
 	std::cout << "\n\tClasse guerrier";
 	std::cout << "\n\t\tNom : " << m_nom;
-	std::cout << "\n\t\tVie : " << m_vie;
+	std::cout << "\n\t\tVie : " << m_vie << "/" << m_vieBase;
 	std::cout << "\n\t\tEsquive : " << m_esquive;
 	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
 	std::cout << "\n\t\tAttaque : " << m_attaque;

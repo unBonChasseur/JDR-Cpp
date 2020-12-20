@@ -41,10 +41,7 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 
-	virtual int GetSpecial();
 	virtual float CalculerDegats();
-	virtual void Reparer();
 
 	virtual void print();
-
 };

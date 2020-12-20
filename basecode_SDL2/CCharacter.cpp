@@ -53,13 +53,14 @@ CCharacter::~CCharacter()
 
 void CCharacter::AttaquerSansArme(CCharacter* ccharacter)
 {
-	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
-		float coeff = 0.95 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.05 - 0.95)));	//calcul du coeff
-		int p_degats = 15*(m_attaque/ccharacter->GetDefense())*coeff;											//calcul des dégats																				//on transforme les dégats en valeur négative
-		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
+	if (!ccharacter->Esquiver()) {																			
+		float coeff = 0.95 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.05 - 0.95)));	
+		float p_degats = 15*((float)m_attaque/(float)ccharacter->GetDefense())*coeff;										
+		ccharacter->SetVie(-p_degats);
+		std::cout << "\n\nLa cible a pris " << p_degats << " points de degats.\nIl lui reste " << ccharacter->GetVie() << "/" << ccharacter->GetVieBase() << " points de vie.";
 	}
 	else {
-		std::cout << "\n" << ccharacter->GetNom() <<" a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
+		std::cout << "\n\nVotre cible (" << ccharacter->GetNom() <<") a esquive.";
 	}
 }
 
@@ -138,14 +139,12 @@ int CCharacter::IsEmpoisonne()
 	return m_empoisonne;
 }
 
-float CCharacter::GetCaracPartic()
-{
-	return 0.0f;
-}
-
 void CCharacter::SetVie(int vie)
 {
 	m_vie += vie;
+	if (m_vie >= m_vieBase) {
+		m_vie = m_vieBase;
+	}
 	if (m_vie < 0) {
 		m_vie = 0;
 	}
@@ -189,6 +188,14 @@ void CCharacter::SetPoison(int poison)
 	m_empoisonne = poison;
 }
 
+void CCharacter::DebuterTour()
+{
+}
+
 void CCharacter::Print()
+{
+}
+
+void CCharacter::Reinitialiser()
 {
 }

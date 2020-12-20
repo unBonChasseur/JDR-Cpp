@@ -46,13 +46,14 @@ public :
 	int GetAgilite();
 	int GetIntelligence();
 	int IsEmpoisonne();
-	virtual float GetCaracPartic();
 
 	void SetVie(int vie);
 	void SetVitesse(int vitesse);
 	void SetWeapon(CWeapon* weapon);
 	void SetPoison(int poison);
 
+	virtual void DebuterTour();
 	virtual void Print();
+	virtual void Reinitialiser();
 };
 

@@ -4,7 +4,7 @@
 class CMage : public CCharacter
 {
 protected :
-	int m_manaMax;
+	int m_manaBase;
 	int m_mana;
 
 	int m_CDsoin;
@@ -17,11 +17,17 @@ public :
 	virtual ~CMage();
 
 	void AttaquerAvecArme(CCharacter* cible);
-	float GetCaracPartic();
+
+	int GetManaBase();
+	int GetMana();
+	int GetCDSoin();
+	int GetCDEnchantement();
 
 	void RegenererMana();
 	void Soigner(CCharacter* cible);
 	void Enchanter(CCharacter* cible);
+
 	void Print();
+	void DebuterTour();
 };
 

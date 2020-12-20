@@ -7,7 +7,6 @@ protected :
 	float m_poison;
 
 	int m_nbToursFurtif;
-
 	int m_CDFurtif;
 
 	CRogue();
@@ -18,9 +17,14 @@ public :
 	virtual ~CRogue();
 
 	void AttaquerAvecArme(CCharacter* ccharacter);
-	float GetCaracPartic();
 
+	float GetPoison();
+	int GetNbToursFurtif();
+	int GetCDFurtif();
+	
 	void Furtivite();
+
 	void Print();
+	void DebuterTour();
 };
 

@@ -27,38 +27,51 @@ CRogue::~CRogue()
 {
 }
 
-float CRogue::GetCaracPartic()
+void CRogue::AttaquerAvecArme(CCharacter* cible)
+{
+	if (!cible->Esquiver()) {
+		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));
+		int p_degats = 7 * (((float)m_agilite + (float)m_weapon->CalculerDegats()) / (float)cible->GetDefense()) * coeff;
+		cible->SetVie(-p_degats);
+		std::cout << "\nL'adversaire prend " << p_degats << " points de degat.";
+		if (m_weapon->GetType() == "Dague" && Empoisonner() && cible->GetClasse() != "Archer") {
+			cible->SetPoison(1);
+			std::cout << "\nVotre coup a empoisonne l'adversaire !   (Il perdra 1/12e de ses pv par tour)";
+		}
+	}
+	else {
+		std::cout << "\n" << cible->GetNom() << " a esquive.";
+	}
+}
+
+float CRogue::GetPoison()
 {
 	return m_poison;
 }
 
-void CRogue::AttaquerAvecArme(CCharacter* ccharacter)
+int CRogue::GetNbToursFurtif()
 {
-	if (!ccharacter->Esquiver()) {																				//Si l'esquive adverse échoue ( inférieure au nombre random tiré au dessus
-		float coeff = 0.85 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0 - 0.85)));	//calcul du coeff
-		int p_degats = 7 * ((m_agilite + m_weapon->CalculerDegats()) / ccharacter->GetDefense()) * coeff;			//calcul des dégats																				//on transforme les dégats en valeur négative
-		ccharacter->SetVie(-p_degats);																			//on inflige les dégats à l'adversaire
-		std::cout << "\nL'adversaire prend " << p_degats << " points de dégat.";
-		if (m_weapon->GetType() == "Dague" && Empoisonner()) {
-			ccharacter->SetPoison(1);
-			std::cout << "\nVotre coup a empoisonné l'adversaire !   (Il perdra 1/12e de ses pv par tour)";
-		}
-	}
-	else {
-		std::cout << "\n" << ccharacter->GetNom() << " a esquive.";												//on informe l'utilisateur que l'adversaire a esquivé
-	}
+	return m_nbToursFurtif;
+}
+
+int CRogue::GetCDFurtif()
+{
+	return m_CDFurtif;
 }
 
 void CRogue::Furtivite()
 {
-
+	m_CDFurtif = 4;
+	int randNum = rand() % (2 - 1 + 1) + 1;
+	m_nbToursFurtif = randNum;
+	std::cout << "\nVotre voleur " << m_nom << " viens de se camoufler et va donc se derober a toutes les attaques adverses pour " << randNum << " tours.";
 }
 
 void CRogue::Print()
 {
 	std::cout << "\n\tClasse voleur";
 	std::cout << "\n\t\tNom : " << m_nom;
-	std::cout << "\n\t\tVie : " << m_vie;
+	std::cout << "\n\t\tVie : " << m_vie << "/" << m_vieBase;
 	std::cout << "\n\t\tEsquive : " << m_esquive;
 	std::cout << "\n\t\tVitesse : " << m_vitesseBase;
 	std::cout << "\n\t\tAttaque : " << m_attaque;
@@ -72,5 +85,32 @@ void CRogue::Print()
 	else {
 		std::cout << "\n\t\tArme equipee : \n";
 		m_weapon->print();
+	}
+}
+
+void CRogue::DebuterTour()
+{
+	if (m_empoisonne == 1) {
+		float p_degats = (float)m_vieBase / 12;
+		m_vie -= p_degats;
+		std::cout << "\nVotre personnage vient de perdre " << p_degats << " points de vie du fait de son empoisonnement.";
+	}
+	if (m_nbToursFurtif >= 1) {
+		m_nbToursFurtif--;
+		if (m_nbToursFurtif == 0) {
+			std::cout << "\nLe camouflage de votre personnage n'est plus actif, vos autres personnages pourront donc être ciblés à nouveau.";
+		}
+		else {
+			std::cout << "\nLe camoulage de votre personnage est encore actif pour " << m_nbToursFurtif << " tour(s).";
+		}
+	}
+	if (m_CDFurtif >= 1) {
+		m_CDFurtif--;
+		if (m_CDFurtif == 0) {
+			std::cout << "\nVous pouvez de nouveau utiliser le camouflage de votre personnage si vous le souhaitez.";
+		}
+		else {
+			std::cout << "\nLe camouflage de votre personnage sera de nouveau utilisable dans " << m_CDFurtif << " tour(s).";
+		}
 	}
 }

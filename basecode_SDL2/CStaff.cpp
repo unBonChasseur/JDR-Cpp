@@ -16,11 +16,6 @@ int CStaff::GetCout()
 	return m_cout;
 }
 
-int CStaff::GetSpecial()
-{
-	return m_cout;
-}
-
 void CStaff::print()
 {
 	std::cout << "\n\tClasse : " << m_type;

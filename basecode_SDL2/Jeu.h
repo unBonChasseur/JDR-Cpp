@@ -32,12 +32,12 @@ public :
 	
 	//Fonctions déroulement partie 
 	int LancerPartie();
-	void AttaquerSansArme(CCharacter* ccharacter, int i);
+	int Attaquer(CCharacter* ccharacter, int equipe, int arme);
 	int Rejouer();
 
 	//Fontions annexes 
-	void PrintJoueur(int i);
-	void EnleverCharacter(CCharacter* ccharacter, int i);
-	int VerifierMorts();
+	void PrintJoueur(int equipe);
+	void EnleverCharacter(CCharacter* ccharacter, int equipe);
+	int VerifierMorts(int equipe);
 };
 

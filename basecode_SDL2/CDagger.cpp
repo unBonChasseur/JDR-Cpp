@@ -10,10 +10,10 @@ void CDagger::Utiliser()
 	std::cout << "\nVotre arme a perdu 1 point de durabilite.";
 	if (m_durabilite <= 0) {
 		m_durabilite = 0;
-		std::cout << "\nVotre arme viens de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de dégats lors votre prochain coup.";
+		std::cout << "\nVotre arme vient de se briser avec ce coup, faites la reparer ou vous infligerez 10 fois moins de dégats lors votre prochain coup.";
 	}
 	else {
-		std::cout << "\nIl reste " << m_durabilite << " points de durabilite a votre arme. (/" << m_durabiliteInitiale << ").";
+		std::cout << "\nIl reste " << m_durabilite << "/" << m_durabiliteInitiale << " points de durabilite a votre arme.";
 	}
 }
 

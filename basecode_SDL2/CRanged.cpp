@@ -9,15 +9,6 @@ CRanged::CRanged(std::string type, std::string nom, int degats, float critique, 
 {
 }
 
-void CRanged::Reparer()
-{
-}
-
-int CRanged::GetSpecial()
-{
-	return 0;
-}
-
 void CRanged::print()
 {
 }

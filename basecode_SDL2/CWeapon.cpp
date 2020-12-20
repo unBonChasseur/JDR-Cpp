@@ -100,18 +100,9 @@ int CWeapon::GetIntelligence()
 	return m_intelligence;
 }
 
-int CWeapon::GetSpecial()
-{
-	return 0;
-}
-
 float CWeapon::CalculerDegats()
 {
 	return 0.0f;
-}
-
-void CWeapon::Reparer()
-{
 }
 
 void CWeapon::print()

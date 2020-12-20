@@ -1,12 +1,13 @@
 #pragma once
 #include "CCharacter.h"
+#include "CMelee.h"
 
 class CWarrior : public CCharacter
 {
 protected :	
 	float m_parade;
 
-	int m_hurlement;
+	int m_nbToursHurlement;
 	int m_CDHurlement;
 
 	CWarrior();
@@ -17,10 +18,15 @@ public :
 
 	void AttaquerAvecArme(CCharacter* ccharacter);
 	int Esquiver();
-	float GetCaracPartic();
+
+	float GetParade();
+	int GetNbToursHurlement();
+	int GetCDHurlement();
 
 	void Hurler();
 	void ReparerArme(CCharacter* allie);
+
 	void Print();
+	void DebuterTour();
 };
 

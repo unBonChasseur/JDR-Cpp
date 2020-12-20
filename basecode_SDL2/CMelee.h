@@ -20,8 +20,6 @@ public :
 	float CalculerDegats();
 	void Reparer();
 
-	int GetSpecial();
-
 	virtual void print();
 };
 

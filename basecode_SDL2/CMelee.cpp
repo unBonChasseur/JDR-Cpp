@@ -72,11 +72,6 @@ void CMelee::Reparer()
 	}
 }
 
-int CMelee::GetSpecial()
-{
-	return m_durabiliteInitiale;
-}
-
 void CMelee::print()
 {
 }
